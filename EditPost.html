@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Edit Post</title>
+	<link rel="stylesheet" type = "text/css" href="EditPost.css">
+</head>
+<body>
+	<div id = "navbar">
+	<a href="HomePage.html" class = "navbaritems">
+			<img src = "images/home.png" class = "navbarlogos" >
+			<div class = navbartext>Home</div>
+	</a>
+	<a href="Browse.html" class = "navbaritems">
+		<img src = "images/dog.png" class = "navbarlogos">
+		<div class = navbartext>Browse Posts</div>
+	</a>
+	<a href="FAQ.html" class = "navbaritems">
+		<img src = "images/FAQ.png" class = "navbarlogos">
+		<div class = navbartext>FAQ</div>
+	</a>
+	<a href="userpage.html" class = "navbaritems">
+		<img src = "images/account.png" class = "navbarlogos">
+		<div class = navbartext>View Profile</div>
+	</a>
+
+	<div id="searchbar">
+		<img src="images/search.png" id="searchlogo">
+		<form id="formbox" action ="Browse.html">
+			<input type="text" class="form_input" name="text" placeholder="Search"autocomplete="off">
+		</form>
+		<div class="dropdown">
+		    <a href="javascript:void(0)" class="dropbtn"><img src="images/Browse/filter.png" id="filterlogo"></a>
+		    <div class="dropdown-content">
+		    	<span id="filter">Filter search results</span><br>
+		    	<form id="formbox" action ="HomePage.html">
+					<input type="checkbox"><small>User Profiles</small><br>
+					<input type="checkbox"><small>Pets for Adoption</small><br>
+					<input type="checkbox"><small>Questions</small><br>
+				</form>
+		    </div>
+		</div>
+	</div>
+	</div>
+
+	<p id = addpostheader> Edit your Post </p>
+
+	<div class = container2>
+		<div class = container>
+			<form class = entries>
+				<label> Name: </label> <br>
+				<input type="text" class = place placeholder="Tofee">
+			</form>
+
+			<form class = entries>
+				<label> Breed: </label> <br>
+				<input type="text" class = place placeholder="Beaglier">
+			</form>
+
+			<form class = entries>
+				<label> Sex:</label> <br>
+				<input type="text" class = place placeholder="Male">
+			</form>
+
+			<form class = entries>
+				<label> Size: </label> <br>
+				<input type="text" class = place placeholder="Small">
+			</form>
+
+			<form class = entries>
+				<label> Age: </label> <br>
+				<input type="text" class = place placeholder="5 Months">
+			</form>
+			<br>
+			<button class = buttons> Upload Image </button> <br>
+			 <form id = remarksform>
+				<label> Remarks: </label> <br>
+				<textarea id = remarks placeholder="This little boy is so charming and sweet! He gets along really well with other puppies but especially loves getting snuggled by humans."> </textarea>
+			</form>
+			<a href = "Browse.html"><button class = buttons> Submit </button></a>
+		</div>
+
+		<img id = picofdog src ="images/addpostdog.jpg">
+	</div>
+
+</body>
+</html>

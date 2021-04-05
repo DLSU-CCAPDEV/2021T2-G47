@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>FAQ</title>
+	<link rel="stylesheet" type = "text/css" href="EditQuestion.css">
+</head>
+<body>
+	<div id = "navbar">
+	<a href="HomePage.html" class = "navbaritems">
+			<img src = "images/home.png" class = "navbarlogos" >
+			<div class = navbartext>Home</div>
+	</a>
+	<a href="Browse.html" class = "navbaritems">
+		<img src = "images/dog.png" class = "navbarlogos">
+		<div class = navbartext>Browse Posts</div>
+	</a>
+	<a href="FAQ.html" class = "navbaritems">
+		<img src = "images/FAQ.png" class = "navbarlogos">
+		<div class = navbartext>FAQ</div>
+	</a>
+	<a href="userpage.html" class = "navbaritems">
+		<img src = "images/account.png" class = "navbarlogos">
+		<div class = navbartext>View Profile</div>
+	</a>
+
+	<div id="searchbar">
+		<img src="images/search.png" id="searchlogo">
+		<form id="formbox" action ="Browse.html">
+			<input type="text" class="form_input" name="text" placeholder="Search"autocomplete="off">
+		</form>
+		<div class="dropdown">
+		    <a href="javascript:void(0)" class="dropbtn"><img src="images/Browse/filter.png" id="filterlogo"></a>
+		    <div class="dropdown-content">
+		    	<span id="filter">Filter search results</span><br>
+		    	<form id="formbox" action ="HomePage.html">
+					<input type="checkbox"><small>User Profiles</small><br>
+					<input type="checkbox"><small>Pets for Adoption</small><br>
+					<input type="checkbox"><small>Questions</small><br>
+				</form>
+		    </div>
+		</div>
+	</div>
+	</div>
+
+		<div class = container1>
+			<div id = profile>
+					<img id = profilepic src="images/user_man.png"> <br>
+					<p id = profilename> Ramsay Bolton </p>
+			</div>
+
+			<div id = addQuestion>
+				<div class = container2>
+					<p id = addQHeader> Edit your Question: </p>
+					<div class = divider>
+					<form id= addQTitle>
+						<label id = qTitleLabel for="Question title"> Title of question: </label>
+						<input id = qTitlePlace type="text" id="addQTitle" name="Add Question Title" placeholder="Can dogs eat sausages?">
+					</form>
+					</div>
+
+					<div class = divider>
+					<form id= addQ>
+						<label id = qLabel for="Question"> Question: </label> <br>
+						<textarea id = questionplace rows = "1" cols = "20" placeholder="Hello everyone! Title is self-explanatory. Is it ok for them to eat?"></textarea>
+					</form>
+					</div>
+				</div>
+				<a href = "FAQ.html"><button class = editpost type= "button"> Submit </button></a>
+			</div>
+		</div>
+</body>
+</html>

@@ -3,6 +3,13 @@
 <head>
 	<title>Edit Account</title>
 	<link rel = "stylesheet" type = "text/css" href = "../css/usereditstyles.css">
+	<!-- <script type="text/javascript">
+		$(document).ready(function(){
+
+			$("#usernameform").setAttribute("value", {{prev.name}});
+
+		});
+	</script> -->
 </head>
 <body>
 	{{> navbar}}
@@ -20,21 +27,19 @@
 		<div style = "display: flex; justify-content: space-around; background-color: #DBBC8E; border: 5px solid #40393E; padding-right: 25px;">
 			<div id = bodyright>
 				<p style = "text-align: center; font-size: 30px; ">Account Details</p>
-				<form>
+				<form action = "/submitedit" method = "post">
 					<label for = "usernameform" style = "font-size: 20px;">Name: </label><br> 
-					<input type = "text" id = "usernameform" name = "usernameform" value = "Ramsay Bolton" size = "58"><br><br>
+					{{{prev.name}}}
 					<label for = "bioform" style = "font-size: 20px;">Bio: </label><br> 
-					<textarea type = "text" id = "bioform" name = "bioform" style = " resize: none; width: 437px; height: 100px" maxlength="200" rows = "4" cols = "40">I love dogs a lot. And sausages.</textarea><br><br>
+					<textarea type = 'text' id = 'bioform' name = 'bioform' style = ' resize: none; width: 437px; height: 100px' maxlength='200' rows = '4' cols = '40'>{{prev.bio}}</textarea><br><br>
 					<label for = "addressform" style = "font-size: 20px;">Address: </label><br> 
-					<input type = "text" id = "addressform" name = "addressform" value = "Winterfell, The North" size = "58"><br><br>
+					{{{prev.address}}}<br><br>
 					<label for = "numberform" style = "font-size: 20px;">Contact Number: </label><br> 
-					<input type = "text" id = "numberform" name = "numberform" value = "0917 597 0054" size = "58"><br><br>
-					<label for = "emailform" style = "font-size: 20px;">E-mail Address: </label><br> 
-					<input type = "text" id = "emailform" name = "emailform" value = "ramsay_bolton@gmail.com" size = "58"><br><br>
+					{{{prev.contact}}}<br><br>
 					<label for = "moneyform" style = "font-size: 20px;">Monthly Income: </label><br> 
-					<input type = "text" id = "moneyform" name = "moneyform" value = "20,000" size = "58"><br><br>
+					{{{prev.salary}}}<br><br>
+					<input type="submit" id = "submit" name = "savechanges" value="Save Changes">
 				</form>
-				<a href = "/userpage"><div><button id = "submit">Save Changes</button></div></a>
 			</div>
 			<div id = backgrounds>
 				<p style = "text-align: center; font-size: 30px">Mini-Backgrounds</p>

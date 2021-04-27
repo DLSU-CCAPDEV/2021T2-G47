@@ -21,10 +21,7 @@ hostname = process.env.HOSTNAME;
 //global variables
 var logName;
 var logEmail;
-var person = {
-		email: logEmail,
-		name: logName
-	}
+
 
 app.get(`/`, function(req, res){
 	res.render(`Login`);
@@ -42,15 +39,18 @@ app.get(`/userpage`, function(req, res){
 
 	var u;
 
+	var person = {
+			email: logEmail,
+			name: logName
+		}
+
 	db.findOne(`users`, person, function(result){
 
 		console.log('result' + result);
-
-		console.log('u' + u);
 		res.render(`userpage`, {
 			u: {
-				email: logEmail,
-				name: logName,
+				email: result.email,
+				name: result.name,
 				bio: result.bio,
 				address: result.address,
 				contact: result.contact,
@@ -79,28 +79,60 @@ app.get(`/editquestion`, function(req, res){
 })
 
 app.get(`/edituser`, function(req, res){
-	var u;
+
+	var prev;
+
+	var person = {
+		email: logEmail,
+		name: logName
+	}
 
 	db.findOne(`users`, person, function(result){
 
-		console.log('result' + result);
-
-		console.log('u' + u);
+		console.log('final result = ' + result);
+		
 		res.render(`edituserpage`, {
-			u: {
-				email: logEmail,
-				name: logName,
+			prev: {
+				name: "<input type = 'text' id = 'usernameform' name = 'usernameform' value = '" + result.name + "' size = '58'>",
 				bio: result.bio,
-				address: result.address,
-				contact: result.contact,
-				salary: result.salary,
-				status: result.status,
-				certvalid: result.certvalid
+				address: "<input type = 'text' id = 'addressform' name = 'addressform' value = '" + result.address + "' size = '58'>",
+				contact: "<input type = 'text' id = 'numberform' name = 'numberform' value = '" + result.contact + "' size = '58'>",
+				salary: "<input type = 'text' id = 'moneyform' name = 'moneyform' value = '" + result.salary + "' size = '58'>",
 			}
-		});
-	})
-	
-	
+		})
+	})	
+})
+
+app.post(`/submitedit`, function(req, res){
+
+	var person = {
+		email: logEmail,
+		name: logName
+	}
+
+	db.updateOne(`users`, person, {$set: {
+		name: req.body.usernameform
+	}})
+
+	res.render(`userpage`, person);
+	// var u;
+
+	// db.findOne(`users`, person, function(result){
+
+	// 	console.log('result' + result);
+	// 	res.render(`userpage`, {
+	// 		u: {
+	// 			email: result.email,
+	// 			name: result.name,
+	// 			bio: result.bio,
+	// 			address: result.address,
+	// 			contact: result.contact,
+	// 			salary: result.salary,
+	// 			status: result.status,
+	// 			certvalid: result.certvalid
+	// 		}
+	// 	});
+	// })
 })
 
 app.get(`/FAQ`, function(req, res){

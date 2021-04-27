@@ -18,7 +18,13 @@ dotenv.config();
 port = process.env.PORT;
 hostname = process.env.HOSTNAME;
 
+//global variables
 var logName;
+var logEmail;
+var person = {
+		email: logEmail,
+		name: logName
+	}
 
 app.get(`/`, function(req, res){
 	res.render(`Login`);
@@ -33,7 +39,27 @@ app.get(`/homepage`, function(req, res){
 })
 
 app.get(`/userpage`, function(req, res){
-	res.render(`userpage`);
+
+	var u;
+
+	db.findOne(`users`, person, function(result){
+
+		console.log('result' + result);
+
+		console.log('u' + u);
+		res.render(`userpage`, {
+			u: {
+				email: logEmail,
+				name: logName,
+				bio: result.bio,
+				address: result.address,
+				contact: result.contact,
+				salary: result.salary,
+				status: result.status,
+				certvalid: result.certvalid
+			}
+		});
+	})
 })
 
 app.get(`/addpost`, function(req, res){
@@ -53,7 +79,28 @@ app.get(`/editquestion`, function(req, res){
 })
 
 app.get(`/edituser`, function(req, res){
-	res.render(`edituserpage`);
+	var u;
+
+	db.findOne(`users`, person, function(result){
+
+		console.log('result' + result);
+
+		console.log('u' + u);
+		res.render(`edituserpage`, {
+			u: {
+				email: logEmail,
+				name: logName,
+				bio: result.bio,
+				address: result.address,
+				contact: result.contact,
+				salary: result.salary,
+				status: result.status,
+				certvalid: result.certvalid
+			}
+		});
+	})
+	
+	
 })
 
 app.get(`/FAQ`, function(req, res){
@@ -83,8 +130,9 @@ app.post(`/login`, function(req, res){
 		else{
 			res.render(`HomePage`);
 			console.log(result);
+			logEmail = email;
 			logName = result.name;
-			console.log(logName);
+			console.log(logName + email);
 		}
 	});
 })

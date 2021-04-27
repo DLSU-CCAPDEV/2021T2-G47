@@ -11,27 +11,27 @@
 			<div id = usercontainer1>
 				<div id = useravatar></div>
 				<div id = usertextcontainer>
-					<div id = username>Ramsay Bolton</div>
-					<div id = bio>I love dogs a lot. And sausages.</div>
+					<div id = username>{{u.name}}</div>
+					<div id = bio>{{u.bio}}</div>
 					<div id = detailscontainer>
 						<img src = "images/gps.png" class = detaillogos>
-						<div style = "width: 200px; text-align: left">Winterfell, The North</div>
+						<div style = "width: 200px; text-align: left">{{u.address}}</div>
 					</div>
 					<div id = detailscontainer>
 						<img src = "images/phone.png" class = detaillogos>
-						<div style = "width: 200px; text-align: left">0917 597 0054</div>
+						<div style = "width: 200px; text-align: left">{{u.contact}}</div>
 					</div>
 					<div id = detailscontainer>
 						<img src = "images/email.png" class = detaillogos>
-						<div style = "width: 200px; text-align: left"><a href = "https://mail.google.com/mail/u/0/#inbox?compose=new">ramsay_bolton@gmail.com</a></div>
+						<div style = "width: 200px; text-align: left"><a href = "https://mail.google.com/mail/u/0/#inbox?compose=new">{{u.email}}</a></div>
 					</div>
 					<div id = detailscontainer>
 						<img src = "images/peso.png" class = detaillogos>
-						<div style = "width: 200px; text-align: left">20,000/month</div>
+						<div style = "width: 200px; text-align: left">{{u.salary}}/month</div>
 					</div>
-					<div id = detailscontainer style = "padding-top: 50px; padding-bottom: 10px; margin: auto;">Status: Certified Adopter</div>
+					<div id = detailscontainer style = "padding-top: 50px; padding-bottom: 10px; margin: auto;">Status: {{u.status}}</div>
 					<div id = detailscontainer style = "height: 190px; background-image: url(images/certificate.jpg); background-size: contain; margin: auto;"></div>
-					<div id = detailscontainer style = "margin: auto;">Valid Until: 05/25</div>
+					<div id = detailscontainer style = "margin: auto;">Valid Until: {{u.certvalid}}</div>
 					<div id = detailscontainer><button style = "font-size: 15px">Upload Certificate</button></div>
 					<br><br>
 					<div style = "display: flex; justify-content: space-around;">

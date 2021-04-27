@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>FAQ</title>
+	<link rel="stylesheet" type = "text/css" href="../css/EditQuestion.css">
+</head>
+<body>
+	{{> navbar}}
+
+		<div class = container1>
+			<div id = profile>
+					<a href = "/userpage"><div style = "background-image: url(images/ramsay.jpeg);" class = "OPpicture"></div></a> <br>
+					<p id = profilename> Ramsay Bolton </p>
+			</div>
+
+			<div id = addQuestion>
+				<div class = container2>
+					<p id = addQHeader> Edit your Question: </p>
+					<div class = divider>
+					<form id= addQTitle>
+						<label id = qTitleLabel for="Question title"> Title of question: </label>
+						<input id = qTitlePlace type="text" id="addQTitle" name="Add Question Title" placeholder="Can dogs eat sausages?">
+					</form>
+					</div>
+
+					<div class = divider>
+					<form id= addQ>
+						<label id = qLabel for="Question"> Question: </label> <br>
+						<textarea id = questionplace rows = "1" cols = "20" placeholder="Hello everyone! Title is self-explanatory. Is it ok for them to eat?"></textarea>
+					</form>
+					</div>
+				</div>
+				<a href = "/FAQ"><button class = editpost type= "button"> Submit </button></a>
+			</div>
+		</div>
+</body>
+</html>

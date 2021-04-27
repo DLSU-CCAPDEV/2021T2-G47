@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="../css/Login.css">
+	<title>Pupperty</title>
+</head>
+<body style = "background-image: url('../images/Login/login_background_v2.png');">
+	<div class="login_box">
+		<div class="column"><img src="images/Login/dog.png" id="logo">
+			<ul id="sign">
+				<a href="/" id="log_in">Log In</a> <span id="slash">/</span>
+				<a href="/signup" id="sign_up">Sign Up</a>
+			</ul>
+			<form id="formbox" action ="/login" autocomplete="off" method="post">
+				<img src="images/Login/email.png" class="icons">
+				<input type="email" class="form_input" name="email" placeholder="Email"><br>
+				<img src="images/Login/password.png" class="icons">
+				<input type="password" class="form_input" name="password" placeholder="Password"><br>
+				<input type="checkbox"><small>Remember Password</small><br>
+				<input type="submit" name="login_button" value="Log In">
+			</form>
+		</div>
+	</div>
+</body>
+</html>

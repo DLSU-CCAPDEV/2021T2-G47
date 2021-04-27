@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Add Post</title>
+	<link rel="stylesheet" type = "text/css" href="../css/AddPost.css">
+</head>
+<body style = "background-image: url(images/bg.jpg)">
+	{{> navbar}}
+
+	<p id = addpostheader> Create a Post </p>
+
+	<div class = container2>
+		<div class = container>
+			<form class = entries method = "post" action = "/submitadoptionpost">
+				<label> Name: </label> <br>
+				<input type="text" class = place name = "name"> <br>
+				<label> Breed: </label> <br>
+				<input type="text" class = place name = "breed"> <br>
+				<label> Sex:</label> <br>
+				<input type="text" class = place name = "sex"> <br>
+				<label> Size: </label> <br>
+				<input type="text" class = place name = "size"> <br>
+				<label> Age: </label> <br>
+				<input type="text" class = place name = "age"> <br>
+				<label> Remarks: </label> <br>
+				<textarea name = "remarks" id = remarks placeholder="This little boy is so charming and sweet! He gets along really well with other puppies but especially loves getting snuggled by humans."> </textarea> 
+				<br>
+				<!-- <input type="image" name="image"><br> -->
+				<input type="submit" name="submit" value = "Submit" >
+			</form>
+			<br>
+		</div>
+
+		<img id = picofdog src ="images/addpostdog.jpg">
+	</div>
+
+</body>
+</html>

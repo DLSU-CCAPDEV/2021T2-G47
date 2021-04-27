@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Edit Post</title>
+	<link rel="stylesheet" type = "text/css" href="../css/EditPost.css">
+</head>
+<body>
+	{{> navbar}}
+
+	<p id = addpostheader> Edit your Post </p>
+
+	<div class = container2>
+		<div class = container>
+			<form class = entries>
+				<label> Name: </label> <br>
+				<input type="text" class = place placeholder="Tofee">
+			</form>
+
+			<form class = entries>
+				<label> Breed: </label> <br>
+				<input type="text" class = place placeholder="Beaglier">
+			</form>
+
+			<form class = entries>
+				<label> Sex:</label> <br>
+				<input type="text" class = place placeholder="Male">
+			</form>
+
+			<form class = entries>
+				<label> Size: </label> <br>
+				<input type="text" class = place placeholder="Small">
+			</form>
+
+			<form class = entries>
+				<label> Age: </label> <br>
+				<input type="text" class = place placeholder="5 Months">
+			</form>
+			<br>
+			<button class = buttons> Upload Image </button> <br>
+			 <form id = remarksform>
+				<label> Remarks: </label> <br>
+				<textarea id = remarks placeholder="This little boy is so charming and sweet! He gets along really well with other puppies but especially loves getting snuggled by humans."> </textarea>
+			</form>
+			<a href = "/browse"><button class = buttons> Submit </button></a>
+		</div>
+
+		<img id = picofdog src ="images/addpostdog.jpg">
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,190 @@
+<html>
+	<head>
+		<title>User Account Details</title>
+		<link rel = "stylesheet" type = "text/css" href = "../css/userstyles.css">
+	</head>
+
+	<body>
+		{{> navbar}}
+
+		<div id = userdetails>
+			<div id = usercontainer1>
+				<div id = useravatar></div>
+				<div id = usertextcontainer>
+					<div id = username>Ramsay Bolton</div>
+					<div id = bio>I love dogs a lot. And sausages.</div>
+					<div id = detailscontainer>
+						<img src = "images/gps.png" class = detaillogos>
+						<div style = "width: 200px; text-align: left">Winterfell, The North</div>
+					</div>
+					<div id = detailscontainer>
+						<img src = "images/phone.png" class = detaillogos>
+						<div style = "width: 200px; text-align: left">0917 597 0054</div>
+					</div>
+					<div id = detailscontainer>
+						<img src = "images/email.png" class = detaillogos>
+						<div style = "width: 200px; text-align: left"><a href = "https://mail.google.com/mail/u/0/#inbox?compose=new">ramsay_bolton@gmail.com</a></div>
+					</div>
+					<div id = detailscontainer>
+						<img src = "images/peso.png" class = detaillogos>
+						<div style = "width: 200px; text-align: left">20,000/month</div>
+					</div>
+					<div id = detailscontainer style = "padding-top: 50px; padding-bottom: 10px; margin: auto;">Status: Certified Adopter</div>
+					<div id = detailscontainer style = "height: 190px; background-image: url(images/certificate.jpg); background-size: contain; margin: auto;"></div>
+					<div id = detailscontainer style = "margin: auto;">Valid Until: 05/25</div>
+					<div id = detailscontainer><button style = "font-size: 15px">Upload Certificate</button></div>
+					<br><br>
+					<div style = "display: flex; justify-content: space-around;">
+						<a href = "/edituser"><div id = detailscontainer><button style = "font-size: 15px">Edit Account</button></div></a>
+						<div id = detailscontainer><a href = "/"><button style = "font-size: 15px;">Log Out</button></a></div>
+						<div id = detailscontainer><button style = "font-size: 15px; background-color: #c40808;">Delete Account</button></div>
+					</div>
+					
+				</div>
+			</div>
+
+			<div>
+				<div id = userinfo  style = "background-color: #f1ce76; padding-top: 30px; padding-bottom: 15px;" >
+					<div style = "display: flex; justify-content: center; height: 120px;">
+						<img src = "images/doghouse.png" style = "height: 100px;">
+						<div id = prevdogstitle> Homegiver To:</div>
+					</div>
+					<div id = prevdogscontainer>
+						<a href = "/adoption">
+							<div id = prevdogbox style = "background-color: rgb(183, 220, 244, 0.8);">
+								<div style = "background-image: url(images/bencurry.jpg); background-size: cover; background-position: -50px;" id = prevdogpic></div>
+								<div id = prevdogname>Ben</div>
+							</div>
+						</a>
+						<a href = "/adoption">
+							<div id = prevdogbox style = "background-color: rgb(183, 220, 244, 0.8);">
+								<div style = "background-image: url(images/vinceveras.jpg); background-size: cover; background-position: -70px;" id = prevdogpic></div>
+								<div id = prevdogname>Vince</div>
+							</div>
+						</a>
+						<a href = "/adoption">
+							<div id = prevdogbox style = "background-color: #ebbab4;">
+								<div style = "background-image: url(images/carolmagalhaes.jpg) ; background-size: cover; background-position: -70px;" id = prevdogpic></div>
+								<div id = prevdogname>Carol</div>
+							</div>
+						</a>
+					</div>
+				</div>
+				<div id = userinfo style = "position: relative; top: 30px; background-color: #c54b6c; height: 650px;">
+					<div style = "display: flex; justify-content: center;">
+						<img src = "images/rescue.png" style = "height: 150px;">
+						<div id = prevdogstitle style = "padding-top: 50px; text-shadow: 2px 2px 0px #000000;">Rescuer Of:</div>
+					</div>
+
+					<div id = prevdogscontainer>
+						<a href = "/adoption">
+							<div id = prevdogbox style = "background-color: #ebbab4;">
+								<div style = "background-image: url(images/yaseniliev.jpg); background-size: cover; background-position: -70px;" id = prevdogpic></div>
+								<div id = prevdogname>Yasen</div>
+							</div>
+						</a>
+						<a href = "/adoption">
+							<div id = prevdogbox style = "background-color: rgb(183, 220, 244, 0.8);">
+								<div style = "background-image: url(images/mitchellorr.jpg); background-size: cover; background-position: 0px 0px;" id = prevdogpic></div>
+								<div id = prevdogname>Mitchell</div>
+							</div>
+						</a>
+						<a href = "/adoption">
+							<div id = prevdogbox style = "background-color: rgb(183, 220, 244, 0.8);">
+								<div style = "background-image: url(images/michaeloxendine.jpg); background-size: cover; background-position: -70px 0px;" id = prevdogpic></div>
+								<div id = prevdogname>Michael</div>
+							</div>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id = userquestions>
+			<br><br><br>
+			<div style = "display: flex; justify-content: center; background-color: #a1cdce;">
+				<div><img src = "images/questions.png" style = "height: 150px; width: 200px;"></div>
+				<div id = questionstitle>Submitted Questions: </div>
+			</div>
+			<div style = "background-color: #FBECDB; padding: 50px;">
+				<div class = questioncontainer>
+					<div class = questionusercontainer>
+						<div class = questionpic style = "background-image: url(images/ramsay.jpeg)"></div>
+						<div class = questionuserdetails>
+							<div style = "padding: 10px;">
+									<div class = qusername><a href = "/userpage">Ramsay Bolton</a></div>
+								<div class = qusertext>
+									<div>
+										<div class = qadoptions>3 Adoptions</div>
+										<div class = qrescues>3 Rescues</div>
+									</div>
+									<div><img src = "images/greencheck.png" style = "height: 30px; width: 40px; position: relative; top: 3px;"></div>
+								</div>
+							</div>
+							<div class = questiontext>
+								Can dogs eat sausages?
+							</div>
+						</div>
+					</div>
+					<div class = questionusercontainer>
+						<div><img src = "images/downrightarrow.png" style = "height: 100px"></div>
+						<div class = questionpic style = "background-image: url(images/theongreyjoy.png)"></div>
+						<div class = questionuserdetails>
+							<div class = usertext>
+								<div class = qusername><a href = "/userpage">Theon Greyjoy</a></div>
+								<div class = qadoptions>1 Adoptions</div>
+								<div class = qrescues>0 Rescues</div>
+							</div>
+							<div class = questiontext style = "max-width: 450px">
+								Depends what kind.
+							</div>
+						</div>
+					</div>
+					<div class = questionusercontainer>
+						<div><img src = "images/downrightarrow.png" style = "height: 100px"></div>
+						<div class = questionpic style = "background-image: url(images/hodor.jfif)"></div>
+						<div class = questionuserdetails>
+							<div class = usertext>
+								<div class = qusername><a href = "/userpage">Hodor Hodor</a></div>
+								<div class = qadoptions>10 Adoptions</div>
+								<div class = qrescues>50 Rescues</div>
+							</div>
+							<div class = questiontext style = "max-width: 450px">
+								Hodor.
+							</div>
+						</div>
+					</div>
+					<div style = "display: flex;">
+						<a href = "FAQ.html"><div style = "margin-top: 20px;"><button>View Post</button></div></a>
+						<a href = "EditQuestion.html"><div style = "margin-top: 20px; position: relative; left: 20px;"><button>Edit Post</button></div></a>
+					</div>
+				</div>
+				<br><br>
+				<div class = questioncontainer>
+					<div class = questionusercontainer>
+						<div class = questionpic style = "background-image: url(images/ramsay.jpeg)"></div>
+						<div class = questionuserdetails>
+							<div style = "padding: 10px;">
+									<div class = qusername><a href = "/userpage">Ramsay Bolton</a></div>
+								<div class = qusertext>
+									<div>
+										<div class = qadoptions>3 Adoptions</div>
+										<div class = qrescues>3 Rescues</div>
+									</div>
+									<div><img src = "images/greencheck.png" style = "height: 30px; width: 40px; position: relative; top: 3px;"></div>
+								</div>
+							</div>
+							<div class = questiontext>
+								How do I train my dog not to pee on the bed so much?!
+							</div>
+						</div>
+					</div>
+					<div style = "display: flex;">
+						<a href = "/FAQ"><div style = "margin-top: 20px;"><button>View Post</button></div></a>
+						<a href = "/editquestion"><div style = "margin-top: 20px; position: relative; left: 20px;"><button>Edit Post</button></div></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

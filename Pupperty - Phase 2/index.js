@@ -39,12 +39,9 @@ app.get(`/userpage`, function(req, res){
 
 	var u;
 
-	var person = {
-			email: logEmail,
-			name: logName
-		}
+	console.log("email and name of current session: "+ logEmail + " -- " + logName);
 
-	db.findOne(`users`, person, function(result){
+	db.findOne(`users`, {email: logEmail}, function(result){
 
 		console.log('result' + result);
 		res.render(`userpage`, {
@@ -82,12 +79,7 @@ app.get(`/edituser`, function(req, res){
 
 	var prev;
 
-	var person = {
-		email: logEmail,
-		name: logName
-	}
-
-	db.findOne(`users`, person, function(result){
+	db.findOne(`users`, {email: logEmail}, function(result){
 
 		console.log('final result = ' + result);
 		
@@ -105,36 +97,32 @@ app.get(`/edituser`, function(req, res){
 
 app.post(`/submitedit`, function(req, res){
 
-	var person = {
-		email: logEmail,
-		name: logName
-	}
-
-	// console.log("LOOK" + req.body.usernameform + "\n" + logEmail + "\n" + logName);
-
-	db.updateOne(`users`, {email: person.email}, {$set: {
-		name: req.body.usernameform
+	db.updateOne(`users`, {email: logEmail}, {$set: {
+		name: req.body.usernameform,
+		bio: req.body.bioform,
+		address: req.body.addressform,
+		contact: req.body.numberform,
+		salary: req.body.moneyform
 	}})
 
-	res.render(`userpage`, person);
-	// var u;
+	var u;
 
-	// db.findOne(`users`, person, function(result){
+	db.findOne(`users`, {email: logEmail}, function(result){
 
-	// 	console.log('result' + result);
-	// 	res.render(`userpage`, {
-	// 		u: {
-	// 			email: result.email,
-	// 			name: result.name,
-	// 			bio: result.bio,
-	// 			address: result.address,
-	// 			contact: result.contact,
-	// 			salary: result.salary,
-	// 			status: result.status,
-	// 			certvalid: result.certvalid
-	// 		}
-	// 	});
-	// })
+		console.log('result' + result);
+		res.render(`userpage`, {
+			u: {
+				email: result.email,
+				name: result.name,
+				bio: result.bio,
+				address: result.address,
+				contact: result.contact,
+				salary: result.salary,
+				status: result.status,
+				certvalid: result.certvalid
+			}
+		});
+	})
 })
 
 app.get(`/FAQ`, function(req, res){
@@ -166,7 +154,7 @@ app.post(`/login`, function(req, res){
 			console.log(result);
 			logEmail = result.email;
 			logName = result.name;
-			console.log(logName + email);
+			console.log(logName + " " + email);
 		}
 	});
 })

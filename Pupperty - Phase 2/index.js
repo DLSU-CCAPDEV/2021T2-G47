@@ -110,7 +110,9 @@ app.post(`/submitedit`, function(req, res){
 		name: logName
 	}
 
-	db.updateOne(`users`, person, {$set: {
+	// console.log("LOOK" + req.body.usernameform + "\n" + logEmail + "\n" + logName);
+
+	db.updateOne(`users`, {email: person.email}, {$set: {
 		name: req.body.usernameform
 	}})
 
@@ -162,7 +164,7 @@ app.post(`/login`, function(req, res){
 		else{
 			res.render(`HomePage`);
 			console.log(result);
-			logEmail = email;
+			logEmail = result.email;
 			logName = result.name;
 			console.log(logName + email);
 		}

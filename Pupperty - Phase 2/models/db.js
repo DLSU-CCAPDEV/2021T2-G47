@@ -8,6 +8,19 @@ const options = { useUnifiedTopology: true };
 
 const database = {
 
+	countDocuments: function(collection, callback){
+		client.connect(url, options, function (err, db){
+			var database = db.db(`database`);
+			database.collection(collection).countDocuments().then((count_documents) => {
+			  console.log(count_documents);
+			  db.close();
+			  return callback(count_documents);
+			}).catch((err) => {
+			  console.log(err.Message);
+			})
+		});
+	},
+
 	insertOne: function(collection, doc){
 		client.connect(url, options, function (err, db){
 			if(err) throw err;

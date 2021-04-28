@@ -13,7 +13,9 @@ const storage = multer.diskStorage({
 		callback(null, './uploads');
 	},
 	filename: function(req, file, callback){
-		callback(null, new Date().toDateString() + "-" + file.originalname);
+		// callback(null,  + "/" + new Date.getDate() + "/" + new Date.getFullYear() + "_" + 
+		// 	new Date.getHours() + ":" + new Date.getMinutes() + ":" + new Date.getSeconds() + "_" + file.originalname);
+		callback(null, new Date().getMonth() + "-" + new Date().getDate() + "-" + new Date().getFullYear() + "_" + new Date().getHours() + "-" + new Date().getMinutes() + "_" + file.originalname);
 	}
 })
 
@@ -219,8 +221,8 @@ app.post(`/register`, function(req, res){
 app.post(`/submitadoptionpost`, upload.single('image'), function(req, res){
 
 	console.log(req.file);
-
-	var dog = {
+	db.countDocuments('adoption_posts', function(result){
+		var dog = {
 		poster: logName,
 		poster_email: logEmail,
 		name: req.body.name,
@@ -231,10 +233,14 @@ app.post(`/submitadoptionpost`, upload.single('image'), function(req, res){
 		remarks: req.body.remarks,
 		image: req.file,
 		path: req.file.path,
-		owner: "N/A"
+		owner: "N/A",
+		adoption_status: false,
+		post_id: "post_" + result,
+		post_date: new Date().getMonth() + "-" + new Date().getDate() + "-" + new Date().getFullYear(),
+		post_time: new Date().getHours() + ":" + new Date().getMinutes()
 	}
-
-	db.insertOne(`adoption_posts`, dog);
+		db.insertOne(`adoption_posts`, dog);
+	});
 
 	res.render(`Browse`);
 })

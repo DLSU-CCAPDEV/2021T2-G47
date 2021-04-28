@@ -147,7 +147,17 @@ app.post(`/submitedit`, function(req, res){
 })
 
 app.get(`/FAQ`, function(req, res){
-	res.render(`FAQ`);
+	var q;
+
+	  db.findMany('FAQS', null,
+	  	{author: 1, 
+	  	title:1, 
+	  	text:1}, function(result){
+	  		 res.render('FAQ', {
+	  		 	q:result,
+	  		 	name: logName
+	  		 });
+	  	})
 })
 
 app.get(`/browse`, function(req, res){
@@ -230,17 +240,23 @@ app.post(`/submitadoptionpost`, upload.single('image'), function(req, res){
 })
 
 app.post(`/submitFAQ`, function(req, res){
-
+	var q;
 	var faq = {
-		author: logName,
-		title: req.body.questiontitle,
-		text: req.body.questiontext,
-		comments: []
-	}
+        author: logName,
+        title: req.body.questiontitle,
+        text: req.body.questiontext,
+        comments: []
+    }
 
 	db.insertOne(`FAQS`, faq);
 
-	res.render(`FAQ`);
+	db.findMany('FAQS', {author : logName}, 
+	  	{author: 1, 
+	  	title:1, 
+	  	text:1}, function(result){
+	  		q = result;
+	  		 res.render('FAQ', q);
+	  	})
 })
 
 app.get(`/deleteuser`, function(req, res){

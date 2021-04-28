@@ -36,6 +36,8 @@ hbs.registerHelper('limit', function (arr, limit) {
   return arr.slice(0, limit);
 })
 
+hbs.registerHelper('reverseArray', (array) => array.reverse());
+
 //global variables
 var logName;
 var logEmail;
@@ -191,8 +193,11 @@ app.get(`/browse`, function(req, res){
 	console.log("Email and name of current session: "+ logEmail + " -- " + logName);
 
 	db.findMany(`adoption_posts`, {adoption_status: false}, {
-		name: 1,
-		path: 1
+		poster: 1,
+		path: 1,
+		remarks: 1,
+		post_date: 1,
+		post_time: 1
 	}, function(result){
 		postsArray = result;
 		console.log('result ' + postsArray);
@@ -315,9 +320,31 @@ app.post(`/submitadoptionpost`, upload.single('image'), function(req, res){
 		post_time: new Date().getHours() + ":" + new Date().getMinutes()
 	}
 		db.insertOne(`adoption_posts`, dog);
-	});
 
-	res.render(`Browse`);
+		var u;
+		var postsArray;
+
+		console.log("Email and name of current session: "+ logEmail + " -- " + logName);
+
+		db.findMany(`adoption_posts`, {adoption_status: false}, {
+			poster: 1,
+			path: 1,
+			remarks: 1,
+			post_date: 1,
+			post_time: 1
+		}, function(result){
+			postsArray = result;
+			console.log('result ' + postsArray);
+			console.log('user: ' + logName);
+
+			res.render(`Browse`, {
+				u: {
+					currentUser: logName,
+					posts: postsArray
+				}
+			})
+		})
+	});
 })
 
 app.post(`/submitFAQ`, function(req, res){

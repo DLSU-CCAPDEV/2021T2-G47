@@ -36,16 +36,17 @@
 
 		<div id="middle">
 			<a href="/addpost" id="post_prompt">Post a dog up for adoption?</a>
+			{{#each (reverseArray u.posts)}}
 			<div class="post">
 				<div class="pic_name">
-					<a href="/userpage"><img src="images/Browse/user_man.png" class="poster_pic"></a>
-					<a href="/userpage" class="poster_name">James Santos</a>
+					<a href="/userpage"><img src="images/Browse/user_woman.png" class="poster_pic"></a>
+					<a href="/userpage" class="poster_name">{{this.poster}}</a>
 				</div>
-				<p class="dog_description">Toffee may seem to be a bit timid at first, but this good boy is one of the sweetest dogs out there! He's a bit cautious around new people but once he warms up to you, you won't be able to stop him from following you around! He likes to play with puppies and humans alike so you surely won't get bored at home.</p>
-				<img src="images/Browse/Toffee.jpg" class="dog_photo">
+				<p class="dog_description">{{this.remarks}}</p>
+				<img src="uploads/{{this.path}}" class="dog_photo">
 				<div class="date_time">
 					<img src="images/Browse/time.png" class="time_logo">
-					<p class="time">Posted 2:57 PM on 04/02/2021</p>
+					<p class="time">Posted {{this.post_time}} on {{this.post_date}}</p>
 				</div>
 				<div class="action_bar">
 					<p class="action_text">102</p>
@@ -55,8 +56,9 @@
 					<p class="action_text">Adopt Dog</p>
 				</div>
 			</div>
+			{{/each}}
 
-			<div class="post">
+			<!-- <div class="post">
 				<div class= "pic_name">
 					<a href= "/userpage"><img src="images/Browse/user_woman.png" class="poster_pic"></a>
 					<a href= "/userpage" class="poster_name">Elizabeth Gonzaga</a>
@@ -94,7 +96,7 @@
 					<a href="/adoption"><img src="images/Browse/dog_seating.png" class="action_icons"></a>
 					<p class="action_text">Adopt Dog</p>
 				</div>
-			</div>
+			</div> -->
 		</div>
 
 		<div id="right">

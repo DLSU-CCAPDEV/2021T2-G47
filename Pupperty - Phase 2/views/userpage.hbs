@@ -37,7 +37,7 @@
 					<div style = "display: flex; justify-content: space-around;">
 						<a href = "/edituser"><div id = detailscontainer><button style = "font-size: 15px">Edit Account</button></div></a>
 						<div id = detailscontainer><a href = "/"><button style = "font-size: 15px;">Log Out</button></a></div>
-						<div id = detailscontainer><button style = "font-size: 15px; background-color: #c40808;">Delete Account</button></div>
+						<div id = detailscontainer><a href = "/deleteuser"><button style = "font-size: 15px; background-color: #c40808;">Delete Account</button></a></div>
 					</div>
 					
 				</div>
@@ -108,7 +108,32 @@
 			</div>
 			<div style = "background-color: #FBECDB; padding: 50px;">
 				<div class = questioncontainer>
-					<div class = questionusercontainer>
+					{{#each u.questions}}
+						<div class = questionusercontainer>
+							<div class = questionpic style = "background-image: url(images/ramsay.jpeg)"></div>
+							<div class = questionuserdetails>
+								<div style = "padding: 10px;">
+										<div class = qusername><a href = "/userpage">{{this.author}}</a></div>
+									<div class = qusertext>
+										<div>
+											<div class = qadoptions>{{../u.adoptcount}} Adoptions</div>
+											<div class = qrescues>{{../u.rescuecount}} Rescues</div>
+										</div>
+										<div><img src = "images/greencheck.png" style = "height: 30px; width: 40px; position: relative; top: 3px;"></div>
+									</div>
+								</div>
+								<div class = questiontext>
+									{{this.title}}
+								</div>
+							</div>
+						</div>
+						<div style = "display: flex;">
+							<a href = "/FAQ"><div style = "margin-top: 20px;"><button>View Post</button></div></a>
+							<a href = "/editquestion"><div style = "margin-top: 20px; position: relative; left: 20px;"><button>Edit Post</button></div></a>
+						</div>
+						<br><br><br>
+					{{/each}}
+					<!-- <div class = questionusercontainer>
 						<div class = questionpic style = "background-image: url(images/ramsay.jpeg)"></div>
 						<div class = questionuserdetails>
 							<div style = "padding: 10px;">
@@ -183,7 +208,7 @@
 						<a href = "/FAQ"><div style = "margin-top: 20px;"><button>View Post</button></div></a>
 						<a href = "/editquestion"><div style = "margin-top: 20px; position: relative; left: 20px;"><button>Edit Post</button></div></a>
 					</div>
-				</div>
+				</div> -->
 			</div>
 		</div>
 	</body>

@@ -22,7 +22,6 @@ hostname = process.env.HOSTNAME;
 var logName;
 var logEmail;
 
-
 app.get(`/`, function(req, res){
 	res.render(`Login`);
 })
@@ -38,22 +37,32 @@ app.get(`/homepage`, function(req, res){
 app.get(`/userpage`, function(req, res){
 
 	var u;
+	var questionsArray;
 
-	console.log("email and name of current session: "+ logEmail + " -- " + logName);
+	console.log("Email and name of current session: "+ logEmail + " -- " + logName);
 
-	db.findOne(`users`, {email: logEmail}, function(result){
+	db.findMany(`FAQS`, {author: logName}, {
+		author: 1,
+		title: 1,
+		text: 1,
+	}, function(result){questionsArray = result;})
 
-		console.log('result' + result);
+	db.findOne(`users`, {email: logEmail}, function(result2){
+		console.log('result' + result2.name);
+
 		res.render(`userpage`, {
 			u: {
-				email: result.email,
-				name: result.name,
-				bio: result.bio,
-				address: result.address,
-				contact: result.contact,
-				salary: result.salary,
-				status: result.status,
-				certvalid: result.certvalid
+				email: result2.email,
+				name: result2.name,
+				bio: result2.bio,
+				address: result2.address,
+				contact: result2.contact,
+				salary: result2.salary,
+				status: result2.status,
+				certvalid: result2.certvalid,
+				adoptcount: result2.homeowner.length,
+				rescuecount: result2.rescuer.length,
+				questions: questionsArray
 			}
 		});
 	})
@@ -147,14 +156,13 @@ app.post(`/login`, function(req, res){
 	db.findOne(`users`, person, function(result){
 		if(result == null){
 			res.render(`Login`);
-			console.log(result);
+			console.log(`Login unsuccessful. User does not exist in the databse.`);
 		}
 		else{
 			res.render(`HomePage`);
-			console.log(result);
 			logEmail = result.email;
 			logName = result.name;
-			console.log(logName + " " + email);
+			console.log(`Login successful. User ` + logName + ` ` + logEmail);
 		}
 	});
 })
@@ -164,23 +172,31 @@ app.post(`/register`, function(req, res){
 	var email = req.body.email;
 	var password = req.body.password;
 
-	var person = {
-		email: email,
-		password: password,
-		name: "",
-		bio: "",
-		address: "",
-		contact: "",
-		salary: "",
-		status: "Not Certified",
-		certvalid: "",
-		homeowner: [],
-		rescuer: []
-	}
+	db.findOne(`users`, {email: email}, function(result){
+		if(result != null){
+			console.log(`Email already registered.`);
+			alert("Email already registered, please try logging in with your email.");
+			res.render(`HomePage`);
+		} else{
+			var person = {
+				email: email,
+				password: password,
+				name: "",
+				bio: "",
+				address: "",
+				contact: "",
+				salary: "",
+				status: "Not Certified",
+				certvalid: "",
+				homeowner: [],
+				rescuer: []
+			}
 
-	db.insertOne(`users`, person);
-
-	res.render(`HomePage`);
+			db.insertOne(`users`, person);
+			logEmail = email;
+			res.render(`HomePage`);
+		}
+	})
 })
 
 app.post(`/submitadoptionpost`, function(req, res){
@@ -202,13 +218,21 @@ app.post(`/submitadoptionpost`, function(req, res){
 app.post(`/submitFAQ`, function(req, res){
 
 	var faq = {
+		author: logName,
 		title: req.body.questiontitle,
-		text: req.body.questiontext
+		text: req.body.questiontext,
+		comments: []
 	}
 
 	db.insertOne(`FAQS`, faq);
 
 	res.render(`FAQ`);
+})
+
+app.get(`/deleteuser`, function(req, res){
+
+	db.deleteOne(`users`, {email: logEmail});
+	res.render(`Login`);
 })
 
 app.listen(port, hostname, function(){

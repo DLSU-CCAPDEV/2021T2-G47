@@ -50,14 +50,15 @@ const database = {
 		});
 	},
 
-	findMany: function(collection, query, sort=null, projection=null){
-		client.connect(url, option, function(err, db){
+	findMany: function(collection, query, projection, callback){
+		client.connect(url, options, function(err, db){
 			if(err) throw err;
 			var database = db.db(`database`);
-			database.collection(collection).find(query, {projection: projection}).sort(sort).toArray(function (err, result){
+			database.collection(collection).find(query, {projection: projection}).toArray(function (err, result){
 				if(err) throw err;
-				console.log(result);
+				console.log("findMany = " + result);
 				db.close();
+				return callback(result);
 			});
 		});
 	},

@@ -10,11 +10,9 @@ const multer = require('multer');
 
 const storage = multer.diskStorage({
 	destination: function(req, file, callback){
-		callback(null, './uploads');
+		callback(null, './public/uploads');
 	},
 	filename: function(req, file, callback){
-		// callback(null,  + "/" + new Date.getDate() + "/" + new Date.getFullYear() + "_" + 
-		// 	new Date.getHours() + ":" + new Date.getMinutes() + ":" + new Date.getSeconds() + "_" + file.originalname);
 		callback(null, new Date().getMonth() + "-" + new Date().getDate() + "-" + new Date().getFullYear() + "_" + new Date().getHours() + "-" + new Date().getMinutes() + "_" + file.originalname);
 	}
 })
@@ -32,6 +30,12 @@ dotenv.config();
 port = process.env.PORT;
 hostname = process.env.HOSTNAME;
 
+// limit an array to a maximum of elements (from the start)
+hbs.registerHelper('limit', function (arr, limit) {
+  if (!Array.isArray(arr)) { return []; }
+  return arr.slice(0, limit);
+})
+
 //global variables
 var logName;
 var logEmail;
@@ -45,7 +49,24 @@ app.get(`/signup`, function(req, res){
 })
 
 app.get(`/homepage`, function(req, res){
-	res.render(`HomePage`);
+	var u;
+	var postsArray;
+
+	console.log("Email and name of current session: "+ logEmail + " -- " + logName);
+
+	db.findMany(`adoption_posts`, {adoption_status: false}, {
+		name: 1,
+		path: 1
+	}, function(result){
+		postsArray = result;
+		console.log('result ' + postsArray);
+
+		res.render(`HomePage`, {
+			u: {
+				posts: postsArray
+			}
+		})
+	})
 })
 
 app.get(`/userpage`, function(req, res){
@@ -178,12 +199,29 @@ app.post(`/login`, function(req, res){
 			console.log(`Login unsuccessful. User does not exist in the databse.`);
 		}
 		else{
-			res.render(`HomePage`);
+
+			db.findMany(`adoption_posts`, {adoption_status: false}, {
+				name: 1,
+				path: 1
+			}, function(result){
+				postsArray = result;
+				console.log('result ' + postsArray);
+
+				res.render(`HomePage`, {
+					u: {
+						posts: postsArray
+					}
+				})
+			})
+
+			// res.render(`HomePage`);
 			logEmail = result.email;
 			logName = result.name;
 			console.log(`Login successful. User ` + logName + ` ` + logEmail);
 		}
 	});
+
+
 })
 
 app.post(`/register`, function(req, res){
@@ -232,7 +270,7 @@ app.post(`/submitadoptionpost`, upload.single('image'), function(req, res){
 		age: req.body.age,
 		remarks: req.body.remarks,
 		image: req.file,
-		path: req.file.path,
+		path: req.file.filename,
 		owner: "N/A",
 		adoption_status: false,
 		post_id: "post_" + result,

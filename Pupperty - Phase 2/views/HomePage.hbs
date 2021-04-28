@@ -2,6 +2,8 @@
 <html>
 <head>
 	<link rel="stylesheet" type="text/css" href="../css/HomePage.css">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type='text/javascript' src='script.js'></script>
 	<title>Pupperty Home</title>
 </head>
 <body>
@@ -136,15 +138,15 @@
 	<div class="for_adoption">
 		<div class="dogs_header">DOGS FOR ADOPTION</div>
 		<div class="pictures">
-			
-			<a href="/adoption" class="dog_link">
-				<div class="doggo" id="doggo1" style = "background-image: url(images/HomePage/doggo1.png);">
-					<img src="images/HomePage/dogF.png" class="dog_logo">
-					<p class="dog_name">Ellie</p>
-				</div>
-			</a>
-			
-			<a href="/adoption" class="dog_link">
+				{{#each (limit u.posts 4)}}
+				<a href="/adoption" class="dog_link">
+					<div class="doggo" style = " background-image: url(uploads/{{this.path}}); background-size: cover; background-position: center">
+						<img src="images/HomePage/dogM.png" class="dog_logo">
+						<p class="dog_name">{{this.name}}</p>
+					</div>
+				</a>
+				{{/each}}
+			<!-- <a href="/adoption" class="dog_link">
 				<div class="doggo" id="doggo2" style = "background-image: url(images/HomePage/doggo2.png);">
 					<img src="images/HomePage/dogM.png" class="dog_logo">
 					<p class="dog_name">Toffee</p>
@@ -163,7 +165,7 @@
 					<img src="images/HomePage/dogF.png" class="dog_logo">
 					<p class="dog_name">Nino</p>
 				</div>
-			</a>
+			</a> -->
 
 			<a href="/browse" id="more">
 				<div class="doggo_separate" id="doggo5">

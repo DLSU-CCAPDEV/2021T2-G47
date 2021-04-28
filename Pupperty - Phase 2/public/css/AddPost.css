@@ -1,3 +1,8 @@
+*{
+	margin: 0px;
+	padding: 0px;
+}
+
 body{
 	font-family: georgia;
 }
@@ -52,7 +57,7 @@ body{
 	display: flex;
 	margin: 0px;
 	position: sticky;
-	top: 0;
+	top: 0px;
 	z-index: 99;
 }
 
@@ -201,6 +206,7 @@ small{
 	text-align: center;
 	font-size: 40px;
 	font-weight : bold;
+	margin-top: 30px;
 	margin-bottom: 0px;
 }
 

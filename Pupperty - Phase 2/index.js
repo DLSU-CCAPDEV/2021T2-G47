@@ -6,6 +6,18 @@ const express = require(`express`);
 const bodyParser = require(`body-parser`);
 const db = require('./models/db.js')
 const hbs = require(`hbs`);
+const multer = require('multer');
+
+const storage = multer.diskStorage({
+	destination: function(req, file, callback){
+		callback(null, './uploads');
+	},
+	filename: function(req, file, callback){
+		callback(null, new Date().toDateString() + "-" + file.originalname);
+	}
+})
+
+const upload = multer({storage: storage});
 
 hbs.registerPartials(__dirname + '/views/partials');
 
@@ -147,13 +159,8 @@ app.post(`/login`, function(req, res){
 	var email = req.body.email;
 	var password = req.body.password;
 
-	var person = {
-		email: email,
-		password: password
-	}
-
 	// access the database, then save the data
-	db.findOne(`users`, person, function(result){
+	db.findOne(`users`, {email: email, password: password}, function(result){
 		if(result == null){
 			res.render(`Login`);
 			console.log(`Login unsuccessful. User does not exist in the databse.`);
@@ -199,15 +206,22 @@ app.post(`/register`, function(req, res){
 	})
 })
 
-app.post(`/submitadoptionpost`, function(req, res){
+app.post(`/submitadoptionpost`, upload.single('image'), function(req, res){
+
+	console.log(req.file);
 
 	var dog = {
+		poster: logName,
+		poster_email: logEmail,
 		name: req.body.name,
 		breed: req.body.breed,
 		sex: req.body.sex,
 		size: req.body.size,
 		age: req.body.age,
-		remarks: req.body.remarks
+		remarks: req.body.remarks,
+		image: req.file,
+		path: req.file.path,
+		owner: "N/A"
 	}
 
 	db.insertOne(`adoption_posts`, dog);

@@ -11,7 +11,7 @@
 
 	<div class = container2>
 		<div class = container>
-			<form class = entries method = "post" action = "/submitadoptionpost">
+			<form class = entries method = "post" action = "/submitadoptionpost" enctype="multipart/form-data">
 				<label> Name: </label> <br>
 				<input type="text" class = place name = "name"> <br>
 				<label> Breed: </label> <br>
@@ -23,10 +23,10 @@
 				<label> Age: </label> <br>
 				<input type="text" class = place name = "age"> <br>
 				<label> Remarks: </label> <br>
-				<textarea name = "remarks" id = remarks placeholder="This little boy is so charming and sweet! He gets along really well with other puppies but especially loves getting snuggled by humans."> </textarea> 
+				<textarea name = "remarks" id = "remarks"></textarea> 
 				<br>
-				<!-- <input type="image" name="image"><br> -->
-				<input type="submit" name="submit" value = "Submit" >
+				<input type="file" name="image" accept="image/*"><br>
+				<input type="submit" name="submit" value = "Submit">
 			</form>
 			<br>
 		</div>

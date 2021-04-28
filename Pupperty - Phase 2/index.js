@@ -152,6 +152,7 @@ app.post(`/submitedit`, function(req, res){
 	var u;
 
 	db.findOne(`users`, {email: logEmail}, function(result){
+		logName = result.name;
 
 		console.log('result' + result);
 		res.render(`userpage`, {
@@ -184,7 +185,26 @@ app.get(`/FAQ`, function(req, res){
 })
 
 app.get(`/browse`, function(req, res){
-	res.render(`Browse`);
+	var u;
+	var postsArray;
+
+	console.log("Email and name of current session: "+ logEmail + " -- " + logName);
+
+	db.findMany(`adoption_posts`, {adoption_status: false}, {
+		name: 1,
+		path: 1
+	}, function(result){
+		postsArray = result;
+		console.log('result ' + postsArray);
+		console.log('user: ' + logName);
+
+		res.render(`Browse`, {
+			u: {
+				currentUser: logName,
+				posts: postsArray
+			}
+		})
+	})
 })
 
 app.post(`/login`, function(req, res){
@@ -214,7 +234,6 @@ app.post(`/login`, function(req, res){
 				})
 			})
 
-			// res.render(`HomePage`);
 			logEmail = result.email;
 			logName = result.name;
 			console.log(`Login successful. User ` + logName + ` ` + logEmail);
@@ -232,8 +251,8 @@ app.post(`/register`, function(req, res){
 	db.findOne(`users`, {email: email}, function(result){
 		if(result != null){
 			console.log(`Email already registered.`);
-			alert("Email already registered, please try logging in with your email.");
-			res.render(`HomePage`);
+			//alert("Email already registered, please try logging in with your email.");
+			res.render(`Login`);
 		} else{
 			var person = {
 				email: email,
@@ -251,7 +270,25 @@ app.post(`/register`, function(req, res){
 
 			db.insertOne(`users`, person);
 			logEmail = email;
-			res.render(`HomePage`);
+
+			console.log('Email: ' + logEmail + ' successfully registered.');
+
+			var prev;
+
+			db.findOne(`users`, {email: logEmail}, function(result){
+
+				console.log('final result = ' + result);
+				
+				res.render(`edituserpage`, {
+					prev: {
+						name: "<input type = 'text' id = 'usernameform' name = 'usernameform' value = '" + result.name + "' size = '58'>",
+						bio: result.bio,
+						address: "<input type = 'text' id = 'addressform' name = 'addressform' value = '" + result.address + "' size = '58'>",
+						contact: "<input type = 'text' id = 'numberform' name = 'numberform' value = '" + result.contact + "' size = '58'>",
+						salary: "<input type = 'text' id = 'moneyform' name = 'moneyform' value = '" + result.salary + "' size = '58'>",
+					}
+				})
+			})	
 		}
 	})
 })

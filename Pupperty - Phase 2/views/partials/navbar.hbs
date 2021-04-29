@@ -1,41 +1,36 @@
 <div id = "navbar">
-	<a href="/homepage" class = "navbaritems" id="currentNavbar">
-			<img src = "images/home.png" class = "navbarlogos">
+	<a href="/homepage" class = "navbaritems" id = "currentnavbar">
+			<img src = "images/home.png" class = "navbarlogos" >
 			<div class = navbartext>Home</div>
 	</a>
-	<a href="/browse" class = "navbaritems" id="navBrowse">
+	<a href="/browse" class = "navbaritems">
 		<img src = "images/dog.png" class = "navbarlogos">
 		<div class = navbartext>Browse Posts</div>
 	</a>
-	<a href="/FAQ" class = "navbaritems" id="navFAQ">
+	<a href="/FAQ" class = "navbaritems">
 		<img src = "images/FAQ.png" class = "navbarlogos">
 		<div class = navbartext>FAQ</div>
 	</a>
-	<a href= "/userpage" class = "navbaritems" id="navUserpage">
+	<a href= "/userpage" class = "navbaritems">
 		<img src = "images/account.png" class = "navbarlogos">
 		<div class = navbartext>View Profile</div>
 	</a>
 
 	<div id="searchbar">
 		<img src="images/search.png" id="searchlogo">
-		<form id="formbox" action ="/browse">
-			<input type="text" class="form_input" name="text" placeholder="Search" autocomplete="off">
+		<form id="formbox" action ="Browse.html">
+			<input type="text" class="form_input" name="text" placeholder="Search"autocomplete="off">
 		</form>
 		<div class="dropdown">
 		    <a href="javascript:void(0)" class="dropbtn"><img src="images/Browse/filter.png" id="filterlogo"></a>
 		    <div class="dropdown-content">
 		    	<span id="filter">Filter search results</span><br>
-		    	<form id="filter_options" action ="HomePage.html">
+		    	<form id="formbox" action ="HomePage.html">
 					<input type="checkbox"><small>User Profiles</small><br>
 					<input type="checkbox"><small>Pets for Adoption</small><br>
 					<input type="checkbox"><small>Questions</small><br>
 				</form>
-		    </div> 
+		    </div>
 		</div>
-	</div>
-	<div id="logout_area">
-		<a href="/" title="Logout" id="logout_ref">
-			<img src = "images/logout.png" id="logout">
-		</a>
 	</div>
 </div>

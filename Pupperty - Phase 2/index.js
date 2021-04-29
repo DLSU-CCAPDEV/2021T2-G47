@@ -299,6 +299,7 @@ app.post(`/register`, function(req, res){
 })
 
 app.post(`/submitadoptionpost`, upload.single('image'), function(req, res){
+
 	console.log(req.file);
 	db.countDocuments('adoption_posts', function(result){
 		var dog = {
@@ -357,13 +358,12 @@ app.post(`/submitFAQ`, function(req, res){
 
 	db.insertOne(`FAQS`, faq);
 
-	db.findMany('FAQS', {author : logName}, {
-		author: 1, 
+	db.findMany('FAQS', {author : logName}, 
+	  	{author: 1, 
 	  	title:1, 
-	  	text:1
-	  }, function(result){
+	  	text:1}, function(result){
 	  		q = result;
-	  		res.render('FAQ', q);
+	  		 res.render('FAQ', q);
 	  	})
 })
 

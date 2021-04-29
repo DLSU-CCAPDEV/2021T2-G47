@@ -7,66 +7,66 @@
 <body style = "background-image: url(images/pattern.png);">
 	{{> navbar}}
 
-	<div style = "padding-left: 20px; padding-right: 20px;">
-		<div class = container2>
-			<p id= FAQHEADER> Frequently Asked Questions </p>
-			<div class = container1>
-				<div id = profile>
-						<a href = "/userpage"><div style = "background-image: url(images/ramsay.jpeg); height: 200px; width: 200px; margin: auto; background-size: cover; border-radius: 50%;"></div></a>
-						 <br>
-						<p id = profilename> <a href = "userpage.html">Ramsay Bolton</a> </p>
-				</div>
+	<div class = container2>
+		<p id= FAQHEADER> Frequently Asked Questions </p>
+		<div class = container1>
+			<div id = profile>
+					<a href = "/userpage"><div style = "background-image: url(images/ramsay.jpeg); height: 200px; width: 200px; margin: auto; background-size: cover; border-radius: 50%;"></div></a>
+					 <br>
+					<p id = profilename> <a href = "userpage.html">{{name}}</a> </p>
+			</div>
 
-				<div class = container2> 
-					<div class= posts>
-						<div class = userdeets>
-						<a href = "/userpage"><div style = "background-image: url(images/ramsay.jpeg);" class = "OPpicture"></div></a>
-						<p class = username><a href = "userpage.html">Ramsay Bolton</a> </p>
-						</div>
-						<p class = question_title> Can dogs eat sausages? </p>
-						<p class = question> Hello everyone! Title is self-explanatory. Is it ok for them to eat? </p>
-						<div class = container2>
-							<div class = answers>
-								<div class = replyprofile>
-								<a href = "/userpage"><div style = "background-image: url(images/theongreyjoy.png);" class = "replypicture"></div></a>
-								<p> <a href = "/userpage">Theon Greyjoy</a> </p>
-								</div>
-								<p class = reply> Depends what kind. </p>
-							</div>
-							<div class = answers>
-								<div class = replyprofile>
-								<a href = "/userpage"><div style = "background-image: url(images/hodor.jfif);" class = "replypicture"></div></a>
-								<a href = "/userpage"><p> Hodor </p></a>
-								</div>
-								<p class = reply> Hodor </p>
-							</div>
-							<a href = "/editquestion"><button class = editpost type= "button"> Edit Post </button></a>	
-						</div>
+			<div class = container2> 
+				<!-- <div class= posts>
+					<div class = userdeets>
+					<a href = "/userpage"><div style = "background-image: url(images/ramsay.jpeg);" class = "OPpicture"></div></a>
+					<p class = username><a href = "userpage.html">Ramsay Bolton</a> </p>
 					</div>
-					<div class= posts>
-						<div class = userdeets>
-						<a href = "/userpage"><div style = "background-image: url(images/ramsay.jpeg);" class = "OPpicture"></div></a>
-						<p class = username> <a href = "userpage.html">Ramsay Bolton</a> </p>
+					<p class = question_title> Can dogs eat sausages? </p>
+					<p class = question> Hello everyone! Title is self-explanatory. Is it ok for them to eat? </p>
+					<div class = container2>
+						<div class = answers>
+							<div class = replyprofile>
+							<a href = "/userpage"><div style = "background-image: url(images/theongreyjoy.png);" class = "replypicture"></div></a>
+							<p> <a href = "/userpage">Theon Greyjoy</a> </p>
+							</div>
+							<p class = reply> Depends what kind. </p>
 						</div>
-						<p class = question_title> How do I train my dog not to pee on the bed so much?! </p>
-						<p class = question> Hello everyone! I am having problems training my dog not to pee on the bed so much. Any useful training tips or tricks? Any good advice to become better at training? </p>
-						<div class = container2>
-							<a href = "/editquestion"><button class = editpost type= "button"> Edit Post </button></a>	
-						</div>`
+						<div class = answers>
+							<div class = replyprofile>
+							<a href = "/userpage"><div style = "background-image: url(images/hodor.jfif);" class = "replypicture"></div></a>
+							<a href = "/userpage"><p> Hodor </p></a>
+							</div>
+							<p class = reply> Hodor </p>
+						</div>
+						<a href = "/editquestion"><button class = editpost type= "button"> Edit Post </button></a>	
+					</div> 
+				</div> -->
+				{{#each q}}
+				<div class= posts>
+					<div class = userdeets>
+					<a href = "/userpage"><div style = "background-image: url(images/ramsay.jpeg);" class = "OPpicture"></div></a>
+					<p class = username> <a href = "userpage.html">{{author}}</a> </p>
 					</div>
+					<p class = question_title>{{title}} </p>
+					<p class = question> {{text}} </p>
+					<div class = container2>
+						<a href = "/editquestion"><button class = editpost type= "button"> Edit Post </button></a>	
+					</div>`
 				</div>
+				{{/each}}
+			</div>
 
-				<div class = container2>
-					<div id = addQuestion>
-						<p id = addQHeader> Add a Question: </p>
-						<form id= addQTitle method ="post" action = "/submitFAQ">
-							<label id = qTitleLabel for="Question title"> Title of question: </label> <br>
-							<input id = qTitlePlace type="text" id="addQTitle" name="questiontitle">
-							<label id = qLabel for="Question"> Question: </label><br> 
-							<textarea id = questionplace rows = "1" cols = "20" name = "questiontext"></textarea>
-							<input type="submit" name="submit">
-						</form>
-					</div>
+			<div class = container2>
+				<div id = addQuestion>
+					<p id = addQHeader> Add a Question: </p>
+					<form id= addQTitle method ="post" action = "/submitFAQ">
+						<label id = qTitleLabel for="Question title"> Title of question: </label> <br>
+						<input id = qTitlePlace type="text" id="addQTitle" name="questiontitle">
+						<label id = qLabel for="Question"> Question: </label><br> 
+						<textarea id = questionplace rows = "1" cols = "20" name = "questiontext"></textarea>
+						<input type="submit" name="submit">
+					</form>
 				</div>
 			</div>
 		</div>

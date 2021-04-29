@@ -4,7 +4,7 @@
 }
 
 body{
-	background-color: #b7dcf4;
+	background-color: #fafcfc;
 	font-family: georgia;
 }
 
@@ -339,12 +339,13 @@ p{
 
 .why_adopt{
 	background-color: #fafcfc;
-	height: 600px;
+	height: auto;
 	display: flex;
 	justify-content: center;
 	padding-top: 330px;
 	padding-left: 175px;
 	padding-right: 175px;
+	/*padding-bottom: 110px;*/
 }
 
 .adopt_text{
@@ -361,11 +362,12 @@ p{
 
 #adopt_paragraph{
 	padding-left: 0px;
+	min-width: 700px;
 }
 
 #dog_and_owner{
-	height: 80%;
-	width: 80%;
+	height: 55%;
+	width: 55%;
 	box-shadow: -1px -1px 50px 10px;
 	margin-left: 40px;
 }
@@ -382,6 +384,7 @@ p{
   max-width: 1920px;
   position: relative;
   margin: auto;
+  margin-top: 50px;
 }
 
 .back, .forward {
@@ -503,7 +506,8 @@ p{
 	flex-direction: column;
 	text-align: center;
 	align-items: center;
-	height: 725px;
+	height: auto;
+	background-color: #b7dcf4;
 }
 
 .dogs_header{

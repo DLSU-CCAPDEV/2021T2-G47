@@ -11,33 +11,46 @@ body{
 	float: left;
 	height: 40px;
 	position: relative;
-	left: 30px;
+	right: 0px;
+	margin-right: 15px;
 }
 
 .navbartext{
 	text-align: center;
-	margin: auto;
+	margin-top: auto;
+	margin-bottom: auto;
 	font-size: 25px;
 	position: relative;
-	right: 25px;
 }
 
 .navbaritems{
-	border-left: 1.5px solid black;
-	border-right: 1.5px solid black;
-	padding: 20px;
-	width: 25%;
+	border-left: 1.5px solid #ffffff;
+	border-right: 1.5px solid #ffffff;
+	padding: 15px;
 	text-align: center;
 	align-content: center;
 	justify-content: center;
 	background-color: #b7dcf4;
 	display: flex;
+	flex-wrap: wrap;
 	color: black;
 	text-decoration: none;
 }
 
-#currentnavbar{
-	background-color: #f7bc57;
+#currentNavbar{
+	width: 16%;
+}
+
+#navBrowse{
+	width: 20%;
+}
+
+#navFAQ{
+	width: 16%;
+}
+
+#navUserpage{
+	width: 20%;
 }
 
 .navbaritems:hover {
@@ -52,12 +65,13 @@ body{
 
 
 #navbar{
-	background-color: #b7dcf4;
 	border-radius: 0px 0px 5px 0px; 
 	display: flex;
 	margin: 0px;
+	width: 100%;
+	height: auto;
 	position: sticky;
-	top: 0px;
+	top: 0;
 	z-index: 99;
 }
 
@@ -88,20 +102,26 @@ body{
 }
 
 #formbox{
-	margin-left: 37px;
+	margin-left: 12px;
+}
+
+#filter_options{
+	margin-left: 22px;
 }
 
 #searchbar{
+	background-color: #b7dcf4;
 	border-left: 1.5px solid #ffffff;
-	padding: 20px 0px;
-	width: 32%;
+	padding: 20px;
 	display: flex;
+	width: 26%;
+	justify-content: left;
+	flex-wrap: wrap;
 }
 
 #searchlogo{
 	height: 40px;
 	position: relative;
-	left: 30px;
 }
 
 #filterlogo{
@@ -141,7 +161,6 @@ body{
   	min-height: 120px;
   	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   	z-index: 1;
-  	right: 20px;
 }
 
 .dropdown-content a {
@@ -160,8 +179,30 @@ body{
   	display: block;
 }
 
+#logout_area{
+	background-color: #b7dcf4;
+	padding: 20px;
+	width: 2%;
+	height: auto;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+#logout_ref{
+	margin: auto;
+}
+
+#logout{
+	height: 40px;
+	border-radius: 30%;
+}
+
+#logout:hover{
+	background-color: rgba(0,0,0,0.2);
+}
+
 input[type="checkbox"]{
-	margin-left: -30px;
 	margin-top: 15px;
 	cursor: pointer;
 }

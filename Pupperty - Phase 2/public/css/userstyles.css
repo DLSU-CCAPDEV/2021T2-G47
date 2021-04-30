@@ -267,13 +267,14 @@ small{
 }
 
 #useravatar{
-	background-image: url(images/ramsay.jpeg);
 	position: relative;
 	left: 20px;
 	height: 300px;
 	width: 300px;
 	overflow: hidden;
 	border-radius: 50%;
+	background-size: cover; 
+	background-position: center; 
 }
 
 #username{
@@ -311,9 +312,10 @@ small{
 
 
 #userinfo{
-	height: 600px;
 	width: 1250px; 
 	border-radius: 20px;
+	padding-right: 25px;
+	padding-left: 25px;
 }
 
 #prevdogstitle{
@@ -325,39 +327,58 @@ small{
 }
 
 #prevdogscontainer{
-	height: 300px;
-	width: 1250px;
+	height: 600px;
 	display: flex;
-	justify-content: space-around;
+	overflow: auto;
+	white-space: nowrap;
+	align-content: space-between;
+	margin: auto;
+	padding-left: 25px;
+	padding-right: 25px;
 }
 
 #prevdogbox{
-	height: 465px;
-	width: 350px;
+	padding-top: 20px;
+	height: 550px;
+	min-width: 350px;
 	border: 1px solid;
 	border-radius: 30px;
+	margin-left: 25px;
+	margin-right: 25px;
+}
+
+#prevdogbuttons{
+	display: flex; 
+	position: relative; 
+	top: -50px;
+	right: 20px;
+	margin: auto;
+	justify-content: center;
+	align-content: space-between;
 }
 
 #prevdogpic{
 	height: 270px;
 	width: 270px;
-	position: relative;
+	/*position: relative;
 	left: 40px;
-	top: 20px;
+	top: 20px;*/
+	margin: auto;
 	border-radius: 25%;
 }
 
 #prevdogname{
-	height: 40px;
+	margin: auto;
+	height: 175px;
 	position: relative;
-	top: 25px;
+	top: 0px;
 	font-size: 35px;
 	text-align: center;
-	padding: 65px;
-	background-image: url(images/bone.png);
+	padding: 0px;
 	background-repeat: no-repeat;
 	background-size: 300px;
 	background-position: 30px -10px;
+	padding-top: 60px;
 }
 
 #userquestions{

@@ -2,6 +2,13 @@
 	<head>
 		<title>User Account Details</title>
 		<link rel = "stylesheet" type = "text/css" href = "../css/userstyles.css">
+		<script type="text/javascript">
+			function confirmWindow(){
+				if(confirm("Are you sure you want to delete your account?")){
+					window.open("http://localhost:3000/deleteuser", "_self");
+				}
+			}
+		</script>
 	</head>
 
 	<body>
@@ -9,7 +16,7 @@
 
 		<div id = userdetails>
 			<div id = usercontainer1>
-				<div id = useravatar></div>
+				<div id = useravatar style = "background-image: url(uploads/{{u.path}});"></div>
 				<div id = usertextcontainer>
 					<div id = username>{{u.name}}</div>
 					<div id = bio>{{u.bio}}</div>
@@ -30,14 +37,17 @@
 						<div style = "width: 200px; text-align: left">{{u.salary}}/month</div>
 					</div>
 					<div id = detailscontainer style = "padding-top: 50px; padding-bottom: 10px; margin: auto;">Status: {{u.status}}</div>
-					<div id = detailscontainer style = "height: 190px; background-image: url(images/certificate.jpg); background-size: contain; margin: auto;"></div>
-					<div id = detailscontainer style = "margin: auto;">Valid Until: {{u.certvalid}}</div>
-					<div id = detailscontainer><button style = "font-size: 15px">Upload Certificate</button></div>
-					<br><br>
-					<div style = "display: flex; justify-content: space-around;">
+					<div id = detailscontainer style = "height: 190px; background-image: url(uploads/{{u.certificate}}); background-size: cover; background-position: center; margin: auto;"></div>
+					<div id = detailscontainer>
+						<form action = "/submitcertificate" method = "post" enctype="multipart/form-data">
+							<input type="file" name="image" accept="image/*"><br><br>
+							<input type="submit" id = "submit" name = "savechanges" value="Submit Certificate">
+						</form>
+					</div>
+					<div style = "display: flex; justify-content: space-around; padding-bottom: 20px;">
 						<a href = "/edituser"><div id = detailscontainer><button style = "font-size: 15px">Edit Account</button></div></a>
 						<div id = detailscontainer><a href = "/"><button style = "font-size: 15px;">Log Out</button></a></div>
-						<div id = detailscontainer><a href = "/deleteuser"><button style = "font-size: 15px; background-color: #c40808;">Delete Account</button></a></div>
+						<div id = detailscontainer><!-- <a href = "/deleteuser"> --><button onclick = "confirmWindow()" style = "font-size: 15px; background-color: #c40808;">Delete Account</button><!-- </a> --></div>
 					</div>
 					
 				</div>
@@ -50,51 +60,38 @@
 						<div id = prevdogstitle> Homegiver To:</div>
 					</div>
 					<div id = prevdogscontainer>
-						<a href = "/adoption">
-							<div id = prevdogbox style = "background-color: rgb(183, 220, 244, 0.8);">
-								<div style = "background-image: url(images/bencurry.jpg); background-size: cover; background-position: -50px;" id = prevdogpic></div>
-								<div id = prevdogname>Ben</div>
-							</div>
-						</a>
-						<a href = "/adoption">
-							<div id = prevdogbox style = "background-color: rgb(183, 220, 244, 0.8);">
-								<div style = "background-image: url(images/vinceveras.jpg); background-size: cover; background-position: -70px;" id = prevdogpic></div>
-								<div id = prevdogname>Vince</div>
-							</div>
-						</a>
-						<a href = "/adoption">
-							<div id = prevdogbox style = "background-color: #ebbab4;">
-								<div style = "background-image: url(images/carolmagalhaes.jpg) ; background-size: cover; background-position: -70px;" id = prevdogpic></div>
-								<div id = prevdogname>Carol</div>
-							</div>
-						</a>
+						{{#each u.adopts}}
+							<a href = "/adoption">
+								<div id = prevdogbox style = "background-color: rgb(183, 220, 244, 0.8);">
+									<div style = "background-size: cover; background-position: center; background-image: url(uploads/{{this.path}});" id = prevdogpic></div>
+									<div id = prevdogname style = "background-image: url(images/bone.png); position: relative; top: 30px;">{{this.name}}</div>
+								</div>
+							</a>
+						{{/each}}
 					</div>
 				</div>
-				<div id = userinfo style = "position: relative; top: 30px; background-color: #c54b6c; height: 650px;">
+				<div id = userinfo style = "position: relative; top: 30px; background-color: #c54b6c;">
 					<div style = "display: flex; justify-content: center;">
 						<img src = "images/rescue.png" style = "height: 150px;">
-						<div id = prevdogstitle style = "padding-top: 50px; text-shadow: 2px 2px 0px #000000;">Rescuer Of:</div>
+						<div id = prevdogstitle style = "padding-top: 50px; text-shadow: 2px 2px 0px #000000;">Dogs Up for Adoption:</div>
 					</div>
 
 					<div id = prevdogscontainer>
-						<a href = "/adoption">
-							<div id = prevdogbox style = "background-color: #ebbab4;">
-								<div style = "background-image: url(images/yaseniliev.jpg); background-size: cover; background-position: -70px;" id = prevdogpic></div>
-								<div id = prevdogname>Yasen</div>
-							</div>
-						</a>
-						<a href = "/adoption">
-							<div id = prevdogbox style = "background-color: rgb(183, 220, 244, 0.8);">
-								<div style = "background-image: url(images/mitchellorr.jpg); background-size: cover; background-position: 0px 0px;" id = prevdogpic></div>
-								<div id = prevdogname>Mitchell</div>
-							</div>
-						</a>
-						<a href = "/adoption">
-							<div id = prevdogbox style = "background-color: rgb(183, 220, 244, 0.8);">
-								<div style = "background-image: url(images/michaeloxendine.jpg); background-size: cover; background-position: -70px 0px;" id = prevdogpic></div>
-								<div id = prevdogname>Michael</div>
-							</div>
-						</a>
+						{{#each u.posts}}
+							<a href = "/adoption">
+								<div id = prevdogbox style = "background-color: rgb(183, 220, 244, 0.8);">
+									<div style = "background-image: url(uploads/{{this.path}}); background-size: cover; background-position: center;" id = prevdogpic></div>
+									<div style = "position: relative; top: 30px;">
+										<div id = prevdogname style = "background-image: url(images/bone.png);">{{this.name}}</div>
+										<div id = prevdogbuttons>
+											<a href = "/FAQ"><div><button>View Post</button></div></a>
+											<a href = "/editquestion"><div style = "position: relative; left: 20px;" name = "{{this.questionid}}"><button>Edit Post</button></div></a>
+											<a href = "/deletepost" method = "delete"><div style = "position: relative; left: 40px;"><button style = "background-color: #c40808;">Delete Post</button></div></a>
+										</div>
+									</div>
+								</div>
+							</a>
+						{{/each}}
 					</div>
 				</div>
 			</div>
@@ -110,14 +107,14 @@
 				<div class = questioncontainer>
 					{{#each u.questions}}
 						<div class = questionusercontainer>
-							<div class = questionpic style = "background-image: url(images/ramsay.jpeg)"></div>
+							<div class = questionpic style = "background-image: url(uploads/{{../u.path}}); background-size: cover; background-position: center;"></div>
 							<div class = questionuserdetails>
 								<div style = "padding: 10px;">
-										<div class = qusername><a href = "/userpage">{{this.author}}</a></div>
+										<div class = qusername><a href = "/userpage">{{this.name}}</a></div>
 									<div class = qusertext>
 										<div>
 											<div class = qadoptions>{{../u.adoptcount}} Adoptions</div>
-											<div class = qrescues>{{../u.rescuecount}} Rescues</div>
+											<div class = qrescues>{{../u.questions.length}} Posts</div>
 										</div>
 										<div><img src = "images/greencheck.png" style = "height: 30px; width: 40px; position: relative; top: 3px;"></div>
 									</div>
@@ -129,86 +126,10 @@
 						</div>
 						<div style = "display: flex;">
 							<a href = "/FAQ"><div style = "margin-top: 20px;"><button>View Post</button></div></a>
-							<a href = "/editquestion"><div style = "margin-top: 20px; position: relative; left: 20px;"><button>Edit Post</button></div></a>
+							<a href = "/editquestion"><div style = "margin-top: 20px; position: relative; left: 20px;"><button name = "{{this.questionid}}">Edit Post</button></div></a>
 						</div>
 						<br><br><br>
 					{{/each}}
-					<!-- <div class = questionusercontainer>
-						<div class = questionpic style = "background-image: url(images/ramsay.jpeg)"></div>
-						<div class = questionuserdetails>
-							<div style = "padding: 10px;">
-									<div class = qusername><a href = "/userpage">Ramsay Bolton</a></div>
-								<div class = qusertext>
-									<div>
-										<div class = qadoptions>3 Adoptions</div>
-										<div class = qrescues>3 Rescues</div>
-									</div>
-									<div><img src = "images/greencheck.png" style = "height: 30px; width: 40px; position: relative; top: 3px;"></div>
-								</div>
-							</div>
-							<div class = questiontext>
-								Can dogs eat sausages?
-							</div>
-						</div>
-					</div>
-					<div class = questionusercontainer>
-						<div><img src = "images/downrightarrow.png" style = "height: 100px"></div>
-						<div class = questionpic style = "background-image: url(images/theongreyjoy.png)"></div>
-						<div class = questionuserdetails>
-							<div class = usertext>
-								<div class = qusername><a href = "/userpage">Theon Greyjoy</a></div>
-								<div class = qadoptions>1 Adoptions</div>
-								<div class = qrescues>0 Rescues</div>
-							</div>
-							<div class = questiontext style = "max-width: 450px">
-								Depends what kind.
-							</div>
-						</div>
-					</div>
-					<div class = questionusercontainer>
-						<div><img src = "images/downrightarrow.png" style = "height: 100px"></div>
-						<div class = questionpic style = "background-image: url(images/hodor.jfif)"></div>
-						<div class = questionuserdetails>
-							<div class = usertext>
-								<div class = qusername><a href = "/userpage">Hodor Hodor</a></div>
-								<div class = qadoptions>10 Adoptions</div>
-								<div class = qrescues>50 Rescues</div>
-							</div>
-							<div class = questiontext style = "max-width: 450px">
-								Hodor.
-							</div>
-						</div>
-					</div>
-					<div style = "display: flex;">
-						<a href = "FAQ.html"><div style = "margin-top: 20px;"><button>View Post</button></div></a>
-						<a href = "EditQuestion.html"><div style = "margin-top: 20px; position: relative; left: 20px;"><button>Edit Post</button></div></a>
-					</div>
-				</div>
-				<br><br>
-				<div class = questioncontainer>
-					<div class = questionusercontainer>
-						<div class = questionpic style = "background-image: url(images/ramsay.jpeg)"></div>
-						<div class = questionuserdetails>
-							<div style = "padding: 10px;">
-									<div class = qusername><a href = "/userpage">Ramsay Bolton</a></div>
-								<div class = qusertext>
-									<div>
-										<div class = qadoptions>3 Adoptions</div>
-										<div class = qrescues>3 Rescues</div>
-									</div>
-									<div><img src = "images/greencheck.png" style = "height: 30px; width: 40px; position: relative; top: 3px;"></div>
-								</div>
-							</div>
-							<div class = questiontext>
-								How do I train my dog not to pee on the bed so much?!
-							</div>
-						</div>
-					</div>
-					<div style = "display: flex;">
-						<a href = "/FAQ"><div style = "margin-top: 20px;"><button>View Post</button></div></a>
-						<a href = "/editquestion"><div style = "margin-top: 20px; position: relative; left: 20px;"><button>Edit Post</button></div></a>
-					</div>
-				</div> -->
 			</div>
 		</div>
 	</body>

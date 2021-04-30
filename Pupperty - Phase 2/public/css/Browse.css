@@ -513,7 +513,7 @@ h3{
 
 #doggo1{
 	background-size: cover;
-	background-position: 0px 0px;
+	background-position: center;
 }
 
 .dog_logo{
@@ -529,6 +529,6 @@ h3{
 #doggo2{
 	object-fit: none;
 	background-size: cover;
-	background-position: 0px 0px;
+	background-position: center;
 	margin-top: 50px;
 }

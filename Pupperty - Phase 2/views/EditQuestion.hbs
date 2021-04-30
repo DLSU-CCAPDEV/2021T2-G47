@@ -9,8 +9,8 @@
 
 		<div class = container1>
 			<div id = profile>
-					<a href = "/userpage"><div style = "background-image: url(images/ramsay.jpeg);" class = "OPpicture"></div></a> <br>
-					<p id = profilename> Ramsay Bolton </p>
+					<a href = "/userpage"><div style = "background-image: url(uploads/{{q.path}});" class = "OPpicture"></div></a> <br>
+					<p id = profilename> {{q.name}} </p>
 			</div>
 
 			<div id = addQuestion>
@@ -19,14 +19,14 @@
 					<div class = divider>
 					<form id= addQTitle>
 						<label id = qTitleLabel for="Question title"> Title of question: </label>
-						<input id = qTitlePlace type="text" id="addQTitle" name="Add Question Title" placeholder="Can dogs eat sausages?">
+						<input id = qTitlePlace type="text" id="addQTitle" name="Add Question Title" placeholder="{{q.title}}">
 					</form>
 					</div>
 
 					<div class = divider>
 					<form id= addQ>
 						<label id = qLabel for="Question"> Question: </label> <br>
-						<textarea id = questionplace rows = "1" cols = "20" placeholder="Hello everyone! Title is self-explanatory. Is it ok for them to eat?"></textarea>
+						<textarea id = questionplace rows = "1" cols = "20" placeholder="{{q.text}}"></textarea>
 					</form>
 					</div>
 				</div>

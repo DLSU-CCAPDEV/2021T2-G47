@@ -71,18 +71,85 @@ app.get(`/homepage`, function(req, res){
 	})
 })
 
+app.post(`/submitcertificate`,  upload.single('image'), function(req, res){
+	
+	var u;
+	var questionsArray;
+	var postsArray;
+	var adoptArray;
+
+	db.updateOne(`users`, {email: logEmail}, {$set: {
+		certificate: req.file.filename
+	}})
+
+	db.findMany(`FAQS`, {author: logEmail}, {
+		author: 1,
+		title: 1,
+		text: 1
+	}, function(result){questionsArray = result;})
+
+	db.findMany(`adoption_posts`, {poster_email: logEmail}, {
+		name: 1,
+		path: 1,
+		adoption_status: 1
+	}, function(result){postsArray = result;})
+
+	db.findMany(`adoption_posts`, {owner: logEmail}, {
+		name: 1,
+		path: 1,
+	}, function(result){adoptArray = result;})
+
+	db.findOne(`users`, {email: logEmail}, function(result2){
+		
+		res.render(`userpage`, {
+			u: {
+				email: result2.email,
+				name: result2.name,
+				bio: result2.bio,
+				address: result2.address,
+				contact: result2.contact,
+				salary: result2.salary,
+				status: result2.status,
+				certvalid: result2.certvalid,
+				adoptcount: result2.homeowner.length,
+				rescuecount: result2.rescuer.length,
+				path: result2.path,
+				questions: questionsArray,
+				posts: postsArray,
+				adopts: adoptArray,
+				certificate: result2.certificate
+			}
+		})
+	})	
+})
+
 app.get(`/userpage`, function(req, res){
 
 	var u;
 	var questionsArray;
+	var postsArray;
+	var adoptArray;
 
 	console.log("Email and name of current session: "+ logEmail + " -- " + logName);
 
-	db.findMany(`FAQS`, {author: logName}, {
+	db.findMany(`FAQS`, {author: logEmail}, {
 		author: 1,
+		name: 1,
 		title: 1,
 		text: 1,
+		question_id: 1
 	}, function(result){questionsArray = result;})
+
+	db.findMany(`adoption_posts`, {poster_email: logEmail}, {
+		name: 1,
+		path: 1,
+		adoption_status: 1
+	}, function(result){postsArray = result;})
+
+	db.findMany(`adoption_posts`, {owner: logEmail}, {
+		name: 1,
+		path: 1,
+	}, function(result){adoptArray = result;})
 
 	db.findOne(`users`, {email: logEmail}, function(result2){
 		console.log('result' + result2.name);
@@ -99,7 +166,12 @@ app.get(`/userpage`, function(req, res){
 				certvalid: result2.certvalid,
 				adoptcount: result2.homeowner.length,
 				rescuecount: result2.rescuer.length,
-				questions: questionsArray
+				path: result2.path,
+				questions: questionsArray,
+				posts: postsArray,
+				adopts: adoptArray,
+				certificate: result2.certificate
+
 			}
 		});
 	})
@@ -118,7 +190,26 @@ app.get(`/editpost`, function(req, res){
 })
 
 app.get(`/editquestion`, function(req, res){
-	res.render(`EditQuestion`);
+
+	var user;
+	var q;
+
+	db.findOne(`users`, {email: logEmail}, function(result2){
+		console.log("result2" + result2);
+		user = result2;
+	})
+
+	db.findOne(`FAQ`, {question_id: req.body.question_id}, function(result){
+		console.log("qid" + req.body.question_id);
+		res.render(`EditQuestion`, {
+			q:{
+				name: user.name,
+				path: user.path,
+				title:  result.title,
+				text: result.text
+				}
+			});	
+	})
 })
 
 app.get(`/edituser`, function(req, res){
@@ -136,12 +227,17 @@ app.get(`/edituser`, function(req, res){
 				address: "<input type = 'text' id = 'addressform' name = 'addressform' value = '" + result.address + "' size = '58'>",
 				contact: "<input type = 'text' id = 'numberform' name = 'numberform' value = '" + result.contact + "' size = '58'>",
 				salary: "<input type = 'text' id = 'moneyform' name = 'moneyform' value = '" + result.salary + "' size = '58'>",
+				image: result.path
 			}
 		})
 	})	
 })
 
-app.post(`/submitedit`, function(req, res){
+app.post(`/submitedit`, upload.single('image'), function(req, res){
+
+	console.log(`REQFILE = ` + req.file);
+
+	var image;
 
 	db.updateOne(`users`, {email: logEmail}, {$set: {
 		name: req.body.usernameform,
@@ -151,22 +247,53 @@ app.post(`/submitedit`, function(req, res){
 		salary: req.body.moneyform
 	}})
 
+	if(req.file != undefined){
+		db.updateOne(`users`, {email: logEmail}, {$set: {
+			image: req.file,
+			path: req.file.filename
+		}})
+	}
+
 	var u;
 
-	db.findOne(`users`, {email: logEmail}, function(result){
-		logName = result.name;
+	db.findMany(`FAQS`, {author: logEmail}, {
+		author: 1,
+		name: 1,
+		title: 1,
+		text: 1
+	}, function(result){questionsArray = result;})
 
-		console.log('result' + result);
+	db.findMany(`adoption_posts`, {poster_email: logEmail}, {
+		name: 1,
+		path: 1,
+		adoption_status: 1
+	}, function(result){postsArray = result;})
+
+	db.findMany(`adoption_posts`, {owner: logEmail}, {
+		name: 1,
+		path: 1,
+	}, function(result){adoptArray = result;})
+
+	db.findOne(`users`, {email: logEmail}, function(result2){
+		console.log('result' + result2.name);
+
 		res.render(`userpage`, {
 			u: {
-				email: result.email,
-				name: result.name,
-				bio: result.bio,
-				address: result.address,
-				contact: result.contact,
-				salary: result.salary,
-				status: result.status,
-				certvalid: result.certvalid
+				email: result2.email,
+				name: result2.name,
+				bio: result2.bio,
+				address: result2.address,
+				contact: result2.contact,
+				salary: result2.salary,
+				status: result2.status,
+				certvalid: result2.certvalid,
+				adoptcount: adoptArray.length,
+				rescuecount: questionsArray.length,
+				path: result2.path,
+				questions: questionsArray,
+				posts: postsArray,
+				adopts: adoptArray,
+				certificate: result2.certificate
 			}
 		});
 	})
@@ -244,8 +371,6 @@ app.post(`/login`, function(req, res){
 			console.log(`Login successful. User ` + logName + ` ` + logEmail);
 		}
 	});
-
-
 })
 
 app.post(`/register`, function(req, res){
@@ -302,22 +427,23 @@ app.post(`/submitadoptionpost`, upload.single('image'), function(req, res){
 	console.log(req.file);
 	db.countDocuments('adoption_posts', function(result){
 		var dog = {
-		poster: logName,
-		poster_email: logEmail,
-		name: req.body.name,
-		breed: req.body.breed,
-		sex: req.body.sex,
-		size: req.body.size,
-		age: req.body.age,
-		remarks: req.body.remarks,
-		image: req.file,
-		path: req.file.filename,
-		owner: "N/A",
-		adoption_status: false,
-		post_id: "post_" + result,
-		post_date: new Date().getMonth() + "-" + new Date().getDate() + "-" + new Date().getFullYear(),
-		post_time: new Date().getHours() + ":" + new Date().getMinutes()
-	}
+			poster: logName,
+			poster_email: logEmail,
+			name: req.body.name,
+			breed: req.body.breed,
+			sex: req.body.sex,
+			size: req.body.size,
+			age: req.body.age,
+			remarks: req.body.remarks,
+			image: req.file,
+			path: req.file.filename,
+			owner: "N/A",
+			adoption_status: false,
+			post_id: "post_" + result,
+			post_date: new Date().getMonth() + "-" + new Date().getDate() + "-" + new Date().getFullYear(),
+			post_time: new Date().getHours() + ":" + new Date().getMinutes()
+		}
+
 		db.insertOne(`adoption_posts`, dog);
 
 		var u;
@@ -331,8 +457,8 @@ app.post(`/submitadoptionpost`, upload.single('image'), function(req, res){
 			remarks: 1,
 			post_date: 1,
 			post_time: 1
-		}, function(result){
-			postsArray = result;
+		}, function(result2){
+			postsArray = result2;
 			console.log('result ' + postsArray);
 			console.log('user: ' + logName);
 
@@ -347,27 +473,32 @@ app.post(`/submitadoptionpost`, upload.single('image'), function(req, res){
 })
 
 app.post(`/submitFAQ`, function(req, res){
-	var q;
-	var faq = {
-        author: logName,
-        title: req.body.questiontitle,
-        text: req.body.questiontext,
-        comments: []
-    }
 
-	db.insertOne(`FAQS`, faq);
+	db.countDocuments('FAQS', function(result){
 
-	db.findMany('FAQS', {author : logName}, {
-		author: 1, 
-	  	title:1, 
-	  	text:1
-	  }, function(result){
-	  		q = result;
-	  		res.render('FAQ', q);
+		var faq = {
+	        author: logEmail,
+	        name: logName,
+	        title: req.body.questiontitle,
+	        text: req.body.questiontext,
+	        question_id: "question_" + result,
+	        comments: []
+   	 	}
+
+		db.insertOne(`FAQS`, faq);
+
+		db.findMany('FAQS', {author : logName}, {
+			author: 1, 
+		  	title:1, 
+		  	text:1
+		}, 
+		function(result2){
+  			res.render('FAQ', result2);
 	  	})
+	})
 })
 
-app.get(`/deleteuser`, function(req, res){
+app.delete(`/deleteuser`, function(req, res){
 
 	db.deleteOne(`users`, {email: logEmail});
 	res.render(`Login`);
@@ -377,3 +508,4 @@ app.listen(port, hostname, function(){
 	console.log(`Server running at: `);
 	console.log(`http://` + hostname + ':' + port);
 })
+

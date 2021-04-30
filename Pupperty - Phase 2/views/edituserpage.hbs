@@ -16,8 +16,7 @@
 	
 	<div id = container>
 		<div id = bodyleft>
-			<div id = picture></div>
-			<div style = "position: relative; top: 150px; left: 150px"><button>Upload Photo</button></div>
+			<div id = picture style = "background-image: url(uploads/{{prev.image}});"></div>
 			<a href = "/userpage">
 				<div id = "return">
 					Return to Profile
@@ -27,9 +26,9 @@
 		<div style = "display: flex; justify-content: space-around; background-color: #DBBC8E; border: 5px solid #40393E; padding-right: 25px;">
 			<div id = bodyright>
 				<p style = "text-align: center; font-size: 30px; ">Account Details</p>
-				<form action = "/submitedit" method = "post">
+				<form action = "/submitedit" method = "post" enctype="multipart/form-data">
 					<label for = "usernameform" style = "font-size: 20px;">Name: </label><br> 
-					{{{prev.name}}}
+					{{{prev.name}}}<br><br>
 					<label for = "bioform" style = "font-size: 20px;">Bio: </label><br> 
 					<textarea type = 'text' id = 'bioform' name = 'bioform' style = ' resize: none; width: 437px; height: 100px' maxlength='200' rows = '4' cols = '40'>{{prev.bio}}</textarea><br><br>
 					<label for = "addressform" style = "font-size: 20px;">Address: </label><br> 
@@ -38,6 +37,8 @@
 					{{{prev.contact}}}<br><br>
 					<label for = "moneyform" style = "font-size: 20px;">Monthly Income: </label><br> 
 					{{{prev.salary}}}<br><br>
+					<label for = "image" style = "font-size: 20px;">Change profile picture: </label><br> 
+					<input type="file" name="image" accept="image/*"><br><br>
 					<input type="submit" id = "submit" name = "savechanges" value="Save Changes">
 				</form>
 			</div>

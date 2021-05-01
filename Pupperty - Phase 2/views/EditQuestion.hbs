@@ -16,21 +16,16 @@
 			<div id = addQuestion>
 				<div class = container2>
 					<p id = addQHeader> Edit your Question: </p>
+					<form class="addQTitle" action="/submiteditedquestion" method="post">
 					<div class = divider>
-					<form id= addQTitle>
 						<label id = qTitleLabel for="Question title"> Title of question: </label>
-						<input id = qTitlePlace type="text" id="addQTitle" name="Add Question Title" placeholder="{{q.title}}">
-					</form>
-					</div>
-
-					<div class = divider>
-					<form id= addQ>
+						<input id = qTitlePlace type="text" id="addQTitle" name="title" value="{{q.title}}"><br>
 						<label id = qLabel for="Question"> Question: </label> <br>
-						<textarea id = questionplace rows = "1" cols = "20" placeholder="{{q.text}}"></textarea>
-					</form>
+						<textarea id = questionplace rows = "1" cols = "20" name="text">{{q.text}}</textarea>
 					</div>
+					<button class = editpost type= "submit" name="question" value="{{q.question_id}}"> Submit </button>
+					</form>
 				</div>
-				<a href = "/FAQ"><button class = editpost type= "button"> Submit </button></a>
 			</div>
 		</div>
 </body>

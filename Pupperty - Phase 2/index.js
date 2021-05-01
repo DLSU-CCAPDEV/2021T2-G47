@@ -143,7 +143,8 @@ app.get(`/userpage`, function(req, res){
 	db.findMany(`adoption_posts`, {poster_email: logEmail}, {
 		name: 1,
 		path: 1,
-		adoption_status: 1
+		adoption_status: 1,
+		post_id: 1
 	}, function(result){postsArray = result;})
 
 	db.findMany(`adoption_posts`, {owner: logEmail}, {
@@ -185,8 +186,37 @@ app.get(`/adoption`, function(req, res){
 	res.render(`Adoption`);
 })
 
+app.get(`/submiteditedpost`, function(req, res){
+	res.render(`userpage`);
+})
+
 app.get(`/editpost`, function(req, res){
 	res.render(`EditPost`);
+})
+
+app.post(`/submiteditedquestion`, function(req, res){
+	console.log("OUTSIDE " + req.body.title);
+	db.updateOne(`FAQS`, {question_id: req.body.question}, {$set: {
+		title: req.body.title,
+		text: req.body.text
+	}});
+	
+	var q;
+
+	  db.findMany('FAQS', null,
+	  	{
+	  		author: 1, 
+	  		title:1, 
+	  		text:1
+	  	}, function(result){
+	  		db.findOne(`users`, {email: logEmail}, function(result2){
+		  		 res.render('FAQ', {
+		  		 	q: result,
+		  		 	name: logName,
+		  		 	path: result2.path
+		  		 });
+		  	});
+	  })
 })
 
 app.get(`/editquestion`, function(req, res){
@@ -195,21 +225,20 @@ app.get(`/editquestion`, function(req, res){
 	var q;
 
 	db.findOne(`users`, {email: logEmail}, function(result2){
-		console.log("result2" + result2);
 		user = result2;
-	})
 
-	db.findOne(`FAQ`, {question_id: req.body.question_id}, function(result){
-		console.log("qid" + req.body.question_id);
+		db.findOne(`FAQS`, {question_id: req.query.question}, function(result){
 		res.render(`EditQuestion`, {
 			q:{
-				name: user.name,
-				path: user.path,
+				name: result2.name,
+				path: result2.path,
 				title:  result.title,
-				text: result.text
+				text: result.text,
+				question_id: req.query.question
 				}
 			});	
-	})
+		});
+	});
 })
 
 app.get(`/edituser`, function(req, res){
@@ -244,7 +273,8 @@ app.post(`/submitedit`, upload.single('image'), function(req, res){
 		bio: req.body.bioform,
 		address: req.body.addressform,
 		contact: req.body.numberform,
-		salary: req.body.moneyform
+		salary: req.body.moneyform,
+		test: req.body.savechanges
 	}})
 
 	if(req.file != undefined){
@@ -303,14 +333,19 @@ app.get(`/FAQ`, function(req, res){
 	var q;
 
 	  db.findMany('FAQS', null,
-	  	{author: 1, 
-	  	title:1, 
-	  	text:1}, function(result){
-	  		 res.render('FAQ', {
-	  		 	q:result,
-	  		 	name: logName
-	  		 });
-	  	})
+	  	{
+	  		author: 1, 
+	  		title:1, 
+	  		text:1
+	  	}, function(result){
+	  		db.findOne(`users`, {email: logEmail}, function(result2){
+		  		 res.render('FAQ', {
+		  		 	q: result,
+		  		 	name: logName,
+		  		 	path: result2.path
+		  		 });
+		  	});
+	  })
 })
 
 app.get(`/browse`, function(req, res){
@@ -487,18 +522,25 @@ app.post(`/submitFAQ`, function(req, res){
 
 		db.insertOne(`FAQS`, faq);
 
-		db.findMany('FAQS', {author : logName}, {
+		db.findMany('FAQS', {author : logEmail}, {
 			author: 1, 
-		  	title:1, 
-		  	text:1
+		  	title: 1, 
+		  	text: 1
 		}, 
 		function(result2){
-  			res.render('FAQ', result2);
-	  	})
-	})
+  			db.findOne(`users`, {email: logEmail}, function(result3){
+  				console.log("COUNT: " + result2);
+		  		 res.render('FAQ', {
+		  		 	q: result2,
+		  		 	name: logName,
+		  		 	path: result3.path
+		  		 });
+		  	});
+	  	});
+	});
 })
 
-app.delete(`/deleteuser`, function(req, res){
+app.get(`/deleteuser`, function(req, res){
 
 	db.deleteOne(`users`, {email: logEmail});
 	res.render(`Login`);

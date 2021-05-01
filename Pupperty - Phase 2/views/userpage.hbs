@@ -85,7 +85,7 @@
 										<div id = prevdogname style = "background-image: url(images/bone.png);">{{this.name}}</div>
 										<div id = prevdogbuttons>
 											<a href = "/FAQ"><div><button>View Post</button></div></a>
-											<a href = "/editquestion"><div style = "position: relative; left: 20px;" name = "{{this.questionid}}"><button>Edit Post</button></div></a>
+											<a href = "/editquestion"><div style = "position: relative; left: 20px;"><button name="{{this.post_id}}">Edit Post</button></div></a>
 											<a href = "/deletepost" method = "delete"><div style = "position: relative; left: 40px;"><button style = "background-color: #c40808;">Delete Post</button></div></a>
 										</div>
 									</div>
@@ -125,8 +125,12 @@
 							</div>
 						</div>
 						<div style = "display: flex;">
-							<a href = "/FAQ"><div style = "margin-top: 20px;"><button>View Post</button></div></a>
-							<a href = "/editquestion"><div style = "margin-top: 20px; position: relative; left: 20px;"><button name = "{{this.questionid}}">Edit Post</button></div></a>
+							<a href = "/FAQ"><div style = "margin-top: 20px;"><button>View Question</button></div></a>
+							<div style = "margin-top: 20px; position: relative; left: 20px;">
+								<form action="/editquestion">
+									<button name="question" type="submit" value="{{this.question_id}}">Edit Question</button>
+								</form>
+							</div>
 						</div>
 						<br><br><br>
 					{{/each}}

@@ -316,6 +316,8 @@ small{
 	border-radius: 20px;
 	padding-right: 25px;
 	padding-left: 25px;
+	margin: auto;
+	height: auto;
 }
 
 #prevdogstitle{
@@ -327,14 +329,16 @@ small{
 }
 
 #prevdogscontainer{
-	height: 600px;
+	height: auto;
 	display: flex;
-	overflow: auto;
+	overflow-x: auto;
+	overflow-y: hidden;
 	white-space: nowrap;
 	align-content: space-between;
 	margin: auto;
 	padding-left: 25px;
 	padding-right: 25px;
+	padding-bottom: 25px;
 }
 
 #prevdogbox{

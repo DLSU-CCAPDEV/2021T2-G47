@@ -3,7 +3,7 @@
 		<title>User Account Details</title>
 		<link rel = "stylesheet" type = "text/css" href = "../css/userstyles.css">
 		<script type="text/javascript">
-			function confirmWindow(){
+			function confirmDeleteUser(){
 				if(confirm("Are you sure you want to delete your account?")){
 					window.open("http://localhost:3000/deleteuser", "_self");
 				}
@@ -36,7 +36,7 @@
 						<img src = "images/peso.png" class = detaillogos>
 						<div style = "width: 200px; text-align: left">{{u.salary}}/month</div>
 					</div>
-					<div id = detailscontainer style = "padding-top: 50px; padding-bottom: 10px; margin: auto;">Status: {{u.status}}</div>
+					<!-- <div id = detailscontainer style = "padding-top: 50px; padding-bottom: 10px; margin: auto;">Status: {{u.status}}</div> --><br>
 					<div id = detailscontainer style = "height: 190px; background-image: url(uploads/{{u.certificate}}); background-size: cover; background-position: center; margin: auto;"></div>
 					<div id = detailscontainer>
 						<form action = "/submitcertificate" method = "post" enctype="multipart/form-data">
@@ -47,7 +47,7 @@
 					<div style = "display: flex; justify-content: space-around; padding-bottom: 20px;">
 						<a href = "/edituser"><div id = detailscontainer><button style = "font-size: 15px">Edit Account</button></div></a>
 						<div id = detailscontainer><a href = "/"><button style = "font-size: 15px;">Log Out</button></a></div>
-						<div id = detailscontainer><!-- <a href = "/deleteuser"> --><button onclick = "confirmWindow()" style = "font-size: 15px; background-color: #c40808;">Delete Account</button><!-- </a> --></div>
+						<div id = detailscontainer><button onclick = "confirmDeleteUser()" style = "font-size: 15px; background-color: #c40808;">Delete Account</button></div>
 					</div>
 					
 				</div>
@@ -85,8 +85,16 @@
 										<div id = prevdogname style = "background-image: url(images/bone.png);">{{this.name}}</div>
 										<div id = prevdogbuttons>
 											<a href = "/FAQ"><div><button>View Post</button></div></a>
-											<a href = "/editquestion"><div style = "position: relative; left: 20px;"><button name="{{this.post_id}}">Edit Post</button></div></a>
-											<a href = "/deletepost" method = "delete"><div style = "position: relative; left: 40px;"><button style = "background-color: #c40808;">Delete Post</button></div></a>
+											<div style = "position: relative; left: 20px;">
+												<form action="/editpost">
+													<button name="post" type="submit" value="{{this.post_id}}">Edit Post</button>
+												</form>
+											</div>
+											<div style = "position: relative; left: 40px;">
+												<form action="/deletepost">
+													<button name="post" type="submit" value="{{this.post_id}}" style = "background-color: #c40808;">Delete Post</button>
+												</form>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -129,6 +137,11 @@
 							<div style = "margin-top: 20px; position: relative; left: 20px;">
 								<form action="/editquestion">
 									<button name="question" type="submit" value="{{this.question_id}}">Edit Question</button>
+								</form>
+							</div>
+							<div style = "margin-top: 20px; position: relative; left: 40px;">
+								<form action="/deletequestion">
+									<button name="question" type="submit" value="{{this.question_id}}" style = "background-color: #c40808;">Delete Question</button>
 								</form>
 							</div>
 						</div>

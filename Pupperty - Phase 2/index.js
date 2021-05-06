@@ -136,6 +136,69 @@ app.get(`/userpage`, function(req, res){
 	})
 })
 
+app.get('/profile', function(req, res){
+	var user_id = req.query.username;
+
+	db.findOne(`users`, {email: logEmail}, function(result)
+	{
+		if(result.user_id == user_id)
+			res.redirect('userpage');
+		else
+		{
+			var u;
+			var questionsArray;
+			var postsArray;
+			var adoptArray;
+
+			console.log("Userid current page: "+ user_id + " -- " + req.body.username);
+
+			db.findMany(`FAQS`, {asker_id: user_id}, {
+				author: 1,
+				name: 1,
+				title: 1,
+				text: 1,
+				question_id: 1
+			}, function(result){questionsArray = result;})
+
+			db.findMany(`adoption_posts`, {poster_id: user_id}, {
+				name: 1,
+				path: 1,
+				adoption_status: 1,
+				post_id: 1
+			}, function(result){postsArray = result;})
+
+			db.findMany(`adoption_posts`, {owner: user_id}, {
+				name: 1,
+				path: 1,
+			}, function(result){adoptArray = result;})
+
+			db.findOne(`users`, {user_id: user_id}, function(result2){
+				console.log('result' + result2.name);
+
+				res.render(`otherusers`, {
+					u: {
+						email: result2.email,
+						name: result2.name,
+						bio: result2.bio,
+						address: result2.address,
+						contact: result2.contact,
+						salary: result2.salary,
+						certvalid: result2.certvalid,
+						adoptcount: result2.homeowner.length,
+						rescuecount: result2.rescuer.length,
+						path: result2.path,
+						questions: questionsArray,
+						posts: postsArray,
+						adopts: adoptArray,
+						certificate: result2.certificate
+					}
+				});
+			})
+		}
+	});
+})
+
+
 app.get(`/addpost`, function(req, res){
 	res.render(`AddPost`);
 })
@@ -300,7 +363,8 @@ app.get(`/browse`, function(req, res){
 		post_time: 1,
 		post_id: 1,
 		poster_picture: 1,
-		poster_id: 1
+		poster_id: 1,
+		upvotes: 1
 	}, function(result){
 		postsArray = result;
 		console.log('result ' + postsArray);
@@ -320,7 +384,7 @@ app.get(`/browse`, function(req, res){
 			db.findOne(`users`, {email: logEmail}, function(result2){
 				res.render(`Browse`, {
 					u: {
-						currentUser: logName,
+						currentUser: result2.name,
 						user_id: result2.user_id,
 						user_photo: result2.path,
 						num_user_posts: num_user_posts,
@@ -454,7 +518,7 @@ app.post(`/submitadoptionpost`, upload.single('image'), function(req, res){
 						poster: logName,
 						poster_email: logEmail,
 						poster_picture: result2.path,
-						poster_id: result2.poster_id,
+						poster_id: result2.user_id,
 						name: req.body.name,
 						breed: req.body.breed,
 						sex: req.body.sex,
@@ -500,22 +564,25 @@ app.post(`/submitFAQ`, function(req, res){
 		  			console.log(`questionidvalue` + questionidvalue);
   				}
 
+  				db.findOne('users', {email: logEmail}, function(result3){
+
 				var faq = {
-			        author: logEmail,
-			        name: logName,
+			        author: result3.email,
+			        name: result3.name,
 			        title: req.body.questiontitle,
 			        text: req.body.questiontext,
 			        question_id: "question_" + questionidvalue,
-			        comments: []
+			        asker_id: result3.user_id,
+			        comments: [],
 		   	 	}
 
 				db.insertOne(`FAQS`, faq);
 
 				res.redirect('/FAQ');
+
+				});
 		});
 	});
-
-	
 })
 
 app.get(`/deleteuser`, function(req, res){
@@ -536,6 +603,16 @@ app.get(`/deletequestion`, function(req, res){
 	db.deleteOne(`FAQS`, {question_id: req.query.question});
 
 	res.redirect('/userpage');
+})
+
+app.get('/upvote', function(req, res){
+	var post_id = req.query.postID;
+	db.findOne('adoption_posts', {post_id: post_id}, function(result){
+		db.updateOne(`adoption_posts`, {post_id: post_id}, {$set: {
+			upvotes: result.upvotes + 1
+		}});
+	});
+	res.redirect('/browse');
 })
 
 app.listen(port, hostname, function(){

@@ -11,11 +11,22 @@
 	<div id="page_area">
 		<div id="left">
 			<div id="profile_peek" class="center">
-				<a href="/userpage"><img src="uploads/{{u.user_photo}}" class="center" id="profile"></a>
+				<div class="center" id="profile">
+				<form method = "get" action = "/profile">
+					<button class="center" name="username" value="{{u.user_id}}" style="cursor: pointer; border-radius: 100%; border: none; height: 100%; width: 100%;">
+						<div id="prof_pic" style = "background-image: url(uploads/{{u.user_photo}});">
+						</div>
+					</button>
+				</form>
+				</div>
 				<div id="user_details">
-					<a href="/userpage" id="name" class="center">
-						<h1 id="username center">{{u.currentUser}}</h1>
-					</a>
+					<div style="margin-bottom: 20px;">
+						<form method = "get" action = "/profile">
+							<button id="name" name="username" value="{{u.user_id}}">
+								<h1 id="username center">{{u.currentUser}}</h1>
+							</button>
+						</form>
+					</div>
 					<p id="details"><span class="bold">Posts:</span> {{u.num_user_posts}}<br><span class="bold">Dogs Adopted:</span> {{u.num_adopted}}</p>
 				</div>
 			</div>
@@ -39,13 +50,19 @@
 			{{#each (reverseArray u.posts)}}
 			<div class="post">
 				<div class="pic_name">
-					<form method = "get" action = "/userpage">
-							<button class="user_icon" name="profile_pic" value="{{this.poster_id}}" style="cursor: pointer; border-radius: 100%; border: none;">
-								<div class="display_pics" style = "background-image: url(uploads/{{this.poster_picture}});">
-								</div>
-							</button>
-						</form>
-					<a href="/userpage" class="poster_name">{{this.poster}}</a>
+					<form method = "get" action = "/profile">
+						<button class="user_icon" name="username" value="{{this.poster_id}}">
+							<div class="display_pics" style = "background-image: url(uploads/{{this.poster_picture}});">
+							</div>
+						</button>
+					</form>
+					<div style="padding-left: 12px; padding-top: 17px;">
+					<form method = "get" action = "/profile">
+						<button class="poster_name" name="username" value="{{this.poster_id}}">
+							{{this.poster}}
+						</button>
+					</form>
+					</div>
 				</div>
 				<p class="dog_description">{{this.remarks}}</p>
 				<img src="uploads/{{this.path}}" class="dog_photo">
@@ -54,10 +71,18 @@
 					<p class="time">Posted {{this.post_time}} on {{this.post_date}}</p>
 				</div>	
 				<div class="action_bar">
-					<p class="action_text">102</p>
-					<img src="images/Browse/up_arrow.png" class="action_icons">
+					<p class="action_text">{{this.upvotes}}</p>
+					<form method = "get" action = "/upvote">
+						<button class="bottombuttons" name="postID" value="{{this.post_id}}">
+							<img src="images/Browse/up_arrow.png" class="action_icons">
+						</button>
+					</form>
 					<p class="action_text">Upvote |</p>
-					<a href="/adoption"><img src="images/Browse/dog_seating.png" class="action_icons"></a>
+					<form method = "get" action = "/adoption">
+						<button class="bottombuttons" name="postID" value="{{this.post_id}}">
+							<img src="images/Browse/dog_seating.png" class="action_icons">
+						</button>
+					</form>
 					<p class="action_text">Adopt Dog</p>
 				</div>
 			</div>

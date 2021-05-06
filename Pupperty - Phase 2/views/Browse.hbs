@@ -11,26 +11,26 @@
 	<div id="page_area">
 		<div id="left">
 			<div id="profile_peek" class="center">
-				<a href="/userpage"><img src="images/Browse/profile.png" class="center" id="profile"></a>
+				<a href="/userpage"><img src="uploads/{{u.user_photo}}" class="center" id="profile"></a>
 				<div id="user_details">
-					<a href="userpage.html" id="name" class="center">
+					<a href="/userpage" id="name" class="center">
 						<h1 id="username center">{{u.currentUser}}</h1>
 					</a>
-					<p id="details"><span class="bold">Posts:</span> 3<br><span class="bold">Dogs Adopted:</span> 2</p>
+					<p id="details"><span class="bold">Posts:</span> {{u.num_user_posts}}<br><span class="bold">Dogs Adopted:</span> {{u.num_adopted}}</p>
 				</div>
 			</div>
 			<div class="pictures center">
-				<a href= "/adoption" class="dog_link">
-					<div class="doggo" id="doggo1" style = "background-image: url(images/Browse/doggo1.jpg);">
-						<img src="images/Browse/dogF.png" class="dog_logo">
-					</div>
-				</a>
-
-				<a href= "/adoption" class="dog_link">
-					<div class="doggo" id="doggo2" style = "background-image: url(images/Browse/doggo2.jpg);">
-						<img src="images/Browse/dogM.png" class="dog_logo">
-					</div>
-				</a>
+				{{#each (limit u.posts 2)}}
+				<div class="dog_link">
+						<form method = "get" action = "/adoption">
+							<button class="doggo" name="dog" value="{{this.post_id}}">
+								<div class="doggo" id="doggo1" style = "background-image: url(uploads/{{this.path}});">
+								<img src="images/Browse/dogM.png" class="dog_logo">
+								</div>
+							</button>
+						</form>
+				</div>
+				{{/each}}
 			</div>
 		</div>
 
@@ -39,7 +39,12 @@
 			{{#each (reverseArray u.posts)}}
 			<div class="post">
 				<div class="pic_name">
-					<a href="/userpage"><img src="images/Browse/user_woman.png" class="poster_pic"></a>
+					<form method = "get" action = "/userpage">
+							<button class="user_icon" name="profile_pic" value="{{this.poster_id}}" style="cursor: pointer; border-radius: 100%; border: none;">
+								<div class="display_pics" style = "background-image: url(uploads/{{this.poster_picture}});">
+								</div>
+							</button>
+						</form>
 					<a href="/userpage" class="poster_name">{{this.poster}}</a>
 				</div>
 				<p class="dog_description">{{this.remarks}}</p>
@@ -57,46 +62,6 @@
 				</div>
 			</div>
 			{{/each}}
-
-			<!-- <div class="post">
-				<div class= "pic_name">
-					<a href= "/userpage"><img src="images/Browse/user_woman.png" class="poster_pic"></a>
-					<a href= "/userpage" class="poster_name">Elizabeth Gonzaga</a>
-				</div>
-				<p class="dog_description">It is simply impossible to capture the beauty that is Nino on camera - you just have to come see her in person! She would make a great addition to a playful and adventurous family. She is espacially sweet and caring! She would definitely love having another dog around to play with.</p>
-				<img src="images/Browse/Nino.jpg" class="dog_photo">
-				<div class="date_time">
-					<img src="images/Browse/time.png" class="time_logo">
-					<p class="time">Posted 11:29 AM on 03/25/2021</p>
-				</div>
-				<div class="action_bar">
-					<p class="action_text">71</p>
-					<img src="images/Browse/up_arrow.png" class="action_icons">
-					<p class="action_text">Upvote |</p>
-					<a href="/adoption"><img src="images/Browse/dog_seating.png" class="action_icons"></a>
-					<p class="action_text">Adopt Dog</p>
-				</div>
-			</div>
-
-			<div class="post">
-				<div class="pic_name">
-					<a href="/userpage"><img src="images/Browse/user_girl.png" class="poster_pic"></a>
-					<a href="/userpage" class="poster_name">Chelsea Ablaza</a>
-				</div>
-				<p class="dog_description">Caione is one of 3 of her litter - they all love to wrestle and have big puppy energy. This adorable little girl likes showing affection to people and is really friendly! She likes playing outdoors and takes baths obediently too!</p>
-				<img src="images/Browse/Caione.jpg" class="dog_photo">
-				<div class="date_time">
-					<img src="images/Browse/time.png" class="time_logo">
-					<p class="time">Posted 5:45 PM on 03/30/2021</p>
-				</div>
-				<div class="action_bar">
-					<p class="action_text">59</p>
-					<img src="images/Browse/up_arrow.png" class="action_icons">
-					<p class="action_text">Upvote |</p>
-					<a href="/adoption"><img src="images/Browse/dog_seating.png" class="action_icons"></a>
-					<p class="action_text">Adopt Dog</p>
-				</div>
-			</div> -->
 		</div>
 
 		<div id="right">
@@ -104,13 +69,13 @@
 				<div id="heart" class="center"><img src="images/Browse/dog_heart.png" class="center" id="dog_heart"></div>
 				<div class="pic_num">
 					<img src="images/Browse/dog.png" class="count_logo">
-					<h1 class="num">420</h1>
+					<h1 class="num">{{u.num_posts}}</h1>
 				</div>
 				<h3 class="center">Dogs up for adoption</h3>
 				<div id="divider" class="center"></div>
 				<div class="pic_num">
 					<img src="images/Browse/users.png" class="count_logo">
-					<h1 class="num" id="bottom">1,547</h1>
+					<h1 class="num" id="bottom">{{u.num_users}}</h1>
 				</div>
 				<h3 class="center">Active users in the community</h3>
 			</div>

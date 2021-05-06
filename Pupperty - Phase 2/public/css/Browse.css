@@ -283,6 +283,7 @@ small{
 	width: 50px;
 	border-radius: 80%;
 	border: 4px solid #f7bc57;
+	cursor: pointer;
 }
 
 .poster_pic:hover {
@@ -392,7 +393,6 @@ small{
 
 h1.num{
 	margin-top: 35px;
-	width: 100px;
 	margin-left: 10px;
  	margin-right: 10px;
 }
@@ -454,6 +454,16 @@ h3{
     transition: all 1s ease;
 }
 
+.display_pics{
+	position: relative;
+	height: 50px;
+	width: 50px;
+	border-radius: 80%;
+	border: 6px solid #f7bc57;
+	background-position: center;
+	background-size: cover;
+}
+
 #user_details{
 	margin-top: -50px;
 }
@@ -492,9 +502,21 @@ h3{
 
 .doggo{
 	margin: auto;
-	width: auto;
+	margin-bottom: 40px;
+	width: 100%;
 	height: 240px;
 	box-shadow: -1px -1px 50px 1px black;
+	cursor: pointer;
+	border: none;
+}
+
+.user_icon:hover{
+    -webkit-filter: brightness(70%);
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    -o-transition: all 1s ease;
+    -ms-transition: all 1s ease;
+    transition: all 1s ease;
 }
 
 .dog_link{

@@ -271,10 +271,10 @@ small{
 
 .dogpic{
 	border-radius: 50%;
-	object-position: -50px 0px;
-	width: 300px;
+	width: 500px;
 	height: 300px;
-	object-fit: cover;
+	background-size: cover;
+	background-position: center;
 	margin-left: 70px;
 }
 
@@ -378,4 +378,21 @@ small{
 	background-color: #b7dcf4;
 	color: black;
 	border-color: #fafcfc;
+}
+
+.buttonadopted{
+	margin: auto;
+	margin-top: 60px;
+	font-size: 70px;
+	background-color: #77dd77;
+	border-bottom: 5px solid #fafcfc;
+	border-right: 5px solid #fafcfc;
+	border-radius: 120px 120px 120px 120px;
+	text-decoration: none;
+	height: auto;
+	width: auto;
+	color: black;
+	font-size: 40px;
+	font-weight: bold;
+	padding: 25px;
 }

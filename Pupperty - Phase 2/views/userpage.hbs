@@ -61,12 +61,15 @@
 					</div>
 					<div id = prevdogscontainer>
 						{{#each u.adopts}}
-							<a href = "/adoption">
-								<div id = prevdogbox style = "background-color: rgb(183, 220, 244, 0.8);">
-									<div style = "background-size: cover; background-position: center; background-image: url(uploads/{{this.path}});" id = prevdogpic></div>
-									<div id = prevdogname style = "background-image: url(images/bone.png); position: relative; top: 30px;">{{this.name}}</div>
+							<div id = prevdogbox style = "background-color: rgb(183, 220, 244, 0.8);">
+								<div style = "background-size: cover; background-position: center; background-image: url(uploads/{{this.path}});" id = prevdogpic></div>
+								<div id = prevdogname style = "background-image: url(images/bone.png); position: relative; top: 30px;">{{this.name}}</div>
+								<div id = prevdogbuttons style = "padding-top: 40px; padding-left: 40px;">
+									<form action="/adoption">
+										<button name="postID" type="submit" value="{{this.post_id}}">View Post</button>
+									</form>
 								</div>
-							</a>
+							</div>
 						{{/each}}
 					</div>
 				</div>
@@ -78,13 +81,15 @@
 
 					<div id = prevdogscontainer>
 						{{#each u.posts}}
-							<a href = "/adoption">
+							{{#unless this.adoption_status}}
 								<div id = prevdogbox style = "background-color: rgb(183, 220, 244, 0.8);">
 									<div style = "background-image: url(uploads/{{this.path}}); background-size: cover; background-position: center;" id = prevdogpic></div>
 									<div style = "position: relative; top: 30px;">
 										<div id = prevdogname style = "background-image: url(images/bone.png);">{{this.name}}</div>
 										<div id = prevdogbuttons>
-											<a href = "/FAQ"><div><button>View Post</button></div></a>
+											<form action="/adoption">
+												<button name="postID" type="submit" value="{{this.post_id}}">View Post</button>
+											</form>
 											<div style = "position: relative; left: 20px;">
 												<form action="/editpost">
 													<button name="post" type="submit" value="{{this.post_id}}">Edit Post</button>
@@ -98,7 +103,7 @@
 										</div>
 									</div>
 								</div>
-							</a>
+							{{/unless}}
 						{{/each}}
 					</div>
 				</div>

@@ -216,17 +216,21 @@ small{
 }
 
 .container2{
-	display:flex;
+	display: flex;
 	flex-direction: column;
 	text-align: center;
 	grid-gap: 10px;
-	justify-content: flex-start;
+	align-content: space-around;
+	margin: auto;
+
 }
 
 .container1{
 	display:flex;
 	justify-content: center;
+	padding-top: 100px;
 	grid-gap: 75px;
+	margin: auto;
 }
 
 #profile
@@ -238,6 +242,7 @@ small{
 	font-size: 30px;
 	text-align: center;
 	background-image: url("images/bg.jpg");
+	padding: 10px;
 }
 
 #profilepic
@@ -262,7 +267,6 @@ small{
 
 #qTitlePlace{
 	width: 400px;
-	height: 40px;
 }
 
 #addQHeader{
@@ -292,13 +296,10 @@ small{
 
 .divider{
 	border-bottom: 2px black solid;
-	text-align: left;
 }
 
 #questionplace{
 	margin-top: 0px;
-	width: 600px;
-	height: 40px;
 	margin-bottom: 0px;
 	margin-left: 15px;
 }

@@ -9,20 +9,20 @@
 
 		<div class = container1>
 			<div id = profile>
-					<a href = "/userpage"><div style = "background-image: url(uploads/{{q.path}});" class = "OPpicture"></div></a> <br>
-					<p id = profilename> {{q.name}} </p>
+				<a href = "/userpage"><div style = "background-image: url(uploads/{{q.path}});" class = "OPpicture"></div></a> <br>
+				<p id = profilename> {{q.name}} </p>
 			</div>
 
 			<div id = addQuestion>
 				<div class = container2>
 					<p id = addQHeader> Edit your Question: </p>
 					<form class="addQTitle" action="/submiteditedquestion" method="post">
-					<div class = divider>
-						<label id = qTitleLabel for="Question title"> Title of question: </label>
-						<input id = qTitlePlace type="text" id="addQTitle" name="title" value="{{q.title}}"><br>
-						<label id = qLabel for="Question"> Question: </label> <br>
-						<textarea id = questionplace rows = "1" cols = "20" name="text">{{q.text}}</textarea>
-					</div>
+						<div class = divider>
+							<label id = qTitleLabel for="Question title"> Title of question: </label><br>
+							<input id = qTitlePlace type="text" id="addQTitle" name="title" value="{{q.title}}"><br><br>
+							<label id = qLabel for="Question"> Question: </label> <br>
+							<textarea id = questionplace rows = "5" cols = "100" name="text" style = "resize: none;">{{q.text}}</textarea>
+						</div>
 						<button class = editpost type= "submit" name="question" value="{{q.question_id}}"> Submit </button>
 					</form>
 				</div>

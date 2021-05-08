@@ -8,8 +8,6 @@ const db = require('./models/db.js')
 const hbs = require(`hbs`);
 const multer = require('multer');
 
-// DB_URL=mongodb+srv://Admin:AdminPupperty@pupperty.ps47i.mongodb.net/database?retryWrites=true&w=majority
-
 const storage = multer.diskStorage({
 	destination: function(req, file, callback){
 		callback(null, './public/uploads');
@@ -82,6 +80,7 @@ app.post(`/submitcertificate`,  upload.single('image'), function(req, res){
 	res.redirect('/userpage');
 })
 
+
 app.get(`/userpage`, function(req, res){
 
 	var u;
@@ -109,6 +108,8 @@ app.get(`/userpage`, function(req, res){
 	db.findMany(`adoption_posts`, {owner: logEmail}, {
 		name: 1,
 		path: 1,
+		adoption_status: 1,
+		post_id: 1
 	}, function(result){adoptArray = result;})
 
 	db.findOne(`users`, {email: logEmail}, function(result2){
@@ -198,13 +199,43 @@ app.get('/profile', function(req, res){
 	});
 })
 
-
 app.get(`/addpost`, function(req, res){
 	res.render(`AddPost`);
 })
 
 app.get(`/adoption`, function(req, res){
-	res.render(`Adoption`);
+
+	var postid = req.query.postID;
+	console.log("adoption postid" + postid)
+
+	db.findOne(`adoption_posts`, {post_id: postid}, function(result){
+		res.render(`Adoption`, {
+			p: {
+				name: result.name,
+				breed: result.breed,
+				sex: result.sex,
+				size: result.size,
+				age: result.age,
+				remarks: result.remarks,
+				status: result.adoption_status,
+				path: result.path,
+				postid: result.post_id,
+				posternumber: result.poster_contact,
+				posteremail: result.poster_email
+			}
+		});
+	})
+
+})
+
+app.get('/adoptdog', function(req, res){
+
+	db.updateOne(`adoption_posts`, {post_id: req.query.postID}, {$set: {
+		owner: logEmail,
+		adoption_status: true
+	}})
+
+	res.redirect('/userpage')
 })
 
 app.post(`/submiteditedpost`, upload.single('image'), function(req, res){
@@ -234,15 +265,33 @@ app.post(`/submiteditedpost`, upload.single('image'), function(req, res){
 app.get(`/editpost`, function(req, res){
 
 	var d;
+	var hbsex, hbsize;
 
 	db.findOne(`adoption_posts`, {post_id: req.query.post}, function(result){
+
+	if(result.sex == "Male"){
+		hbsex = "<input type='radio' id = 'male' name = 'sex' value = 'Male' checked> <label for = 'male'>Male</label> <input type='radio' id = 'female' name = 'sex' value = 'Female'> <label for = 'female'>Female</label> <br><br>"
+	} else{
+		hbsex = "<input type='radio' id = 'male' name = 'sex' value = 'Male'> <label for = 'male'>Male</label> <input type='radio' id = 'female' name = 'sex' value = 'Female' checked> <label for = 'female'>Female</label> <br><br>"
+	}
+
+	if(result.size == "Small"){
+		hbsize = "<input type='radio' id = 'small' name = 'size' value = 'Small' checked> <label for = 'small'>Small</label> <input type='radio' id = 'medium' name = 'size' value = 'Medium'> <label for = 'medium'>Medium</label> <input type='radio' id = 'large' name = 'size' value = 'Large'> <label for = 'large'>Large</label> <br><br>"
+	}
+	else if(result.size == "Medium"){
+		hbsize = "<input type='radio' id = 'small' name = 'size' value = 'Small'> <label for = 'small'>Small</label> <input type='radio' id = 'medium' name = 'size' value = 'Medium' checked> <label for = 'medium'>Medium</label> <input type='radio' id = 'large' name = 'size' value = 'Large'> <label for = 'large'>Large</label> <br><br>"
+	}
+	else{
+		hbsize = "<input type='radio' id = 'small' name = 'size' value = 'Small'> <label for = 'small'>Small</label> <input type='radio' id = 'medium' name = 'size' value = 'Medium'> <label for = 'medium'>Medium</label> <input type='radio' id = 'large' name = 'size' value = 'Large' checked> <label for = 'large'>Large</label> <br><br>"
+	}
+
 	res.render(`EditPost`, {
 		d:{
 			name: result.name,
 			path: result.path,
 			breed: result.breed,
-			sex:  result.sex,
-			size: result.size,
+			sex:  hbsex,
+			size: hbsize,
 			age: result.age,
 			remarks: result.remarks,
 			postid : result.post_id
@@ -309,12 +358,21 @@ app.post(`/submitedit`, upload.single('image'), function(req, res){
 
 	var image;
 
+	db.updateMany(`adoption_posts`, {poster_email: logEmail}, {$set: {
+		poster: req.body.usernameform
+	}})
+
+	db.updateMany(`FAQS`, {author: logEmail}, {$set: {
+		name: req.body.usernameform
+	}})
+
 	db.updateOne(`users`, {email: logEmail}, {$set: {
 		name: req.body.usernameform,
 		bio: req.body.bioform,
 		address: req.body.addressform,
 		contact: req.body.numberform,
-		salary: req.body.moneyform //test
+		salary: req.body.moneyform,
+		test: req.body.savechanges
 	}})
 
 	if(req.file != undefined){
@@ -408,7 +466,7 @@ app.post(`/login`, function(req, res){
 	// access the database, then save the data
 	db.findOne(`users`, {email: email, password: password}, function(result){
 		if(result == null){
-			res.redirect(`/`);
+			res.render(`Login`);
 			console.log(`Login unsuccessful. User does not exist in the databse.`);
 		}
 		else{
@@ -518,6 +576,7 @@ app.post(`/submitadoptionpost`, upload.single('image'), function(req, res){
 	  				var dog = {
 						poster: logName,
 						poster_email: logEmail,
+						poster_contact: result2.contact,
 						poster_picture: result2.path,
 						poster_id: result2.user_id,
 						name: req.body.name,
@@ -543,7 +602,6 @@ app.post(`/submitadoptionpost`, upload.single('image'), function(req, res){
 			});
 	  	})
 })
-
 app.post(`/submitFAQ`, function(req, res){
 
 	var questionidstring;
@@ -565,25 +623,23 @@ app.post(`/submitFAQ`, function(req, res){
 		  			console.log(`questionidvalue` + questionidvalue);
   				}
 
-  				db.findOne('users', {email: logEmail}, function(result3){
-
 				var faq = {
+
 					opPath: result3.path,
 					image: result3.image,
 			        author: result3.email,
 			        name: result3.name,
+			        author: logEmail,
+			        name: logName,
 			        title: req.body.questiontitle,
 			        text: req.body.questiontext,
 			        question_id: "question_" + questionidvalue,
-			        asker_id: result3.user_id,
-			        comments: [],
+			        comments: []
 		   	 	}
 
 				db.insertOne(`FAQS`, faq);
 
 				res.redirect('/FAQ');
-
-				});
 		});
 	});
 })

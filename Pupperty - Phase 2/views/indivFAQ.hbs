@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Question Page</title>
+	<link rel="stylesheet" type = "text/css" href="../css/indivFAQ.css">
+</head>
+<body>
+	{{> navbar}}
+
+	<div class = container>
+		<div id = userdeets>
+			<div style = "background-image: url(uploads/{{../path}});" class = "OPpicture">
+			<p> {{author}} </p> 
+		</div>
+
+		<div id = questiontitle>
+			<p> {{title}}</p>
+		</div>
+
+		<div id = question>
+			<p> {{question}} </p>
+		</div>
+	</div>
+</body>
+</html>

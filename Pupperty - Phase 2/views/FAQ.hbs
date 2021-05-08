@@ -12,7 +12,7 @@
 			<p id= FAQHEADER> Frequently Asked Questions </p>
 			<div class = container1>
 				<div id = profile>
-						<a href = "/userpage"><div style = "background-image: url(uploads/{{this.path}}); height: 200px; width: 200px; margin: auto; background-size: cover; border-radius: 50%;"></div></a>
+						<a href = "/userpage"><div style = "background-image: url(uploads/{{loginpath}}); height: 200px; width: 200px; margin: auto; background-size: cover; border-radius: 50%;"></div></a>
 						 <br>
 						<p id = profilename> <a href = "userpage.html">{{name}}</a> </p>
 				</div>
@@ -21,10 +21,10 @@
 					{{#each q}}
 					<div class= posts>
 						<div class = userdeets>
-						<a href = "/userpage"><div style = "background-image: url(uploads/{{../path}});" class = "OPpicture"></div></a>
+						<a href = "/userpage"><div style = "background-image: url(uploads/{{this.opPath}});" class = "OPpicture"></div></a>
 						<p class = username><a href = "userpage.html"></a> {{this.name}}</p>
 						</div>
-						<p class = question_title> {{this.title}}</p>
+						<p class = question_title> <a href = "/indivFAQ"></a>{{this.title}}</p>
 						<p class = question> {{this.text}} </p>
 						<div class = container2>
 							{{#each q.comments}}
@@ -36,7 +36,10 @@
 								<p class = reply> {{this.comments}} </p>
 							</div>
 							{{/each}}
-							<a href = "/editquestion"><button class = editpost type= "button"> Edit Post </button></a>	
+							<div>
+								<textarea> </textarea> <br>
+								<button type="button"> Submit Comment </button>
+							</div>
 						</div>
 					</div>
 					{{/each}}

@@ -8,6 +8,8 @@ const db = require('./models/db.js')
 const hbs = require(`hbs`);
 const multer = require('multer');
 
+// DB_URL=mongodb+srv://Admin:AdminPupperty@pupperty.ps47i.mongodb.net/database?retryWrites=true&w=majority
+
 const storage = multer.diskStorage({
 	destination: function(req, file, callback){
 		callback(null, './public/uploads');
@@ -399,9 +401,8 @@ app.get(`/FAQ`, function(req, res){
 		  		 res.render('FAQ', {
 		  		 	q: result,
 		  		 	name: logName,
-		  		 	loginpath: result2.path
+		  		 	path: result2.path
 		  		 });
-		  		 console.log(q);
 		  	});
 	  })
 })
@@ -624,11 +625,6 @@ app.post(`/submitFAQ`, function(req, res){
   				}
 
 				var faq = {
-
-					opPath: result3.path,
-					image: result3.image,
-			        author: result3.email,
-			        name: result3.name,
 			        author: logEmail,
 			        name: logName,
 			        title: req.body.questiontitle,
@@ -673,13 +669,6 @@ app.get('/upvote', function(req, res){
 	});
 	res.redirect('/browse');
 })
-
-//partial code
-// app.post('/submitcomment', function(req,res)
-// {
-// 	var question_id = req.query.question_id
-// 	db.updateOne('FAQS', {question_id: question_id}, {$set})
-// })
 
 app.listen(port, hostname, function(){
 	console.log(`Server running at: `);

@@ -677,17 +677,22 @@ app.get('/upvote', function(req, res){
 // 	db.updateOne('FAQS', {question_id: question_id}, {$set})
 // })
 
-app.post(`/submitFAQ`, function(req, res){
-  				db.findOne('users', {email: logEmail}, function(result3){
+app.get(`/indivFAQ`, function(req, res)
+{
+  	db.findOne('FAQ', {email: logEmail}, function(result)
+  	{
+  		var question = 
+  		{
+  			name: result.name,
+			title: result.title,
+			text: result.text,
+  		}
 
-				var faq = {
-					opPath: result3.path,
-					image: result3.image,
-			        author: result3.email,
-			        name: result3.name,
-			        title: req.body.questiontitle,
+  		res.render('/indivFAQ', question);
+  	}
 
 }
+
 app.get('/upvote', function(req, res){
 	res.redirect('/browse');
 })

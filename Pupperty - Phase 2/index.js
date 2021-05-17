@@ -670,6 +670,28 @@ app.get('/upvote', function(req, res){
 	res.redirect('/browse');
 })
 
+//partial code
+// app.post('/submitcomment', function(req,res)
+// {
+// 	var question_id = req.query.question_id
+// 	db.updateOne('FAQS', {question_id: question_id}, {$set})
+// })
+
+app.post(`/submitFAQ`, function(req, res){
+  				db.findOne('users', {email: logEmail}, function(result3){
+
+				var faq = {
+					opPath: result3.path,
+					image: result3.image,
+			        author: result3.email,
+			        name: result3.name,
+			        title: req.body.questiontitle,
+
+}
+app.get('/upvote', function(req, res){
+	res.redirect('/browse');
+})
+
 app.listen(port, hostname, function(){
 	console.log(`Server running at: `);
 	console.log(`http://` + hostname + ':' + port);

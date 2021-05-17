@@ -539,13 +539,14 @@ app.post(`/register`, function(req, res){
 							path: "user.png"
 						}
 
-						db.insertOne(`users`, person);
+						console.log('Email: ' + logEmail + ' successfully registered with Name: ' + logName);
 						logEmail = email;
 						logName = person.name;
 
-						console.log('Email: ' + logEmail + ' successfully registered with Name: ' + logName);
-
-						res.redirect('/edituser');
+						db.insertOne(`users`, person, function(result){
+							res.redirect('/edituser');
+						});
+						
 					}
 				})
 			});
@@ -596,9 +597,9 @@ app.post(`/submitadoptionpost`, upload.single('image'), function(req, res){
 						upvotes: 0
 					}
 
-					db.insertOne(`adoption_posts`, dog);
-
-					res.redirect('/browse');
+					db.insertOne(`adoption_posts`, dog, function(result){
+						res.redirect('/browse');
+					});
 	  			});
 			});
 	  	})
@@ -633,9 +634,9 @@ app.post(`/submitFAQ`, function(req, res){
 			        comments: []
 		   	 	}
 
-				db.insertOne(`FAQS`, faq);
-
-				res.redirect('/FAQ');
+				db.insertOne(`FAQS`, faq, function(result){
+						res.redirect('/FAQ');
+				});
 		});
 	});
 })
@@ -660,16 +661,6 @@ app.get(`/deletequestion`, function(req, res){
 	res.redirect('/userpage');
 })
 
-app.get('/upvote', function(req, res){
-	var post_id = req.query.postID;
-	db.findOne('adoption_posts', {post_id: post_id}, function(result){
-		db.updateOne(`adoption_posts`, {post_id: post_id}, {$set: {
-			upvotes: result.upvotes + 1
-		}});
-	});
-	res.redirect('/browse');
-})
-
 //partial code
 // app.post('/submitcomment', function(req,res)
 // {
@@ -689,12 +680,17 @@ app.get(`/indivFAQ`, function(req, res)
   		}
 
   		res.render('/indivFAQ', question);
-  	}
-
-}
+  	});
+})
 
 app.get('/upvote', function(req, res){
-	res.redirect('/browse');
+	var post_id = req.query.postID;
+	db.findOne('adoption_posts', {post_id: post_id}, function(result){
+		db.updateOne(`adoption_posts`, {post_id: post_id}, {$set: {
+			upvotes: result.upvotes + 1
+		}});
+		res.redirect('/browse');
+	});
 })
 
 app.listen(port, hostname, function(){

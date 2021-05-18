@@ -531,13 +531,25 @@ p{
 	flex-wrap: wrap;
 }
 
-.doggo, .doggo_separate{
+.doggo_base{
 	margin-left: 20px;
 	border-top: 5px solid #f7bc57;
 	border-left: 5px solid #f7bc57;
 	width: 340px;
 	height: 340px;
+	border-radius: 24px 24px 24px 24px;
+	cursor: pointer;
+}
+
+
+.doggo, .doggo_separate{
+	width: 340px;
+	height: 340px;
 	border-radius: 20px 20px 20px 20px;
+}
+
+.doggo_separate{
+	margin-left: 20px;
 }
 
 .doggo:hover {

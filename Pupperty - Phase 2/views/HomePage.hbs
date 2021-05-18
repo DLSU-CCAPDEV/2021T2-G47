@@ -139,12 +139,16 @@
 		<div class="dogs_header">DOGS FOR ADOPTION</div>
 		<div class="pictures">
 				{{#each (limit u.posts 4)}}
-				<a href="/adoption" class="dog_link">
-					<div class="doggo" style = " background-image: url(uploads/{{this.path}}); background-size: cover; background-position: center">
-						<img src="images/HomePage/dogM.png" class="dog_logo">
-						<p class="dog_name">{{this.name}}</p>
-					</div>
-				</a>
+				<div class="dog_link">
+					<form method = "get" action = "/adoption">
+						<button class="doggo_base" name="postID" value="{{this.post_id}}">
+							<div class="doggo" style = " background-image: url(uploads/{{this.path}}); background-size: cover; background-position: center">
+								<img src="images/HomePage/dogM.png" class="dog_logo">
+								<p class="dog_name">{{this.name}}</p>
+							</div>
+						</button>
+					</form>
+				</div>
 				{{/each}}
 			<!-- <a href="/adoption" class="dog_link">
 				<div class="doggo" id="doggo2" style = "background-image: url(images/HomePage/doggo2.png);">

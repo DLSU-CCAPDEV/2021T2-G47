@@ -60,7 +60,8 @@ app.get(`/homepage`, function(req, res){
 
 	db.findMany(`adoption_posts`, {adoption_status: false}, {
 		name: 1,
-		path: 1
+		path: 1,
+		post_id: 1
 	}, function(result){
 		postsArray = result;
 		console.log('result ' + postsArray);
@@ -474,7 +475,8 @@ app.post(`/login`, function(req, res){
 
 			db.findMany(`adoption_posts`, {adoption_status: false}, {
 				name: 1,
-				path: 1
+				path: 1,
+				post_id: 1
 			}, function(result){
 				postsArray = result;
 				console.log('result ' + postsArray);

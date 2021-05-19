@@ -696,7 +696,7 @@ app.get('/upvote', function(req, res){
 		db.updateOne(`adoption_posts`, {post_id: post_id}, {$set: {
 			upvotes: result.upvotes + 1
 		}});
-		res.redirect('/browse');
+		// res.redirect('/browse');
 	});
 })
 

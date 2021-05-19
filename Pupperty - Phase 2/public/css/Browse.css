@@ -349,6 +349,18 @@ small{
 	background-color: rgba(0,0,0,0.2);
 }
 
+.disable{
+	padding: 7px 0px 7px 0px;
+	height: 20px;
+	width: 20px;
+	border-radius: 30%;
+	cursor: default;
+}
+
+.disable:hover{
+	background-color: #b7dcf4;
+}
+
 .action_text{
 	padding-left: 5px;
 	padding-right: 5px;
@@ -579,7 +591,13 @@ h3{
 	margin-top: 50px;
 }
 
-.bottombuttons{
+.bottombuttons_upvotes{
+	background-color: rgb(0,0,0,0);
+	border: none;
+	cursor: pointer;
+}
+
+.bottombuttons_adopt{
 	background-color: rgb(0,0,0,0);
 	border: none;
 	cursor: pointer;

@@ -2,6 +2,21 @@
 <html>
 <head>
 	<link rel="stylesheet" type="text/css" href="../css/Browse.css">
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js" type="text/javascript"></script>
+	<script type="text/javascript">
+		$(document).ready(function () {
+		    $('.bottombuttons_upvotes').click(function () {
+		    	var value = this.value;
+		        var upvotes = $('#' + value + '_upvotes').text();
+		        $('#'+value+'_upvotes').text(parseInt(upvotes) + 1);
+
+		        $.get('/upvote', {postID: value}, function(result){});
+
+		        $(this).prop('disabled', true);
+		        $(this).children('img').addClass('disable');
+		        });		
+		    });
+	</script>
 	<title>Browse</title>
 </head>
 <body>
@@ -71,15 +86,13 @@
 					<p class="time">Posted {{this.post_time}} on {{this.post_date}}</p>
 				</div>	
 				<div class="action_bar">
-					<p class="action_text">{{this.upvotes}}</p>
-					<form method = "get" action = "/upvote">
-						<button class="bottombuttons" name="postID" value="{{this.post_id}}">
-							<img src="images/Browse/up_arrow.png" class="action_icons">
+					<p class="action_text" id="{{this.post_id}}_upvotes">{{this.upvotes}}</p>
+						<button class="bottombuttons_upvotes" name="postID" value="{{this.post_id}}">
+							<img src="images/Browse/up_arrow.png" class="action_icons" name="test">
 						</button>
-					</form>
 					<p class="action_text">Upvote |</p>
 					<form method = "get" action = "/adoption">
-						<button class="bottombuttons" name="postID" value="{{this.post_id}}">
+						<button class="bottombuttons_adopt" name="postID" value="{{this.post_id}}">
 							<img src="images/Browse/dog_seating.png" class="action_icons">
 						</button>
 					</form>

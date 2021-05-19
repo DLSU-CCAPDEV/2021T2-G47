@@ -109,7 +109,7 @@ small{
 	text-align: center;
 }
 
-input[type="submit"]{
+input[type="button"]{
 	margin-top: 30px;
 	background-color: rgb(183,220,244);
 	border-radius: 20px 20px 20px 20px;
@@ -122,9 +122,19 @@ input[type="submit"]{
 	border-color: gray;
 }
 
-input[type="submit"]:hover{
+input[type="button"]:hover{
 	cursor: pointer;
 	text-decoration: underline;
 	color: black;
 	border-color: black;
+}
+
+#error {
+    height: 20px;
+    margin-top: 10px;
+    font-family: georgia;
+}
+
+#error:empty {
+    height: 20px;
 }

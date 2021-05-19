@@ -15,7 +15,7 @@ div.login_box{
 	justify-content: center;
 	display: flex;
 	box-shadow: -1px -1px 50px 10px;
-	height: 360px;
+	height: 430px;
 	width: 500px;
 	margin: auto;
 	margin-top: 250px;
@@ -119,4 +119,14 @@ input[type="submit"]:hover{
 	text-decoration: underline;
 	color: black;
 	border-color: black;
+}
+
+#error {
+    height: 20px;
+    margin-top: 10px;
+    font-family: georgia;
+}
+
+#error:empty {
+    height: 20px;
 }

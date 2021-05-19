@@ -2,6 +2,58 @@
 <html>
 <head>
 	<link rel="stylesheet" type="text/css" href="../css/Signup.css">
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js" type="text/javascript"></script>
+	<script type="text/javascript">
+		$(document).ready(function () {
+		    $('#email').keyup(function () {
+		        var email = $('#email').val();
+
+		        $.post('/checkEmail', {email: email}, function (result) {
+
+			            if(result.email == email) {
+			                $('#email').css('background-color', 'rgb(239,141,141)');
+			                $('#error').text('Email already exists in the database');
+			                $('#submit').prop('disabled', true);
+			                $('#submit').css('cursor', 'default');
+			                $('#submit').css('border-color', 'gray');
+			                $('#submit').css('color', 'gray');
+			            }
+
+			            else {
+			                $('#email').css('background-color', 'rgb(183,220,244,0.15)');
+			                $('#error').text('');
+			                $('#submit').prop('disabled', false);
+			                $('#submit').css('cursor', 'pointer');
+			                $('#submit').css('border-color', '');
+			                $('#submit').css('color', '');
+			            }
+			    });
+			});
+
+			$('#confirm_password').keyup(function () {
+		        var password = $('#password').val();
+		        var confirm_password = $('#confirm_password').val();
+
+	            if(password != confirm_password) {
+	                $('#confirm_password').css('background-color', 'rgb(239,141,141)');
+	                $('#error').text('Password does not match');
+	                $('#submit').prop('disabled', true);
+	                $('#submit').css('cursor', 'default');
+	                $('#submit').css('border-color', 'gray');
+			        $('#submit').css('color', 'gray');
+	            }
+
+	            else {
+	                $('#confirm_password').css('background-color', 'rgb(183,220,244,0.15)');
+	                $('#error').text('');
+	                $('#submit').prop('disabled', false);
+	                $('#submit').css('cursor', 'pointer');
+	                $('#submit').css('border-color', '');
+			        $('#submit').css('color', '');
+	            }
+			});
+		});
+	</script>
 	<title>Pupperty</title>
 </head>
 <body style = "background-image: url('../images/Login/login_background_v2.png');">
@@ -14,10 +66,12 @@
 			</ul>
 			<form id="formbox" action ="/register" autocomplete="off" method="post">
 				<img src="images/Login/email.png" class="icons">
-				<input type="email" class="form_input" name="email" placeholder="Email"><br>
+				<input type="email" class="form_input" name="email" placeholder="Email" id="email" required><br>
 				<img src="images/Login/password.png" class="icons">
-				<input type="password" class="form_input" name="password" placeholder="Password"><br>
-				<input type="submit" name="login_button" value="Sign Up">
+				<input type="password" class="form_input" name="password" placeholder="Password" id="password" required><br>
+				<input type="password" class="form_input" name="confirm_password" placeholder="Confirm Password" id="confirm_password" style="margin-left: 60px;" required><br>
+				<p id="error"></p>
+				<input type="submit" name="login_button" value="Sign Up" style="margin-top: 15px;" id="submit">
 			</form>
 		</div>
 	</div>

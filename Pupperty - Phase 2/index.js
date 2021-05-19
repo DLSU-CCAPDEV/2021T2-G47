@@ -546,9 +546,9 @@ app.post(`/register`, function(req, res){
 							path: "user.png"
 						}
 
-						console.log('Email: ' + logEmail + ' successfully registered with Name: ' + logName);
 						logEmail = email;
 						logName = person.name;
+						console.log('Email: ' + logEmail + ' successfully registered with Name: ' + logName);
 
 						db.insertOne(`users`, person, function(result){
 							res.redirect('/edituser');
@@ -846,6 +846,27 @@ app.get(`/checksearch`, function(req,res){
 
 	console.log(`RADIORES =` + radioRes);
 	console.log(`checksearchEntry = ` + req.query.text);
+})
+
+app.post('/checkEmail', function(req, res){
+	var email = req.body.email;
+	db.findOne(`users`, {email: email}, function(result){
+            if(result != null)
+                res.send(result);
+            else
+                res.send(null);
+        });
+})
+
+app.post('/loginCheck', function(req, res){
+	var email = req.body.email;
+	var password = req.body.password;
+	db.findOne(`users`, {email: email, password: password}, function(result){
+            if(result != null)
+                res.send(result);
+            else
+                res.send(null);
+        });
 })
 
 app.listen(port, hostname, function(){

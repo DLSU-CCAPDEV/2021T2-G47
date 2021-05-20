@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>FAQ</title>
+	<link rel="stylesheet" type = "text/css" href="../css/FAQ.css">
+</head>
+<body style = "background-image: url(images/pattern.png);">
+	{{> navbar}}
+
+	<div style = "padding-left: 20px; padding-right: 20px;">
+		<div class = container2>
+			<p id= FAQHEADER> Frequently Asked Questions </p>
+			<div class = container1>
+				<div id = profile>
+						<a href = "/userpage"><div style = "background-image: url(uploads/{{path}}); height: 200px; width: 200px; margin: auto; background-size: cover; border-radius: 50%;"></div></a>
+						 <br>
+						<p id = profilename> <a href = "userpage.html">{{name}}</a> </p>
+				</div>
+
+				<div class = container2> 
+					{{#each q}}
+					<div class= posts>
+						<div class = userdeets>
+						<a href = "/userpage"><div style = "background-image: url(uploads/{{this.opPath}});" class = "OPpicture"></div></a>
+						<p class = username><a href = "userpage.html"></a> {{this.name}}</p>
+						</div>
+						<p class = question_title> <a href = "/indivFAQ"></a>{{this.title}}</p>
+						<p class = question> {{this.text}} </p>
+						<div class = container2>
+							{{#each q.comments}}
+							<div class = answers>
+								<div class = replyprofile>
+								<a href = "/userpage"><div style = "background-image: url(uploads/{{this.path}});" class = "replypicture"></div></a>
+								<p> <a href = "/userpage">{{this.name}}</a> </p>
+								</div>
+								<p class = reply> {{this.comments}} </p>
+							</div>
+							{{/each}}
+							<div>
+								<textarea> </textarea> <br>
+								<button type="button"> Submit Comment </button>
+							</div>
+						</div>
+					</div>
+					{{/each}}
+				</div>
+				<div class = container2>
+					<div id = addQuestion>
+						<p id = addQHeader> Add a Question: </p>
+						<form id= addQTitle method ="post" action = "/submitFAQ">
+							<label id = qTitleLabel for="Question title"> Title of question: </label> <br>
+							<input id = qTitlePlace type="text" id="addQTitle" name="questiontitle"><br>
+							<label id = qLabel for="Question"> Question: </label><br> 
+							<textarea id = questionplace rows = "1" cols = "20" name = "questiontext"></textarea><br>
+							<input type="submit" name="submit">
+						</form>
+					</div>
+				</div>
+		</div>
+	</div>
+</body>
+</html>

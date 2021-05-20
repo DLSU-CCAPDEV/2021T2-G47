@@ -1,0 +1,48 @@
+<div id = "navbar">
+	<a href="/homepage" class = "navbaritems" id="currentNavbar">
+			<img src = "images/home.png" class = "navbarlogos">
+			<div class = navbartext>Home</div>
+	</a>
+	<a href="/browse" class = "navbaritems" id="navBrowse">
+		<img src = "images/dog.png" class = "navbarlogos">
+		<div class = navbartext>Browse Posts</div>
+	</a>
+	<a href="/FAQ" class = "navbaritems" id="navFAQ">
+		<img src = "images/FAQ.png" class = "navbarlogos">
+		<div class = navbartext>FAQ</div>
+	</a>
+	<a href= "/userpage" class = "navbaritems" id="navUserpage">
+		<img src = "images/account.png" class = "navbarlogos">
+		<div class = navbartext>View Profile</div>
+	</a>
+	<a href= "/aboutpage" class = "navbaritems" id="navAboutpage">
+		<img src = "images/paw.png" class = "navbarlogos">
+		<div class = navbartext>About Us</div>
+	</a>
+
+	<div id="searchbar">
+		<img src="images/search.png" id="searchlogo">
+		<form id="formbox" action ="/checksearch">
+			<input type="text" class="form_input" name="text" placeholder="Search" autocomplete="off">
+			<div class="dropdown">
+			    <a href="javascript:void(0)" class="dropbtn"><img src="images/Browse/filter.png" id="filterlogo"></a>
+			    <div class="dropdown-content">
+			    	<span id="filter">Search For:</span><br>
+						<input type="radio" id = "profileName" name = "searchradio" value = "profileName" required>
+						<label for = "profileName">User by Name</label><br>
+						<input type="radio" id = "petName" name = "searchradio" value = "petName" required>
+						<label for = "petName">Pet by Name</label><br>
+						<input type="radio" id = "petBreed" name = "searchradio" value = "petBreed" required>
+						<label for = "petBreed">Pets by Breed</label><br>
+						<input type="radio" id = "faqTitle" name = "searchradio" value = "faqTitle" required>
+						<label for = "faqTitle">Faq by Title</label><br>
+			    </div> 
+			</div>
+		</form>
+	</div>
+	<div id="logout_area">
+		<a href="/" title="Logout" id="logout_ref">
+			<img src = "images/logout.png" id="logout">
+		</a>
+	</div>
+</div>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="../css/Adoption.css">
+	<title>Adoption</title>
+</head>
+<body>
+	{{> navbar}}
+
+	<div id="page_area">
+		<div class="areas left" id="section1">
+			<div class="area_content">
+				<div id="caption">DOG INFORMATION</div>
+				<div class="content">
+					<div class="dogpic" style = "background-image: url(uploads/{{p.path}})"></div>
+
+					<div class="content_text1 left" id="area1">
+						<div class="text1"><span class="category">Name: </span> {{p.name}}</div>
+						<div class="text1"><span class="category">Breed: </span> {{p.breed}}</div>
+						<div class="text1"><span class="category">Sex: </span> {{p.sex}}</div>
+						<div class="text1"><span class="category">Size: </span> {{p.size}}</div>
+						<div class="text1"><span class="category">Age: </span> {{p.age}}</div>
+					</div>
+
+					<div class="content_text2 left">
+						<div class="text2">Remarks</div>
+						<p>{{p.remarks}}</p>
+						<div class="text2" id="contact_gap">Poster's Contact Information</div>
+						<p class="spacing">+63 {{p.posternumber}}<br>
+						{{p.posteremail}}</p>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+		{{#if p.status}}
+			<a target="_blank" class="buttonadopted">Adopted</a>
+		{{else}}
+			<form method = "get" action = "/adoptdog">
+				<button class = "button center" name="postID" type="submit" value="{{p.postid}}">Adopt Dog</button>
+			</form>
+		{{/if}}
+	</div>
+
+</body>
+</html>

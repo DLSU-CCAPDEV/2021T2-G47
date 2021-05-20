@@ -7,6 +7,7 @@ const controller = {
 
 		  db.findMany('FAQS', null,
 		  	{
+		  		OPpath: 1,
 		  		author: 1,
 		  		name: 1,
 		  		title:1, 
@@ -26,6 +27,12 @@ const controller = {
 
 		var questionidstring;
 		var questionidvalue;
+		var tempComments [] = 
+		{
+			commentPath: "",
+			name: "",
+			commentText: ""
+		}
 
 		db.findMany('FAQS', null, {
 				question_id: 1
@@ -43,18 +50,21 @@ const controller = {
 			  			console.log(`questionidvalue` + questionidvalue);
 	  				}
 
-					var faq = {
+	  				db.findOne('users', {email: req.session.email}, function(result3)
+	  				{
+	  					var faq = {
+	  					OPpath: result3.path,
 				        author: req.session.email,
 				        name: req.session.name,
 				        title: req.body.questiontitle,
 				        text: req.body.questiontext,
 				        question_id: "question_" + questionidvalue,
-				        comments: []
+				        comments: tempComments
 			   	 	}
-
-					db.insertOne(`FAQS`, faq, function(result){
-							res.redirect('/FAQ');
-					});
+				   	 	db.insertOne(`FAQS`, faq, function(result){
+								res.redirect('/FAQ');
+						});
+	  				})
 			});
 		});
 	},
@@ -65,6 +75,7 @@ const controller = {
 	  	{
 	  		var question = 
 	  		{
+	  			OPpath: result.path,
 	  			name: result.name,
 				title: result.title,
 				text: result.text,
@@ -74,12 +85,16 @@ const controller = {
 	  	});
 	}
 
-	//partial code
-	// app.post('/submitcomment', function(req,res)
-	// {
-	// 	var question_id = req.query.question_id
-	// 	db.updateOne('FAQS', {question_id: question_id}, {$set})
-	// })
+	submitcomment: function(req,res)
+	{
+		var question_id = req.query.question_id;
+		db.findOne('FAQs', {question_id:question_id}, function(result)
+		{
+			db.updateOne('FAQs', {question_id:question_id}, 
+				{ $set: {comments.name} 
+				)
+		})
+	}
 }
 
 module.exports = controller;

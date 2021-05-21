@@ -44,14 +44,14 @@ const controller = {
 					contact: result2.contact,
 					salary: result2.salary,
 					certvalid: result2.certvalid,
-					adoptcount: result2.homeowner.length,
+					adoptcount: adoptArray.length,
 					rescuecount: result2.rescuer.length,
 					path: result2.path,
 					questions: questionsArray,
 					posts: postsArray,
 					adopts: adoptArray,
-					certificate: result2.certificate
-
+					certificate: result2.certificate,
+					bgpath: result2.bgpath
 				}
 			});
 		})
@@ -72,13 +72,13 @@ const controller = {
 
 
 	deletepost: function(req, res){
-		db.deleteOne(`adoption_posts`, {post_id: req.query.post});
+		db.deleteOne(`adoption_posts`, {post_id: req.query.postno});
 
 		res.redirect('/userpage');
 	},
 
 	deletequestion: function(req, res){
-		db.deleteOne(`FAQS`, {question_id: req.query.question});
+		db.deleteOne(`FAQS`, {question_id: req.query.questionno});
 
 		res.redirect('/userpage');
 	},

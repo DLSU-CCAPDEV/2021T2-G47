@@ -7,46 +7,82 @@ const controller = {
 		var searchText = req.query.text;
 
 		if(radioRes == 'profileName'){
-			db.findMany(`users`, {name: {$regex: ".*" + searchText + ".*"}}, {
+
+			db.findMany(`users`, {name: {$regex: ".*" + searchText + ".*", $options: 'i'}}, {
 				user_id: 1,
 				name: 1,
 				bio: 1,
 				path: 1
 				}, function(result){
-					usersArray = result;
-					console.log('ASDHFGASKDJHFDresult ' + usersArray[0].name);
-					console.log('user: ' + req.session.name);
 
-					db.findMany(`adoption_posts`, {poster_email: req.session.email, adoption_status: false}, {
-						name: 1,
-						path: 1,
-					}, function(result){num_user_posts = result.length;})
+					console.log(`CHECKHERE` + result + 'WHUT');
 
-					db.findMany(`adoption_posts`, {owner: req.session.email}, {
-						name: 1,
-						path: 1,
-					}, function(result){num_adopted = result.length;})
+					if(result != undefined){
+					
+						usersArray = result;
+						console.log('user: ' + req.session.name);
 
-					db.countDocuments('users', function(result3){
-						db.findOne(`users`, {email: req.session.email}, function(result2){
-							res.render(`UserResults`, {
-								u: {
-									currentUser: result2.name,
-									user_id: result2.user_id,
-									user_photo: result2.path,
-									num_user_posts: num_user_posts,
-									num_adopted: num_adopted,
-									users: result,
-									num_posts: result.length,
-									num_users: result3
-								}
+						db.findMany(`adoption_posts`, {poster_email: req.session.email, adoption_status: false}, {
+							name: 1,
+							path: 1,
+						}, function(result){num_user_posts = result.length;})
+
+						db.findMany(`adoption_posts`, {owner: req.session.email}, {
+							name: 1,
+							path: 1,
+						}, function(result){num_adopted = result.length;})
+
+						db.countDocuments('users', function(result3){
+							db.findOne(`users`, {email: req.session.email}, function(result2){
+								res.render(`UserResults`, {
+									u: {
+										currentUser: result2.name,
+										user_id: result2.user_id,
+										user_photo: result2.path,
+										num_user_posts: num_user_posts,
+										num_adopted: num_adopted,
+										users: result,
+										num_posts: result.length,
+										num_users: result3
+									}
+								})
 							})
-						})
-					});		
+						});	
+					}
+					else{
+
+						console.log('user: ' + req.session.name);
+
+						db.findMany(`adoption_posts`, {poster_email: req.session.email, adoption_status: false}, {
+							name: 1,
+							path: 1,
+						}, function(result){num_user_posts = result.length;})
+
+						db.findMany(`adoption_posts`, {owner: req.session.email}, {
+							name: 1,
+							path: 1,
+						}, function(result){num_adopted = result.length;})
+
+						db.countDocuments('users', function(result3){
+							db.findOne(`users`, {email: req.session.email}, function(result2){
+								res.render(`UserResults`, {
+									u: {
+										currentUser: result2.name,
+										user_id: result2.user_id,
+										user_photo: result2.path,
+										num_user_posts: num_user_posts,
+										num_adopted: num_adopted,
+										num_posts: result.length,
+										num_users: result3
+									}
+								})
+							})
+						});						
+					}	
 			})
 		}
 		else if(radioRes == 'petName'){
-			db.findMany(`adoption_posts`, {name: {$regex: ".*" + searchText + ".*"}}, {
+			db.findMany(`adoption_posts`, {name: {$regex: ".*" + searchText + ".*", $options: 'i'}}, {
 				poster: 1,
 				path: 1,
 				remarks: 1,
@@ -90,7 +126,7 @@ const controller = {
 			})
 		}
 		else if(radioRes == 'petBreed'){
-			db.findMany(`adoption_posts`, {breed: {$regex: ".*" + searchText + ",*"}}, {
+			db.findMany(`adoption_posts`, {breed: {$regex: ".*" + searchText + ".*", $options: 'i'}}, {
 			poster: 1,
 			path: 1,
 			remarks: 1,
@@ -134,7 +170,7 @@ const controller = {
 			})
 		}
 		else if(radioRes == 'faqTitle'){
-			db.findOne('FAQS', {title: searchText}, function(result){
+			db.findOne('FAQS', {title: searchText, $options: 'i'}, function(result){
 		  		var question = 
 		  		{
 		  			name: result.name,
@@ -148,6 +184,15 @@ const controller = {
 
 		console.log(`RADIORES =` + radioRes);
 		console.log(`checksearchEntry = ` + req.query.text);
+	},
+
+	logout: function(req, res){
+		req.session.destroy(function(err){
+			if(err) throw err;
+			else console.log('Logout Successful.');
+
+			res.redirect('/');
+		});
 	}
 }
 

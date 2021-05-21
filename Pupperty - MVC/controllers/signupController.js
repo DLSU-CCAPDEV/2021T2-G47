@@ -54,7 +54,8 @@ const controller = {
 									homeowner: [],
 									rescuer: [],
 									user_id: "user_" + useridvalue,
-									path: "user.png"
+									path: "user.png",
+									bgpath: "images/backgrounds/bg1.jpg"
 
 								}
 								console.log('Email: ' + email + ' successfully registered with Name: ' + person.name);

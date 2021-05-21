@@ -82,5 +82,6 @@ app.get(`/submitcomment`, faqController.submitcomment);
 
 //Navbar Controllers
 app.get(`/checksearch`, navbarController.checksearch);
+app.get(`/logout`, navbarController.logout);
 
 module.exports = app;

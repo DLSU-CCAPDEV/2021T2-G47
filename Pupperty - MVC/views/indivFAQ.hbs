@@ -7,19 +7,31 @@
 <body>
 	{{> navbar}}
 
-	<div class = container>
-		<div id = userdeets>
-			<div style = "background-image: url(uploads/{{path}});" class = "OPpicture">
-			<p> {{name}} </p> 
-		</div>
+	<div class = container1>
+			<div id = profile>
+				<a href = "/userpage"><div style = "background-image: url(uploads/{{path}});" class = "OPpicture"></div></a> <br>
+				<p id = profilename> {{name}} </p>
+			</div>
 
-		<div id = questiontitle>
-			<p> {{title}}</p>
+			<div id = addQuestion>
+				<div class = container2>
+					<div id="qtitle">
+						<p id="title"> {{title}} </p><br>
+					</div>
+					<div id="question">
+						<p id="questiontext"> {{text}} </p>
+					</div>
+					<div class = "container1">
+						<div id = "userprofile"> 
+							<div style = "background-image: url(uploads/{{comment.COPpath}});" id = "replypic"></div> <br>
+							<p id = "replyname"> {{comment.comment_name}} </p>
+						</div>
+						<div id= "reply">
+							<p id = "replytext"> {{comment.comment_text}} </p>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
-
-		<div id = question>
-			<p> {{text}} </p>
-		</div>
-	</div>
 </body>
 </html>

@@ -1,4 +1,6 @@
 const db = require(`../models/db.js`);
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 const controller = {
 
@@ -66,8 +68,19 @@ const controller = {
 	},
 
 	deleteuser: function(req, res){
+
+		db.deleteMany(`adoption_posts`, {poster_email: req.session.email, adoption_status: false});
+
+		db.deleteMany(`FAQS`, {author: req.session.email});
+
 		db.deleteOne(`users`, {email: req.session.email});
-		res.redirect(`/`);
+
+		req.session.destroy(function(err){
+			if(err) throw err;
+			else console.log('Logout Successful.');
+
+			res.redirect('/');
+		});
 	},
 
 
@@ -138,6 +151,14 @@ const controller = {
 				postid : result.post_id
 				}
 			});	
+		});
+	},
+
+	checkpassword: function(req, res){
+		db.findOne(`users`, {email: req.session.email}, function(result){	
+			bcrypt.compare(req.query.pass, result.password, function(err, equal) {
+                res.send(equal);
+            });
 		});
 	}
 }

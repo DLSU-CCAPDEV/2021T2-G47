@@ -5,7 +5,10 @@ const saltRounds = 10;
 const controller = {
 
 	getIndex: function(req, res){
-		res.render(`Login`);
+		if(req.session.email)
+			res.redirect('/homepage');
+		else
+			res.render(`Login`);
 	},
 
 	loginCheck: function(req, res){

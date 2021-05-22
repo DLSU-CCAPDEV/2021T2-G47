@@ -170,15 +170,22 @@ const controller = {
 			})
 		}
 		else if(radioRes == 'faqTitle'){
-			db.findOne('FAQS', {title: searchText, $options: 'i'}, function(result){
-		  		var question = 
-		  		{
-		  			name: result.name,
-					title: result.title,
-					text: result.text,
-		  		}
 
-		  		res.render('indivFAQ', question);
+			db.findMany('FAQS', {title: {$regex: ".*" + searchText + ".*", $options: 'i'}},
+		  	{
+		  		OPpath: 1,
+		  		author: 1,
+		  		name: 1,
+		  		title:1, 
+		  		text:1
+		  	}, function(result){
+		  		db.findOne(`users`, {email: req.session.email}, function(result2){
+			  		 res.render('FAQ', {
+			  		 	q: result,
+			  		 	name: req.session.name,
+			  		 	path: result2.path
+			  		 });
+			  	});
 		  	});
 		}
 

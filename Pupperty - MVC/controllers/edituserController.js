@@ -12,15 +12,15 @@ const controller = {
 			
 			res.render(`edituserpage`, {
 				prev: {
-					name: "<input type = 'text' id = 'usernameform' name = 'usernameform' value = '" + result.name + "' size = '58'>",
+					name: "<input type = 'text' id = 'usernameform' name = 'usernameform' value = '" + result.name + "' size = '58' style = 'max-width: 99%; width: 200%;'>",
 					bio: result.bio,
-					address: "<input type = 'text' id = 'addressform' name = 'addressform' value = '" + result.address + "' size = '58'>",
+					address: "<input type = 'text' id = 'addressform' name = 'addressform' value = '" + result.address + "' size = '58' style = 'max-width: 99%; width: 200%;'>",
 					contact: "<input type = 'number' id = 'numberform' name = 'numberform' value = '" + result.contact + "' size = '58'>",
 					salary: "<input type = 'number' id = 'moneyform' name = 'moneyform' value = '" + result.salary + "' size = '58'>",
 					image: result.path,
 					bgpath: result.bgpath
 				}
-			})
+			});
 		})	
 	},
 

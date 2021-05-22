@@ -23,14 +23,14 @@
 				</div>
 			</a>
 		</div>
-		<div style = "display: flex; justify-content: space-around; background-color: #DBBC8E; border: 5px solid #40393E; padding-right: 25px;">
+		<div id = "rightside">
 			<div id = bodyright>
 				<p style = "text-align: center; font-size: 30px; ">Account Details</p>
 				<form action = "/submitedit" method = "post" enctype="multipart/form-data">
 					<label for = "usernameform" style = "font-size: 20px;">Name: </label><br> 
 					{{{prev.name}}}<br><br>
 					<label for = "bioform" style = "font-size: 20px;">Bio: </label><br> 
-					<textarea type = 'text' id = 'bioform' name = 'bioform' style = ' resize: none; width: 437px; height: 100px' maxlength='200' rows = '4' cols = '40'>{{prev.bio}}</textarea><br><br>
+					<textarea type = 'text' id = 'bioform' name = 'bioform' style = ' resize: none; max-width: 99%; width: 200%; height: 100px' maxlength='200' rows = '4'>{{prev.bio}}</textarea><br><br>
 					<label for = "addressform" style = "font-size: 20px;">Address: </label><br> 
 					{{{prev.address}}}<br><br>
 					<label for = "numberform" style = "font-size: 20px;">Contact Number: </label><br> 
@@ -44,44 +44,44 @@
 			<div id = backgrounds>
 				<p style = "text-align: center; font-size: 30px">Mini-Backgrounds</p>
 				<div class = backgroundrow>
-					<label>
+					<label class = "labelclass">
 						<input type = "radio" name = "bg" value = "1">
 						<img src = "images/backgrounds/bg1.jpg" class = backgroundunit>
 						<!-- <div class = backgroundunit style = "background-image: url(images/backgrounds/bg1.jpg)"></div> -->
 					</label>
-					<label>
+					<label class = "labelclass">
 						<input type = "radio" name = "bg" value = "2">
 						<img src = "images/backgrounds/bg2.jpg" class = backgroundunit>
 					</label>
-					<label>
+					<label class = "labelclass">
 						<input type = "radio" name = "bg" value = "3">
 						<img src = "images/backgrounds/bg3.jpg" class = backgroundunit>
 					</label>				
 				</div>
 				<div class = backgroundrow>
-					<label>
+					<label class = "labelclass">
 						<input type = "radio" name = "bg" value = "4">
 						<img src = "images/backgrounds/bg4.jpg" class = backgroundunit>
 					</label>
-					<label>
+					<label class = "labelclass">
 						<input type = "radio" name = "bg" value = "5">
 						<img src = "images/backgrounds/bg5.jpg" class = backgroundunit>
 					</label>
-					<label>
+					<label class = "labelclass">
 						<input type = "radio" name = "bg" value = "6">
 						<img src = "images/backgrounds/bg6.jpg" class = backgroundunit>
 					</label>
 				</div>
 				<div class = backgroundrow>
-					<label>
+					<label class = "labelclass">
 						<input type = "radio" name = "bg" value = "7">
 						<img src = "images/backgrounds/bg7.jpg" class = backgroundunit>
 					</label>
-					<label>
+					<label class = "labelclass">
 						<input type = "radio" name = "bg" value = "8">
 						<img src = "images/backgrounds/bg8.jpg" class = backgroundunit>
 					</label>
-					<label>
+					<label class = "labelclass">
 						<input type = "radio" name = "bg" value = "9">
 						<img src = "images/backgrounds/bg9.jpg" class = backgroundunit>
 					</label>				

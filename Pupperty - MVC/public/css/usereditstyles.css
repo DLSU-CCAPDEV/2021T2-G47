@@ -248,38 +248,46 @@ small{
 #container{
 	display: flex;
 	padding: 100px;
-	justify-content: space-around;
+	width: 100%;
+	height: 810px;
+}
+
+#rightside{
+	display: flex; 
+	background-color: #DBBC8E; 
+	border: 5px solid #40393E; 
+	padding-right: 25px;
+	height: 75%;
+	width: 50%;
 }
 
 #bodyleft{
-	background-image: url(images/backgrounds/bg2.jpg);
 	background-size: cover;
-	height: 600px;
-	width: 400px;
+	height: 75%;
+	width: 20%;
 	border-radius: 50px;
+	margin-right: 100px;
+	margin-left: 100px;
 }
 
 #bodyright{
-	height: 575px;
-	width: 450px;
+	height: 50%;
+	width: 50%;
 	padding: 25px;
 	padding-top: 0px;
+	margin-right: 10px;
 }
 
 #picture{
 	margin: auto;
 	position: relative;
 	top: 120px;
-	height: 300px;
-	width: 300px;
+	height: 50%;
+	width: 75%;
 	overflow: hidden;
 	border-radius: 50%;
 	background-size: cover;
 	background-position: center;
-}
-
-#picture:hover{
-	opacity: 0.8;
 }
 
 #name{
@@ -296,27 +304,35 @@ small{
 }
 
 #backgrounds{
+	margin-top: 10px;
+	margin-left: 10px;
 	background-color: #A9C8C0;
 	padding-left: 10px;
 	padding-right: 10px;
-	width: auto;
-	height: 570px;
-	position: relative;
-	top: 25px;
+	height: 95%;
+	width: 50%;
 	border-top-left-radius: 50px;
 	border-top-right-radius: 50px;
 }
 
 .backgroundrow{
 	display: flex;
-	justify-content: space-around;
+	width: 100%;
+	height: 25%;
+	margin: 0px;
+	padding-bottom: 10px;
 }
 
 .backgroundunit{
 	border: 1px solid;
-	height: 150px;
-	width: 150px;
+	height: 100%;
+	width: 100%;
 	background-size: auto;
+}
+
+.labelclass{
+	height: 100%;
+	width: 33%;
 }
 
 .backgroundunit:hover{

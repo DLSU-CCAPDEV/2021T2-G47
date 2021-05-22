@@ -266,6 +266,7 @@ small{
 .container2{
 	display: flex;
 	justify-content: center;
+	padding-bottom: 30px;
 }
 
 #picofdog{

@@ -12,7 +12,8 @@ const controller = {
 			sex:  req.body.sex,
 			size: req.body.size,
 			age: req.body.age,
-			remarks: req.body.remarks,
+			medical: req.body.medical,
+			remarks: req.body.remarks
 		}});
 
 		if(req.file != undefined){

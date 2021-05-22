@@ -148,7 +148,8 @@ const controller = {
 				size: hbsize,
 				age: result.age,
 				remarks: result.remarks,
-				postid : result.post_id
+				postid : result.post_id,
+				medical: result.medical
 				}
 			});	
 		});

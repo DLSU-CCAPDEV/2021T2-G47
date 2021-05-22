@@ -88,7 +88,8 @@ const controller = {
 					posteremail: result.poster_email,
 					poster_address: result.poster_address,
 					poster_id: result.poster_id,
-					poster_picture: result.poster_picture
+					poster_picture: result.poster_picture,
+					medHistory: result.medical
 				}
 			});
 		})

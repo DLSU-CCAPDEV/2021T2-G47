@@ -230,6 +230,7 @@ small{
 	display: flex;
 	flex-direction: column;
 	background-color: #faebeb;
+	padding-bottom: 10px;
 }
 
 .entries{
@@ -265,8 +266,8 @@ small{
 
 #picofdog{
 	margin-top :10px;
-	width: 800px;
-	height: 600px;
+	max-width: 800px;
+	max-height: 694px;
 }
 
 #remarksform{

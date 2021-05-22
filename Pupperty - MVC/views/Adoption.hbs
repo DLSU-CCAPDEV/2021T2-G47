@@ -20,14 +20,24 @@
 						<div class="text1"><span class="category">Sex: </span> {{p.sex}}</div>
 						<div class="text1"><span class="category">Size: </span> {{p.size}}</div>
 						<div class="text1"><span class="category">Age: </span> {{p.age}}</div>
+						<div class="text1"><span class="category">Medical History: </span> {{p.medHistory}}</div>
 					</div>
 
 					<div class="content_text2 left">
 						<div class="text2">Remarks</div>
 						<p>{{p.remarks}}</p>
 						<div class="text2" id="contact_gap">Poster's Contact Information</div>
-						<p class="spacing">+63 {{p.posternumber}}<br>
-						{{p.posteremail}}</p>
+						<div class="contact_info">
+							<form method = "get" action = "/profile">
+								<button class="user_icon" name="username" value="{{p.poster_id}}">
+									<div class="display_pics" style = "background-image: url(uploads/{{p.poster_picture}});">
+									</div>
+								</button>
+							</form>
+							<p class="spacing">{{p.posternumber}}<br>
+							{{p.posteremail}}<br>
+							{{p.poster_address}}</p>
+						</div>
 					</div>
 
 				</div>
@@ -38,7 +48,7 @@
 			<a target="_blank" class="buttonadopted">Adopted</a>
 		{{else}}
 			<form method = "get" action = "/adoptdog">
-				<button class = "button center" name="postID" type="submit" value="{{p.postid}}">Adopt Dog</button>
+				<button class = "button_submit center" name="postID" type="submit" value="{{p.postid}}">Adopt Dog</button>
 			</form>
 		{{/if}}
 	</div>

@@ -85,7 +85,10 @@ const controller = {
 					path: result.path,
 					postid: result.post_id,
 					posternumber: result.poster_contact,
-					posteremail: result.poster_email
+					posteremail: result.poster_email,
+					poster_address: result.poster_address,
+					poster_id: result.poster_id,
+					poster_picture: result.poster_picture
 				}
 			});
 		})

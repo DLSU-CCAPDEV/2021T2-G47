@@ -83,7 +83,9 @@ const controller = {
 	  				path: result.OPpath,
 		  			name: result.name,
 					title: result.title,
-					text: result.text
+					text: result.text,
+					comment: result.comment,
+					question_id: result.question_id,	
 	  			}	
 	  		);
 	  	});

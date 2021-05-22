@@ -59,6 +59,10 @@ a:hover{
 	width: 20%;
 }
 
+#navAboutpage{
+	width: 16%;
+}
+
 .navbaritems:hover {
     -webkit-filter: brightness(70%);
     -webkit-transition: all 1s ease;
@@ -109,6 +113,7 @@ a:hover{
 
 #formbox{
 	margin-left: 12px;
+	display: flex;
 }
 
 #filter_options{

@@ -5,11 +5,14 @@
 		<script src="https://code.jquery.com/jquery-3.4.1.min.js" type="text/javascript"></script>
 		<script type="text/javascript">
 			$(document).ready(function () {
-				function confirmDeleteUser(){
-					if(confirm("Are you sure you want to delete your account?")){
-						window.open("http://localhost:3000/deleteuser", "_self");
+
+				$('#deleteaccount').click(function(){
+					if(confirm(`Are you sure you want to delete your account?`)){
+						if(confirm(`Are you completely sure? This action cannot be undone.`)){
+							$.get(`deleteuser`, function(result){window.open("http://localhost:3000/deleteuser", "_self");})
+						}
 					}
-				};
+				});
 
 				$('.deletepost').click(function(){
 
@@ -38,6 +41,27 @@
 
 						postDiv.remove();
 						$.get(`/deletequestion`, {questionno: questionno}, function(result){});
+					}
+				});
+
+				$('#editaccount').click(function(){
+
+					var pass = prompt("Please enter your password.");
+					// var enter = false;
+
+					if(pass != null){
+						$.get(`/checkpassword`, {pass: pass}, function(result){
+							if(result){
+								console.log('1');
+								$.get(`/edituser`, function(result){
+									window.open("http://localhost:3000/edituser", "_self");
+								});
+							}
+							else{
+								console.log('3');
+								alert(`Incorrect password.`);
+							}
+						});
 					}
 				});
 			})
@@ -78,15 +102,15 @@
 						</form>
 					</div>
 					<div style = "display: flex; justify-content: space-around; padding-bottom: 20px;">
-						<a href = "/edituser"><div id = detailscontainer><button style = "font-size: 15px">Edit Account</button></div></a>
+						<div id = detailscontainer><button id = "editaccount" style = "font-size: 15px">Edit Account</button></div>
 						<div id = detailscontainer><a href = "/"><button style = "font-size: 15px;">Log Out</button></a></div>
-						<div id = detailscontainer><button onclick = "confirmDeleteUser()" style = "font-size: 15px; background-color: #c40808;">Delete Account</button></div>
+						<div id = detailscontainer><button id = "deleteaccount" style = "font-size: 15px; background-color: #c40808;">Delete Account</button></div>
 					</div>
 					
 				</div>
 			</div>
 
-			<div>
+			<div style = "width: 100%;">
 				<div id = userinfo  style = "background-color: #f1ce76; padding-top: 30px; padding-bottom: 15px;" >
 					<div style = "display: flex; justify-content: center; height: 120px;">
 						<img src = "images/doghouse.png" style = "height: 100px;">

@@ -32,6 +32,7 @@ const controller = {
 							poster_contact: result2.contact,
 							poster_picture: result2.path,
 							poster_id: result2.user_id,
+							poster_address: result2.address,
 							name: req.body.name,
 							breed: req.body.breed,
 							sex: req.body.sex,

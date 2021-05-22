@@ -88,15 +88,17 @@
 				<div class="action_bar">
 					<p class="action_text" id="{{this.post_id}}_upvotes">{{this.upvotes}}</p>
 						<button class="bottombuttons_upvotes" name="postID" value="{{this.post_id}}">
-							<img src="images/Browse/up_arrow.png" class="action_icons" name="test">
+							<img src="images/Browse/up_arrow.png" class="action_icons up" name="test">
 						</button>
 					<p class="action_text">Upvote |</p>
 					<form method = "get" action = "/adoption">
 						<button class="bottombuttons_adopt" name="postID" value="{{this.post_id}}">
+							<div class="single_obj">
 							<img src="images/Browse/dog_seating.png" class="action_icons">
+							<p class="action_text">Adopt Dog</p>
+							</div>
 						</button>
 					</form>
-					<p class="action_text">Adopt Dog</p>
 				</div>
 			</div>
 			{{/each}}

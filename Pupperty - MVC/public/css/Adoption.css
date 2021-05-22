@@ -62,6 +62,10 @@ body{
 	width: 20%;
 }
 
+#navAboutpage{
+	width: 16%;
+}
+
 .navbaritems:hover {
     -webkit-filter: brightness(70%);
     -webkit-transition: all 1s ease;
@@ -112,6 +116,7 @@ body{
 
 #formbox{
 	margin-left: 12px;
+	display: flex;
 }
 
 #filter_options{
@@ -357,7 +362,7 @@ small{
 	padding: 25px;
 }
 
-.button{
+.button_submit{
 	margin: auto;
 	margin-top: 60px;
 	font-size: 70px;
@@ -374,7 +379,7 @@ small{
 	padding: 25px;
 }
 
-.button:hover{
+.button_submit:hover{
 	background-color: #b7dcf4;
 	color: black;
 	border-color: #fafcfc;
@@ -395,4 +400,35 @@ small{
 	font-size: 40px;
 	font-weight: bold;
 	padding: 25px;
+}
+
+.contact_info{
+	display:flex;
+	justify-content: left;
+}
+
+
+.user_icon{
+	cursor: pointer; 
+	border-radius: 100%; 
+	border: none;
+}
+
+.user_icon:hover{
+    -webkit-filter: brightness(70%);
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    -o-transition: all 1s ease;
+    -ms-transition: all 1s ease;
+    transition: all 1s ease;
+}
+
+.display_pics{
+	position: relative;
+	height: 80px;
+	width: 80px;
+	border-radius: 80%;
+	border: 5px solid #f7bc57;
+	background-position: center;
+	background-size: cover;
 }

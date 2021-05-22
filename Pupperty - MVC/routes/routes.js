@@ -48,6 +48,7 @@ app.get(`/deletepost`, userpageController.deletepost);
 app.get(`/deletequestion`, userpageController.deletequestion);
 app.get(`/editquestion`, userpageController.editquestion);
 app.get(`/editpost`, userpageController.editpost);
+app.get(`/checkpassword`, userpageController.checkpassword);
 
 //Homepage Controllers
 app.get(`/homepage`, homepageController.homepage);

@@ -11,7 +11,9 @@ const controller = {
 		  		author: 1,
 		  		name: 1,
 		  		title:1, 
-		  		text:1
+		  		text:1,
+		  		question_id:1,
+		  		comment: 1
 		  	}, function(result){
 		  		db.findOne(`users`, {email: req.session.email}, function(result2){
 			  		 res.render('FAQ', {
@@ -27,13 +29,14 @@ const controller = {
 
 		var questionidstring;
 		var questionidvalue;
-		var tempComments = 
+		var commentObj = 
 		{
-			commentPath: "",
-			name: "",
-			commentText: ""
+			COPpath: "",
+			comment_name: "",
+			comment_text:"",
+			status: "Submit Comment",
+			answered: false
 		}
-
 		db.findMany('FAQS', null, {
 				question_id: 1
 			}, 
@@ -59,7 +62,7 @@ const controller = {
 				        title: req.body.questiontitle,
 				        text: req.body.questiontext,
 				        question_id: "question_" + questionidvalue,
-				        comments: tempComments
+				        comment: commentObj
 			   	 	}
 				   	 	db.insertOne(`FAQS`, faq, function(result){
 								res.redirect('/FAQ');
@@ -71,28 +74,50 @@ const controller = {
 
 	indivFAQ: function(req, res)
 	{
-	  	db.findOne('FAQ', {email: req.session.email}, function(result)
+		var question_id = req.query.question_id;
+	  	db.findOne('FAQS', {question_id:question_id}, function(result)
 	  	{
-	  		var question = 
-	  		{
-	  			OPpath: result.path,
-	  			name: result.name,
-				title: result.title,
-				text: result.text,
-	  		}
-	  		res.render('/indivFAQ', question);
+	  	
+	  		res.render('indivFAQ', 
+	  			{
+	  				path: result.OPpath,
+		  			name: result.name,
+					title: result.title,
+					text: result.text
+	  			}	
+	  		);
 	  	});
 	},
 
 	submitcomment: function(req,res)
 	{
 		var question_id = req.query.question_id;
-		db.findOne('FAQs', {question_id:question_id}, function(result)
+		var comment = req.query.comment_content;
+
+		db.findOne('users', {email: req.session.email}, function(result)
 		{
-			db.updateOne('FAQs', {question_id:question_id}, 
-				{ $set: {name:name} 
-				})
-		})
+			var commentObj = 
+			{
+				COPpath : result.path,
+				comment_name: result.name,
+				comment_text: comment,
+				status: "Edit Comment",
+				answered: true
+			}
+			console.log("Question ID: " + question_id);
+			console.log("Comment: " + comment);
+			console.log("Path: " + commentObj.COPpath);
+			console.log("Comment Name: " + commentObj.comment_name);
+			console.log("Comment Text: " + commentObj.comment_text);
+ 
+
+			db.updateOne('FAQS', {question_id: question_id}, 
+			{
+				$set : {comment: commentObj}  
+			});
+		});
+
+		res.redirect('/FAQ');
 	}
 }
 

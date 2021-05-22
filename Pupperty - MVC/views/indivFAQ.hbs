@@ -22,6 +22,7 @@
 						<p id="questiontext"> {{text}} </p>
 					</div>
 					<div class = "container1">
+						{{#if comment.answered}}
 						<div id = "userprofile"> 
 							<div style = "background-image: url(uploads/{{comment.COPpath}});" id = "replypic"></div> <br>
 							<p id = "replyname"> {{comment.comment_name}} </p>
@@ -29,6 +30,13 @@
 						<div id= "reply">
 							<p id = "replytext"> {{comment.comment_text}} </p>
 						</div>
+						{{/if}}
+					</div>
+					<div id = submitcomment>
+						<form action = "/submitcomment">
+								<textarea name="comment_content"> </textarea> <br>
+								<button type="submit" id="commentB" value= "{{this.question_id}}" name="question_id"> {{comment.status}} </button>
+						</form>
 					</div>
 				</div>
 			</div>

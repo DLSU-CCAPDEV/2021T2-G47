@@ -1,6 +1,6 @@
 body{
 	font-family: georgia;
-	background-image: url("images/bg.jpg");
+	margin: 0px;
 }
 
 .navbarlogos{
@@ -47,6 +47,11 @@ body{
 
 #navUserpage{
 	width: 20%;
+	background-color: #f7bc57;
+}
+
+#navAboutpage{
+	width: 16%;
 }
 
 .navbaritems:hover {
@@ -99,6 +104,7 @@ body{
 
 #formbox{
 	margin-left: 12px;
+	display: flex;
 }
 
 #filter_options{

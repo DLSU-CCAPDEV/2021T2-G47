@@ -69,6 +69,10 @@ button:hover{
 	background-color: #f7bc57;
 }
 
+#navAboutpage{
+	width: 16%;
+}
+
 .navbaritems:hover {
     -webkit-filter: brightness(70%);
     -webkit-transition: all 1s ease;
@@ -119,6 +123,7 @@ button:hover{
 
 #formbox{
 	margin-left: 12px;
+	display: flex;
 }
 
 #filter_options{
@@ -241,7 +246,7 @@ small{
 }
 
 #userdetails{
-	margin-top: 5px;
+	margin: 0px;
 	padding-top: 50px;
 	padding-bottom: 50px;
 	padding-left: 100px;
@@ -270,8 +275,8 @@ small{
 #useravatar{
 	position: relative;
 	left: 20px;
-	height: 300px;
-	width: 300px;
+	height: 21%;
+	width: 90%;
 	overflow: hidden;
 	border-radius: 50%;
 	background-size: cover; 
@@ -283,34 +288,26 @@ small{
 	text-align: center;
 	padding-top: 15px;
 	padding-bottom: 15px;
-	width: 300px;
-	position: relative;
-	left: 10px;
+	width: 100%;
 }
 
 #bio{
 	font-size: 20px;
 	text-align: center;
 	padding: 10px;
-	width: 300px;
+	width: 93%;
 	border: 2px solid;
 }
 
 #detailscontainer{
 	position: relative;
 	padding-top: 20px;
-	max-width: 300px;
+	max-width: 93%;
 	font-size: 18px;
 	justify-content: center;
 	text-align: center;
 	display: flex;
-
 }
-
-#profpic{
-	margin: -75px 0 0 -100px;
-}
-
 
 #userinfo{
 	width: 1250px; 

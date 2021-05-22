@@ -43,6 +43,7 @@ body{
 
 #navBrowse{
 	width: 20%;
+	background-color: #f7bc57;
 }
 
 #navFAQ{
@@ -51,6 +52,10 @@ body{
 
 #navUserpage{
 	width: 20%;
+}
+
+#navAboutpage{
+	width: 16%;
 }
 
 .navbaritems:hover {
@@ -103,6 +108,7 @@ body{
 
 #formbox{
 	margin-left: 12px;
+	display: flex;
 }
 
 #filter_options{

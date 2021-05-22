@@ -429,7 +429,17 @@ small{
 	font-size:30px;
 	border-bottom: .5px,black;
 	margin-top: 15px;
-	font-weight: bold;
+}
+
+.indivFAQ:hover
+{
+	-webkit-filter: brightness(99%);
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    -o-transition: all 1s ease;
+    -ms-transition: all 1s ease;
+    transition: all 1s ease;
+    text-decoration: underline;
 }
 
 .question{

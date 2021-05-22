@@ -368,8 +368,8 @@ small{
 	border: 2px black solid;
 	margin-bottom: 10px;
 	border-radius: 20px;
-	height: 100px;
-	width: 150px;
+	min-height: 100px;
+	min-width: 200px;
 }
 
 .reply{
@@ -415,4 +415,18 @@ small{
 	 margin: auto; 
 	 background-size: cover;
 	 border-radius: 50%;
+}
+
+.indivFAQ{
+	cursor: pointer; 
+	border-radius: 100%; 
+	border: none;
+	font-size:30px;
+	border-bottom: .5px,black;
+	margin-top: 15px;
+	font-weight: bold;
+}
+
+.question{
+	font-size: 20px;
 }

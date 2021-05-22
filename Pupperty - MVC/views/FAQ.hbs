@@ -38,11 +38,11 @@
 						<p class = username><a href = "userpage.html"></a> {{this.name}}</p>
 						</div>
 						<form method = "get" action = "/indivFAQ">
-						<button name="question_id" value="{{this.question_id}}">
+						<button class = "indivFAQ" name="question_id" value="{{this.question_id}}">
 							{{this.title}}
 						</button>
 						</form>
-						<p class = question> {{this.text}} </p>
+						<p style="font-size: 20px; margin-top:10px; border-bottom: 1px, black;"> {{this.text}} </p>
 						<div class = container2>
 							{{#if this.comment.answered}}
 							<div class = answers id=reply>

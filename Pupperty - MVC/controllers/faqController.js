@@ -27,7 +27,7 @@ const controller = {
 
 		var questionidstring;
 		var questionidvalue;
-		var tempComments [] = 
+		var tempComments = 
 		{
 			commentPath: "",
 			name: "",
@@ -80,10 +80,9 @@ const controller = {
 				title: result.title,
 				text: result.text,
 	  		}
-
 	  		res.render('/indivFAQ', question);
 	  	});
-	}
+	},
 
 	submitcomment: function(req,res)
 	{
@@ -91,8 +90,8 @@ const controller = {
 		db.findOne('FAQs', {question_id:question_id}, function(result)
 		{
 			db.updateOne('FAQs', {question_id:question_id}, 
-				{ $set: {comments.name} 
-				)
+				{ $set: {name:name} 
+				})
 		})
 	}
 }

@@ -7,6 +7,8 @@
 		$(document).ready(function () {
 		    $('#email').keyup(function () {
 		        var email = $('#email').val();
+		        var password = $('#password').val();
+		        var confirm_password = $('#confirm_password').val();
 
 		        $.post('/checkEmail', {email: email}, function (result) {
 
@@ -20,12 +22,21 @@
 			            }
 
 			            else {
-			                $('#email').css('background-color', 'rgb(183,220,244,0.15)');
-			                $('#error').text('');
-			                $('#submit').prop('disabled', false);
-			                $('#submit').css('cursor', 'pointer');
-			                $('#submit').css('border-color', '');
-			                $('#submit').css('color', '');
+			            	$('#email').css('background-color', 'rgb(183,220,244,0.15)');
+			            	if(password == confirm_password){
+				                $('#error').text('');
+				                $('#submit').prop('disabled', false);
+				                $('#submit').css('cursor', 'pointer');
+				                $('#submit').css('border-color', '');
+				                $('#submit').css('color', '');
+			            	}
+			                else{
+			                	$('#error').text('Password does not match');
+			                	$('#submit').prop('disabled', true);
+				                $('#submit').css('cursor', 'default');
+				                $('#submit').css('border-color', 'gray');
+				                $('#submit').css('color', 'gray');
+			                }
 			            }
 			    });
 			});
@@ -35,7 +46,6 @@
 		        var confirm_password = $('#confirm_password').val();
 
 	            if(password != confirm_password) {
-	                $('#confirm_password').css('background-color', 'rgb(239,141,141)');
 	                $('#error').text('Password does not match');
 	                $('#submit').prop('disabled', true);
 	                $('#submit').css('cursor', 'default');
@@ -44,12 +54,54 @@
 	            }
 
 	            else {
-	                $('#confirm_password').css('background-color', 'rgb(183,220,244,0.15)');
-	                $('#error').text('');
-	                $('#submit').prop('disabled', false);
-	                $('#submit').css('cursor', 'pointer');
-	                $('#submit').css('border-color', '');
-			        $('#submit').css('color', '');
+	            	$.post('/checkEmail', {email: email}, function (result) {
+	            		if(result != email){
+			                $('#error').text('');
+			                $('#submit').prop('disabled', false);
+			                $('#submit').css('cursor', 'pointer');
+			                $('#submit').css('border-color', '');
+					        $('#submit').css('color', '');
+	            		}
+	            		else{
+	            			$('#error').text('Email already exists in the database');
+	            			$('#submit').prop('disabled', true);
+			                $('#submit').css('cursor', 'default');
+			                $('#submit').css('border-color', 'gray');
+					        $('#submit').css('color', 'gray');
+		            		}
+	            	})
+	            }
+			});
+
+			$('#password').keyup(function () {
+		        var password = $('#password').val();
+		        var confirm_password = $('#confirm_password').val();
+
+	            if(password != confirm_password) {
+	                $('#error').text('Password does not match');
+	                $('#submit').prop('disabled', true);
+	                $('#submit').css('cursor', 'default');
+	                $('#submit').css('border-color', 'gray');
+			        $('#submit').css('color', 'gray');
+	            }
+
+	            else {
+	            	$.post('/checkEmail', {email: email}, function (result) {
+	            		if(result != email){
+			                $('#error').text('');
+			                $('#submit').prop('disabled', false);
+			                $('#submit').css('cursor', 'pointer');
+			                $('#submit').css('border-color', '');
+					        $('#submit').css('color', '');
+	            		}
+	            		else{
+	            			$('#error').text('Email already exists in the database');
+	            			$('#submit').prop('disabled', true);
+			                $('#submit').css('cursor', 'default');
+			                $('#submit').css('border-color', 'gray');
+					        $('#submit').css('color', 'gray');
+		            		}
+	            	})
 	            }
 			});
 		});

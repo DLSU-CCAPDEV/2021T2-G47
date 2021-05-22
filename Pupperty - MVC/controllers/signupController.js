@@ -1,4 +1,6 @@
 const db = require(`../models/db.js`);
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 const controller = {
 
@@ -38,31 +40,35 @@ const controller = {
 							//alert("Email already registered, please try logging in with your email.");
 							res.redirect(`/`);
 						} else{
-							var person = {
-								email: email,
-								password: password,
-								name: "user_" + useridvalue,
-								bio: "",
-								address: "",
-								contact: "",
-								salary: "",
-								certvalid: "",
-								homeowner: [],
-								rescuer: [],
-								user_id: "user_" + useridvalue,
-								path: "user.png"
 
-							}
-							console.log('Email: ' + email + ' successfully registered with Name: ' + person.name);
-							req.session.email = person.email;
-							req.session.name = person.name;
+							bcrypt.hash(password, saltRounds, function(err, hash) {
+								var person = {
+									email: email,
+									password: hash,
+									name: "user_" + useridvalue,
+									bio: "",
+									address: "",
+									contact: "",
+									salary: "",
+									certvalid: "",
+									homeowner: [],
+									rescuer: [],
+									user_id: "user_" + useridvalue,
+									path: "user.png",
+									bgpath: "images/backgrounds/bg1.jpg"
 
-							
-							console.log('SESSION Email: ' + req.session.email + ' successfully registered with SESSION Name: ' + req.session.name);
+								}
+								console.log('Email: ' + email + ' successfully registered with Name: ' + person.name);
+								req.session.email = person.email;
+								req.session.name = person.name;
 
-							db.insertOne(`users`, person, function(result){
-								res.redirect('/edituser');
-							});
+								
+								console.log('SESSION Email: ' + req.session.email + ' successfully registered with SESSION Name: ' + req.session.name);
+
+								db.insertOne(`users`, person, function(result){
+									res.redirect('/edituser');
+								});
+							})
 							
 						}
 					})

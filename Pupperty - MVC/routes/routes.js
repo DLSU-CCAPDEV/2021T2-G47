@@ -78,8 +78,10 @@ app.get(`/aboutpage`, aboutpageController.aboutpage);
 app.get(`/FAQ`, faqController.FAQ);
 app.post(`/submitFAQ`, faqController.submitFAQ);
 app.get(`/indivFAQ`, faqController.indivFAQ);
+app.get(`/submitcomment`, faqController.submitcomment);
 
 //Navbar Controllers
 app.get(`/checksearch`, navbarController.checksearch);
+app.get(`/logout`, navbarController.logout);
 
 module.exports = app;

@@ -4,7 +4,7 @@
 	<title>Edit Post</title>
 	<link rel="stylesheet" type = "text/css" href="../css/EditPost.css">
 </head>
-<body>
+<body style = "background-image: url(images/bg.jpg);">
 	{{> navbar}}
 
 	<p id = addpostheader> Edit your Post </p>
@@ -24,7 +24,7 @@
 				<input name = "age" type="text" class = place value="{{d.age}}"><br><br>
 				<input type="file" name="image" accept="image/*"> <br><br>
 				<label> Remarks: </label> <br>
-				<textarea id = remarks name = "remarks">{{d.remarks}}</textarea><br><br>
+				<textarea rows = "5" cols = "50" name = "remarks">{{d.remarks}}</textarea><br><br>
 				<button name="edit" type="submit" value="{{d.postid}}">Submit Edits</button>
 			</form>
 		</div>

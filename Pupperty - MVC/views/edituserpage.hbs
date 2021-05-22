@@ -15,7 +15,7 @@
 	{{> navbar}}
 	
 	<div id = container>
-		<div id = bodyleft>
+		<div id = bodyleft style = "background-image: url('{{prev.bgpath}}');">
 			<div id = picture style = "background-image: url(uploads/{{prev.image}});"></div>
 			<a href = "/userpage">
 				<div id = "return">
@@ -40,25 +40,53 @@
 					<label for = "image" style = "font-size: 20px;">Change profile picture: </label><br> 
 					<input type="file" name="image" accept="image/*"><br><br>
 					<input type="submit" id = "submit" name = "savechanges" value="Save Changes">
-				</form>
 			</div>
 			<div id = backgrounds>
 				<p style = "text-align: center; font-size: 30px">Mini-Backgrounds</p>
 				<div class = backgroundrow>
-					<div class = backgroundunit style = "background-image: url(images/backgrounds/bg1.jpg)"></div>
-					<div class = backgroundunit style = "background-image: url(images/backgrounds/bg2.jpg)"></div>
-					<div class = backgroundunit style = "background-image: url(images/backgrounds/bg3.jpg)"></div>
+					<label>
+						<input type = "radio" name = "bg" value = "1">
+						<img src = "images/backgrounds/bg1.jpg" class = backgroundunit>
+						<!-- <div class = backgroundunit style = "background-image: url(images/backgrounds/bg1.jpg)"></div> -->
+					</label>
+					<label>
+						<input type = "radio" name = "bg" value = "2">
+						<img src = "images/backgrounds/bg2.jpg" class = backgroundunit>
+					</label>
+					<label>
+						<input type = "radio" name = "bg" value = "3">
+						<img src = "images/backgrounds/bg3.jpg" class = backgroundunit>
+					</label>				
 				</div>
 				<div class = backgroundrow>
-					<div class = backgroundunit style = "background-image: url(images/backgrounds/bg4.jpg)"></div>
-					<div class = backgroundunit style = "background-image: url(images/backgrounds/bg5.jpg)"></div>
-					<div class = backgroundunit style = "background-image: url(images/backgrounds/bg6.jpg)"></div>
+					<label>
+						<input type = "radio" name = "bg" value = "4">
+						<img src = "images/backgrounds/bg4.jpg" class = backgroundunit>
+					</label>
+					<label>
+						<input type = "radio" name = "bg" value = "5">
+						<img src = "images/backgrounds/bg5.jpg" class = backgroundunit>
+					</label>
+					<label>
+						<input type = "radio" name = "bg" value = "6">
+						<img src = "images/backgrounds/bg6.jpg" class = backgroundunit>
+					</label>
 				</div>
 				<div class = backgroundrow>
-					<div class = backgroundunit style = "background-image: url(images/backgrounds/bg7.jpg)"></div>
-					<div class = backgroundunit style = "background-image: url(images/backgrounds/bg8.jpg)"></div>
-					<div class = backgroundunit style = "background-image: url(images/backgrounds/bg9.jpg)"></div>
+					<label>
+						<input type = "radio" name = "bg" value = "7">
+						<img src = "images/backgrounds/bg7.jpg" class = backgroundunit>
+					</label>
+					<label>
+						<input type = "radio" name = "bg" value = "8">
+						<img src = "images/backgrounds/bg8.jpg" class = backgroundunit>
+					</label>
+					<label>
+						<input type = "radio" name = "bg" value = "9">
+						<img src = "images/backgrounds/bg9.jpg" class = backgroundunit>
+					</label>				
 				</div>
+				</form>
 			</div>
 		</div>
 	</div>

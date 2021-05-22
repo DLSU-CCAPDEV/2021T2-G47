@@ -63,7 +63,7 @@ body{
 	width: 20%;
 }
 
-#navAboutpage{
+#navAboutPage{
 	width: 16%;
 }
 
@@ -350,7 +350,7 @@ small{
 	cursor: pointer;
 }
 
-.action_icons:hover{
+.up:hover{
 	background-color: rgba(0,0,0,0.2);
 }
 
@@ -370,6 +370,8 @@ small{
 	padding-left: 5px;
 	padding-right: 5px;
 	padding-top: 8px;
+	font-family: georgia;
+	font-size: 15px;
 }
 
 #right{
@@ -606,4 +608,13 @@ h3{
 	background-color: rgb(0,0,0,0);
 	border: none;
 	cursor: pointer;
+}
+
+.single_obj{
+	display: flex;
+}
+
+.single_obj:hover{
+	background-color: rgba(0,0,0,0.2);
+	border-radius: 10%;
 }

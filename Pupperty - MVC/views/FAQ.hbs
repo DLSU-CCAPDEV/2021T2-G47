@@ -6,13 +6,68 @@
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js" type="text/javascript"></script>
 	<script type="text/javascript">
 		$(document).ready(function () {
+
+			var user;
+			$.get('/checkuser', function(result){
+				user = result;
+				if(user != "user_0")
+					$('.container3').hide();
+			})
+
 		    $('#submit').click(function()
 		    {
-		    	$('.posts').load('/FAQ');
+		    	var questiontitle = $('#questiontitle').val();
+		    	var questiontext = $('#questiontext').val();
+
+		    	if(questiontitle == "" || questiontext == "")
+		    	{
+		    		alert("Question title and/or question text must not be empty.");
+		    	}
+		    	else{
+			    	var value = $(this).siblings('#question_id').val();
+
+			    	$.get('/submitFAQ', {questiontitle:questiontitle, questiontext:questiontext}, function(result)
+			    	{
+			    		$('#postlist').prepend(result);
+
+			    		if(user != "user_0")
+			    			$('#postlist').children('.posts').children('.container3').remove();
+			    	})
+
+			    	$('#questiontitle').val('');
+			    	$('#questiontext').val('');
+		    	}
 		    });
-		    $('#commentB').click(function()
+
+		    $('.commentB').click(function()
 		    {
-		    	$('.posts').load('/FAQ');
+		    	var question_id = $(this).siblings('#question_id').val();
+		    	var comment_text = $('#' + question_id + '_comment_text').val();
+
+		    	var value = this.value;
+
+		    	console.log("COMMENT: " + comment_text);
+
+		    	if(comment_text == "")
+		    	{
+		    		alert("Comment text must not be empty.");
+		    	}
+		    	else
+		    	{
+			    	$.get('/submitcomment', {comment_text:comment_text, question_id:question_id}, function(result)
+			    	{
+			    		if(value == "Submit Comment")
+			    		{
+			    			$('#' + question_id + '_commentlist').prepend(result);
+			    		}
+			    		else
+			    		{
+			    			$('#' + question_id + '_comtext').text(comment_text);
+			    		}
+			    	});
+			    	$('#' + question_id + '_comment_text').val("");
+		    		$(this).val("Edit Comment");
+		    	}
 		    });
 		});
 	</script>
@@ -30,48 +85,20 @@
 						<p id = profilename> <a href = "userpage.html">{{name}}</a> </p>
 				</div>
 
-				<div class = container2> 
-					{{#each q}}
-					<div class= posts>
-						<div class = userdeets>
-						<div style = "background-image: url(uploads/{{this.OPpath}});" class = "OPpicture"></div>
-						<p class = username><a href = "userpage.html"></a> {{this.name}}</p>
-						</div>
-						<form method = "get" action = "/indivFAQ">
-						<button class = "indivFAQ" name="question_id" value="{{this.question_id}}">
-							{{this.title}}
-						</button>
-						</form>
-						<p style="font-size: 20px; margin-top:10px; border-bottom: 1px, black;"> {{this.text}} </p>
-						<div class = container2>
-							{{#if this.comment.answered}}
-							<div class = answers id=reply>
-								<div class = replyprofile>
-								<a href = "/userpage"><div style = "background-image: url(uploads/{{this.comment.COPpath}});" class = "replypicture"></div></a>
-								<p> <a href = "/userpage">{{this.comment.comment_name}}</a> </p>
-								</div>
-								<p class = reply id="comtext"> {{this.comment.comment_text}} </p>
-							</div>
-							{{/if}}
-							<div>
-								<form action = "/submitcomment">
-									<textarea name="comment_content"> </textarea> <br>
-									<button type="submit" id="commentB" value= "{{this.question_id}}" name="question_id"> {{this.comment.status}} </button>
-								</form>
-							</div>
-						</div>
-					</div>
+				<div class = container2 id=postlist> 
+					{{#each (reverseArray q)}}
+						{{> post this}}
 					{{/each}}
 				</div>
 				<div class = container2>
 					<div id = addQuestion>
 						<p id = addQHeader> Add a Question: </p>
-						<form id= addQTitle method ="post" action = "/submitFAQ">
+						<form id= addQTitle>
 							<label id = qTitleLabel for="Question title"> Title of question: </label> <br>
-							<input id = qTitlePlace type="text" id="addQTitle" name="questiontitle"><br>
+							<input id = questiontitle type="text" id="addQTitle" name="questiontitle" required><br>
 							<label id = qLabel for="Question"> Question: </label><br> 
-							<textarea id = questionplace rows = "1" cols = "20" name = "questiontext"></textarea><br>
-							<input type="submit" name="submit">
+							<textarea id = questiontext rows = "1" cols = "20" name = "questiontext" required></textarea><br>
+							<input type="button" name="submit" id="submit" value="submit">
 						</form>
 					</div>
 				</div>

@@ -77,9 +77,10 @@ app.get(`/aboutpage`, aboutpageController.aboutpage);
 
 //FAQ Controllers
 app.get(`/FAQ`, faqController.FAQ);
-app.post(`/submitFAQ`, faqController.submitFAQ);
+app.get(`/submitFAQ`, faqController.submitFAQ);
 app.get(`/indivFAQ`, faqController.indivFAQ);
 app.get(`/submitcomment`, faqController.submitcomment);
+app.get('/checkuser', faqController.checkuser);
 
 //Navbar Controllers
 app.get(`/checksearch`, navbarController.checksearch);

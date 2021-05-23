@@ -3,6 +3,45 @@
 <head>
 	<title>Question Page</title>
 	<link rel="stylesheet" type = "text/css" href="../css/indivFAQ.css">
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js" type="text/javascript"></script>
+	<script type="text/javascript">
+		$(document).ready(function () {
+
+			var user;
+			$.get('/checkuser', function(result){
+				user = result;
+				if(user != "user_0")
+					$('#submitcomment').hide();
+			})
+
+		    $('.commentB').click(function()
+		    {
+		    	var question_id = $(this).siblings('#question_id').val();
+		    	var comment_text = $('#' + question_id + '_comment_text').val();
+
+		    	console.log("comment text: " + comment_text);
+		    	console.log("ques id: " + question_id);
+
+		    	var value = this.value;
+		    	console.log("value: " + value);
+		    	$.get('/submitcomment', {comment_text:comment_text, question_id:question_id}, function(result)
+		    	{
+		    		if(value == "Submit Comment")
+		    		{
+		    			console.log("if" + value);
+		    			$('#comment_container').prepend(result);
+		    		}
+		    		else
+		    		{
+		    			$('#' + question_id + '_comtext').text(comment_text);
+		    			console.log("else" + value);
+		    		}
+		    	})
+		    	$('#' + question_id + '_comment_text').val("");
+		    	$(this).val("Edit Comment");
+		    });
+		});
+	</script>
 </head>
 <body>
 	{{> navbar}}
@@ -21,21 +60,16 @@
 					<div id="question">
 						<p id="questiontext"> {{text}} </p>
 					</div>
-					<div class = "container1">
+					<div class = "container1" id="comment_container">
 						{{#if comment.answered}}
-						<div id = "userprofile"> 
-							<div style = "background-image: url(uploads/{{comment.COPpath}});" id = "replypic"></div> <br>
-							<p id = "replyname"> {{comment.comment_name}} </p>
-						</div>
-						<div id= "reply">
-							<p id = "replytext"> {{comment.comment_text}} </p>
-						</div>
+							{{> comment}}
 						{{/if}}
 					</div>
 					<div id = submitcomment>
 						<form action = "/submitcomment">
-								<textarea name="comment_content"> </textarea> <br>
-								<button type="submit" id="commentB" value= "{{this.question_id}}" name="question_id"> {{comment.status}} </button>
+							<textarea name="{{question_id}}_comment_text" id = "{{question_id}}_comment_text" required></textarea> <br>
+							<input type="hidden" id="question_id" name="question_id" value="{{question_id}}">
+							<input type="button" class = "commentB" id="commentB" value= "{{comment.status}}" name="commentB">
 						</form>
 					</div>
 				</div>

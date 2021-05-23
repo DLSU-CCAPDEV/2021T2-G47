@@ -9,7 +9,7 @@
 				$('#deleteaccount').click(function(){
 					if(confirm(`Are you sure you want to delete your account?`)){
 						if(confirm(`Are you completely sure? This action cannot be undone.`)){
-							$.get(`deleteuser`, function(result){window.open("http://localhost:3000/deleteuser", "_self");})
+							$.get(`deleteuser`, function(result){window.open("/deleteuser", "_self");})
 						}
 					}
 				});
@@ -20,8 +20,6 @@
 					var postno = $(this).val();
 
 					if(confirm("Are you sure you want to delete this post?")){
-
-
 						postDiv.remove();
 						$.get(`/deletepost`, {postno: postno}, function(result){});
 					}
@@ -52,7 +50,7 @@
 						$.get(`/checkpassword`, {pass: pass}, function(result){
 							if(result){
 								$.get(`/edituser`, function(result){
-									window.open("http://localhost:3000/edituser", "_self");
+									window.open("/edituser", "_self");
 								});
 							}
 							else{

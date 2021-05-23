@@ -37,13 +37,13 @@ const controller = {
 			db.findMany(`adoption_posts`, {poster_email: req.session.email, adoption_status: false}, {
 				name: 1,
 				path: 1,
-			}, function(result){
-				num_user_posts = result.length;
+			}, function(result4){
+				num_user_posts = result4.length;
 				db.findMany(`adoption_posts`, {owner: req.session.email}, {
 					name: 1,
 					path: 1,
-				}, function(result){
-					num_adopted = result.length;
+				}, function(result5){
+					num_adopted = result5.length;
 					db.countDocuments('users', function(result3){
 						db.findOne(`users`, {email: req.session.email}, function(result2){
 							res.render(`Browse`, {

@@ -125,46 +125,48 @@ const controller = {
 						post_id: 1
 					}, function(result3){
 						postsArray = result3;
-						db.findMany(`adoption_posts`, {owner: user_id}, {
-							name: 1,
-							path: 1,
-						}, function(result4){
-							adoptArray = result4;
-							if(adoptArray == undefined){
-								adoptCount = 0;
-							} else{
-								adoptCount = adoptArray.length;
-							}
+						db.findOne('users', {user_id: user_id}, function(result6){
+							db.findMany(`adoption_posts`, {owner: result6.email}, {
+								name: 1,
+								path: 1,
+							}, function(result4){
+								adoptArray = result4;
+								if(adoptArray == undefined){
+									adoptCount = 0;
+								} else{
+									adoptCount = adoptArray.length;
+								}
 
-							if(postsArray == undefined){
-								postsCount = 0;
-							} else{
-								postsCount = postsArray.length;
-							}
+								if(postsArray == undefined){
+									postsCount = 0;
+								} else{
+									postsCount = postsArray.length;
+								}
 
-							db.findOne(`users`, {user_id: user_id}, function(result5){
+								db.findOne(`users`, {user_id: user_id}, function(result5){
 
-								res.render(`otherusers`, {
-									u: {
-										email: result5.email,
-										name: result5.name,
-										bio: result5.bio,
-										address: result5.address,
-										contact: result5.contact,
-										salary: result5.salary,
-										certvalid: result5.certvalid,
-										adoptcount: adoptCount,
-										rescuecount: postsCount,
-										path: result5.path,
-										questions: questionsArray,
-										posts: postsArray,
-										adopts: adoptArray,
-										certificate: result5.certificate,
-										bgpath: result5.bgpath
-									}
-								});
+									res.render(`otherusers`, {
+										u: {
+											email: result5.email,
+											name: result5.name,
+											bio: result5.bio,
+											address: result5.address,
+											contact: result5.contact,
+											salary: result5.salary,
+											certvalid: result5.certvalid,
+											adoptcount: adoptCount,
+											rescuecount: postsCount,
+											path: result5.path,
+											questions: questionsArray,
+											posts: postsArray,
+											adopts: adoptArray,
+											certificate: result5.certificate,
+											bgpath: result5.bgpath
+										}
+									});
+								})
 							})
-						})
+						});
 					})
 				})
 			}

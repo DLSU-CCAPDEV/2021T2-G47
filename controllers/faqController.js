@@ -50,7 +50,6 @@ const controller = {
 	  					questionidstring = result2[(result2.length - 1)].question_id;
 			  			questionidstring = questionidstring.split("_");
 			  			questionidvalue = parseInt(questionidstring[1]) + 1;
-			  			console.log(`questionidvalue` + questionidvalue);
 	  				}
 
 	  				db.findOne('users', {email: req.session.email}, function(result3)
@@ -65,13 +64,7 @@ const controller = {
 				        asker_id: result3.user_id,
 				        comment: commentObj
 			   	 		}
-			   	 		console.log(faq.OPpath);
-			   	 		console.log(faq.author);
-			   	 		console.log(faq.name);
-			   	 		console.log(faq.title);
-			   	 		console.log(faq.question_id);
-			   	 		console.log(faq.text);
-			   	 		console.log(faq.comment);
+
 				   	 	db.insertOne(`FAQS`, faq, function(result){
 								res.render('partials\\post', {OPpath:result3.path, name:req.session.name, question_id:faq.question_id, title:req.query.questiontitle, text:req.query.questiontext, comment: faq.comment}, function(err, result)
 									{
@@ -118,12 +111,6 @@ const controller = {
 				answered: true,
 				question_id: question_id
 			}
-			console.log("Question ID: " + question_id);
-			console.log("Comment: " + comment);
-			console.log("Path: " + commentObj.COPpath);
-			console.log("Comment Name: " + commentObj.comment_name);
-			console.log("Comment Text: " + commentObj.comment_text);
- 
 
 			db.updateOne('FAQS', {question_id: question_id}, 
 			{
@@ -140,7 +127,6 @@ const controller = {
 
 	checkuser: function(req, res){
 		db.findOne('users', {email: req.session.email}, function(result){
-			console.log("checked id: " + result.user_id);
 			res.send(result.user_id);
 		})
 	}

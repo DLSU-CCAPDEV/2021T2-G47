@@ -12,7 +12,6 @@ const database = {
 		client.connect(url, options, function (err, db){
 			var database = db.db(`database`);
 			database.collection(collection).countDocuments().then((count_documents) => {
-			  console.log(count_documents);
 			  db.close();
 			  return callback(count_documents);
 			}).catch((err) => {
@@ -56,7 +55,6 @@ const database = {
 				if(err){ 
 					throw err;
 				}
-				console.log('internal' + result);
 				res = result;
 				db.close();
 				return callback(result);
@@ -70,7 +68,6 @@ const database = {
 			var database = db.db(`database`);
 			database.collection(collection).find(query, {projection: projection}).toArray(function (err, result){
 				if(err) throw err;
-				console.log("findMany = " + result);
 				db.close();
 				return callback(result);
 			});

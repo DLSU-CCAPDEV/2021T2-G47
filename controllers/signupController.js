@@ -11,7 +11,6 @@ const controller = {
 	register: function(req, res){
 		var email = req.body.email;
 		var password = req.body.password;
-		console.log('HERE Email: ' + email + ' successfully registered with Name: ' + password);
 		var useridstring;
 		var useridvalue;
 
@@ -27,17 +26,11 @@ const controller = {
 						useridstring = result2[(result2.length - 1)].user_id;
 			  			useridstring = useridstring.split("_");
 			  			useridvalue = parseInt(useridstring[1]) + 1;
-			  			console.log(`postidvalue` + useridvalue);
 					}
 
-						console.log("before = " + email);
 						db.findOne(`users`, {email: email}, function(result){
-						console.log("after = " + email);
-						console.log('uservalue' + useridvalue);
 
 						if(result != null){
-							console.log(`Email already registered.`);
-							//alert("Email already registered, please try logging in with your email.");
 							res.redirect(`/`);
 						} else{
 
@@ -56,13 +49,10 @@ const controller = {
 									bgpath: "images/backgrounds/bg1.jpg"
 
 								}
-								console.log('Email: ' + email + ' successfully registered with Name: ' + person.name);
 								req.session.email = person.email;
 								req.session.name = person.name;
 
-								
-								console.log('SESSION Email: ' + req.session.email + ' successfully registered with SESSION Name: ' + req.session.name);
-
+							
 								db.insertOne(`users`, person, function(result){
 									res.redirect('/edituser');
 								});

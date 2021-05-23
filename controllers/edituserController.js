@@ -6,9 +6,6 @@ const controller = {
 		var prev;
 
 		db.findOne(`users`, {email: req.session.email}, function(result){
-
-			console.log('final result = ' + result);
-			console.log('FINAL req.session.email = ' + req.session.email);
 			
 			res.render(`edituserpage`, {
 				prev: {
@@ -25,12 +22,9 @@ const controller = {
 	},
 
 	submitedit: function(req, res){
-		console.log(`REQFILE = ` + req.file);
 
 		var image;
 		var background;
-
-		console.log(`SUBMITEDIT BG: ` + background + req.body.bg);
 
 		switch(req.body.bg){
 			case '1':

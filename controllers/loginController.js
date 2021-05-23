@@ -42,7 +42,6 @@ const controller = {
 							post_id: 1
 						}, function(result){
 							postsArray = result;
-							console.log('result ' + postsArray);
 
 							res.render(`HomePage`, {
 								u: {
@@ -53,7 +52,6 @@ const controller = {
 
 						req.session.email = result.email;
 						req.session.name = result.name;
-						console.log(`Login successful. User ` + req.session.name + ` ` + req.session.email);
 	                }
 	                else {
 	                    var details = {error: `Email and/or Password is incorrect.`}

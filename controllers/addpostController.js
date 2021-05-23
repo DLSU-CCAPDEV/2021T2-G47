@@ -3,7 +3,6 @@ const db = require(`../models/db.js`);
 const controller = {
 
 	submitadoptionpost: function(req, res){
-		console.log(req.file);
 		var postidstring;
 		var postidvalue;
 
@@ -20,10 +19,7 @@ const controller = {
 			  			postidstring = result2[(result2.length - 1)].post_id;
 			  			postidstring = postidstring.split("_");
 			  			postidvalue = parseInt(postidstring[1]) + 1;
-			  			console.log(`postidvalue` + postidvalue);
 		  			}
-
-		  			console.log("inside adoptionsubmit = " + req.session.email);
 
 		  			db.findOne('users', {email: req.session.email}, function(result2){
 		  				var dog = {

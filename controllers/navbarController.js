@@ -15,12 +15,10 @@ const controller = {
 				path: 1
 				}, function(result){
 
-					console.log(`CHECKHERE` + result + 'WHUT');
 
 					if(result != undefined){
 					
 						usersArray = result;
-						console.log('user: ' + req.session.name);
 
 						db.findMany(`adoption_posts`, {poster_email: req.session.email, adoption_status: false}, {
 							name: 1,
@@ -50,8 +48,6 @@ const controller = {
 						});	
 					}
 					else{
-
-						console.log('user: ' + req.session.name);
 
 						db.findMany(`adoption_posts`, {poster_email: req.session.email, adoption_status: false}, {
 							name: 1,
@@ -94,8 +90,6 @@ const controller = {
 				upvotes: 1
 				}, function(result){
 					postsArray = result;
-					console.log('result ' + postsArray);
-					console.log('user: ' + req.session.name);
 
 					db.findMany(`adoption_posts`, {poster_email: req.session.email, adoption_status: false}, {
 						name: 1,
@@ -138,8 +132,6 @@ const controller = {
 			upvotes: 1
 			}, function(result){
 				postsArray = result;
-				console.log('result ' + postsArray);
-				console.log('user: ' + req.session.name);
 
 				db.findMany(`adoption_posts`, {poster_email: req.session.email, adoption_status: false}, {
 					name: 1,
@@ -189,8 +181,6 @@ const controller = {
 		  	});
 		}
 
-		console.log(`RADIORES =` + radioRes);
-		console.log(`checksearchEntry = ` + req.query.text);
 	},
 
 	logout: function(req, res){

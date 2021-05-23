@@ -4,8 +4,6 @@ const controller = {
 
 	submiteditedpost: function(req, res){
 
-		console.log("queryedit" + req.body.edit);
-		
 		if(req.file != undefined){
 			db.updateOne(`adoption_posts`, {post_id: req.body.edit}, {$set: {
 				image: req.file,

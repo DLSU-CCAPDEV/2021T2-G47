@@ -10,8 +10,6 @@ const controller = {
 		var postsArray;
 		var adoptArray;
 
-		console.log("Email and name of current session: "+ req.session.email + " -- " + req.session.name);
-
 		db.findMany(`FAQS`, {author: req.session.email}, {
 			author: 1,
 			name: 1,
@@ -35,7 +33,6 @@ const controller = {
 		}, function(result){adoptArray = result;})
 
 		db.findOne(`users`, {email: req.session.email}, function(result2){
-			console.log('result' + result2.name);
 
 			res.render(`userpage`, {
 				u: {

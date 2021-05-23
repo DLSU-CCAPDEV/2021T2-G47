@@ -21,8 +21,6 @@ const controller = {
 		var num_user_posts;
 		var num_adopted;
 
-		console.log("Email and name of current session: "+ req.session.email + " -- " + req.session.name);
-
 		db.findMany(`adoption_posts`, {adoption_status: false}, {
 			poster: 1,
 			path: 1,
@@ -35,8 +33,6 @@ const controller = {
 			upvotes: 1
 		}, function(result){
 			postsArray = result;
-			console.log('result ' + postsArray);
-			console.log('user: ' + req.session.name);
 
 			db.findMany(`adoption_posts`, {poster_email: req.session.email, adoption_status: false}, {
 				name: 1,
@@ -70,7 +66,6 @@ const controller = {
 	adoption: function(req, res){
 
 		var postid = req.query.postID;
-		console.log("adoption postid" + postid)
 
 		db.findOne(`adoption_posts`, {post_id: postid}, function(result){
 			res.render(`Adoption`, {
@@ -101,9 +96,6 @@ const controller = {
 		db.findOne(`users`, {email: req.session.email}, function(result)
 		{
 
-			console.log("current = " + result.user_id);
-			console.log("pressed = " + user_id + "/" + req.query.username);
-
 			if(result.user_id == user_id)
 				res.redirect('userpage');
 			else
@@ -112,8 +104,6 @@ const controller = {
 				var questionsArray;
 				var postsArray;
 				var adoptArray;
-
-				console.log("Userid current page: "+ user_id + " -- " + req.query.username);
 
 				db.findMany(`FAQS`, {asker_id: user_id}, {
 					author: 1,
@@ -136,7 +126,6 @@ const controller = {
 				}, function(result4){adoptArray = result4;})
 
 				db.findOne(`users`, {user_id: user_id}, function(result5){
-					console.log('result' + result5.name);
 
 					res.render(`otherusers`, {
 						u: {

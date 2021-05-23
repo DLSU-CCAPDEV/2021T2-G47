@@ -22,9 +22,4 @@
     "routes": "^2.1.0"
   },
   "devDependencies": {},
-  "buildpacks": [
-    {
-      "url": "heroku/nodejs"
-    }
-  ]
 }

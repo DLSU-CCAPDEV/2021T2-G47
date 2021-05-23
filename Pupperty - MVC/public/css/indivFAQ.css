@@ -307,37 +307,40 @@ small{
 
 }
 
-.answers{
-	display: flex;
-}
-
-.replyprofile{
-	margin-left: 15px;
-	background-color: #b7dcf4;
-	border: 2px black solid;
-	margin-bottom: 10px;
-	border-radius: 20px;
-	min-height: 100px;
-	min-width: 200px;
-}
-
-.reply{
-	font-size: 30px;
-	margin-left: 15px;
-	margin-top: 40px;
-	border: 2px black solid;
-	border-top-left-radius: 20px;
-	border-top-right-radius: 20px;
-	border-bottom-right-radius: 20px;		
-	background-color: #f7bc57;
-	width: 500px;
-	height: 50px
-}
-
-.replypicture{
+#replypic 
+{  	 
+	 margin-top: 15px;
 	 height: 100px; 
 	 width: 100px; 
 	 margin: auto; 
-	 background-size: cover; 
-	 border-radius: 50%;
+	 background-size: cover;
+	 border-radius: 50%; 
+}
+
+#replyname
+{
+	font-size: 18px;
+	font-weight: bold;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+#reply
+{
+	border: 2px solid black;
+	max-height: 75px;
+	max-width: 400px;
+	border-top-left-radius: 20px;
+	border-top-right-radius: 20px;
+	border-bottom-right-radius: 20px;
+	background-color: #f7bc57;
+	margin-top: 40px;
+}
+
+#replytext
+{
+	font-size:24px;
+	margin-top: 30px;
+	margin-left: 5px;
+	margin-right: 5px;
 }

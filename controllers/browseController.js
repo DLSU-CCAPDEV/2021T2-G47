@@ -92,6 +92,7 @@ const controller = {
 
 	profile: function(req, res){
 		var user_id = req.query.username;
+		var adoptCount;
 
 		db.findOne(`users`, {email: req.session.email}, function(result)
 		{
@@ -104,6 +105,8 @@ const controller = {
 				var questionsArray;
 				var postsArray;
 				var adoptArray;
+				var adoptCount;
+				var postsCount;
 
 				db.findMany(`FAQS`, {asker_id: user_id}, {
 					author: 1,
@@ -125,6 +128,18 @@ const controller = {
 					path: 1,
 				}, function(result4){adoptArray = result4;})
 
+				if(adoptArray == undefined){
+					adoptCount = 0;
+				} else{
+					adoptCount = adoptArray.length;
+				}
+
+				if(postsArray == undefined){
+					postsCount = 0;
+				} else{
+					postsCount = postsArray.length;
+				}
+
 				db.findOne(`users`, {user_id: user_id}, function(result5){
 
 					res.render(`otherusers`, {
@@ -136,8 +151,8 @@ const controller = {
 							contact: result5.contact,
 							salary: result5.salary,
 							certvalid: result5.certvalid,
-							adoptcount: result5.homeowner.length,
-							rescuecount: result5.rescuer.length,
+							adoptcount: adoptCount,
+							rescuecount: postsCount,
 							path: result5.path,
 							questions: questionsArray,
 							posts: postsArray,

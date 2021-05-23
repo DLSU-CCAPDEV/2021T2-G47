@@ -9,6 +9,8 @@ const controller = {
 		var questionsArray;
 		var postsArray;
 		var adoptArray;
+		var adoptCount;
+		var postsCount;
 
 		db.findMany(`FAQS`, {author: req.session.email}, {
 			author: 1,
@@ -32,6 +34,18 @@ const controller = {
 			post_id: 1
 		}, function(result){adoptArray = result;})
 
+		if(adoptArray == undefined){
+			adoptCount = 0;
+		} else{
+			adoptCount = adoptArray.length;
+		}
+
+		if(postsArray == undefined){
+			postsCount = 0;
+		} else{
+			postsCount = postsArray.length;
+		}
+
 		db.findOne(`users`, {email: req.session.email}, function(result2){
 
 			res.render(`userpage`, {
@@ -43,8 +57,8 @@ const controller = {
 					contact: result2.contact,
 					salary: result2.salary,
 					certvalid: result2.certvalid,
-					adoptcount: adoptArray.length,
-					rescuecount: result2.rescuer.length,
+					adoptcount: adoptCount,
+					rescuecount: postsCount,
 					path: result2.path,
 					questions: questionsArray,
 					posts: postsArray,

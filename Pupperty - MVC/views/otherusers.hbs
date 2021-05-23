@@ -67,7 +67,7 @@
 									<div style = "background-image: url(uploads/{{this.path}}); background-size: cover; background-position: center;" id = prevdogpic></div>
 									<div style = "position: relative; top: 30px;">
 										<div id = prevdogname style = "background-image: url(images/bone.png);">{{this.name}}</div>
-										<div id = prevdogbuttons style = "padding-left: 40px;">
+										<div id = prevdogbuttons>
 											<form action="/adoption">
 												<button name="postID" type="submit" value="{{this.post_id}}">View Post</button>
 											</form>
@@ -98,7 +98,7 @@
 									<div class = qusertext>
 										<div>
 											<div class = qadoptions>{{../u.adoptcount}} Adoptions</div>
-											<div class = qrescues>{{../u.questions.length}} Questions</div>
+											<div class = qrescues>{{../u.questions.length}} Posts</div>
 										</div>
 										<div><img src = "images/greencheck.png" style = "height: 30px; width: 40px; position: relative; top: 3px;"></div>
 									</div>
@@ -108,9 +108,7 @@
 								</div>
 							</div>
 						</div>
-						<form action="/indivFAQ">
-							<div style = "margin-top: 20px;"><button type="submit" value="{{this.question_id}}" name="question_id">View Question</button></div>
-						</form>
+						<br><br><br>
 					{{/each}}
 			</div>
 		</div>

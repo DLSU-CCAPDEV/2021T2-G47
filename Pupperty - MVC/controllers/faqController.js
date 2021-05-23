@@ -64,13 +64,6 @@ const controller = {
 				        question_id: "question_" + questionidvalue,
 				        comment: commentObj
 			   	 		}
-			   	 		console.log(faq.OPpath);
-			   	 		console.log(faq.author);
-			   	 		console.log(faq.name);
-			   	 		console.log(faq.title);
-			   	 		console.log(faq.question_id);
-			   	 		console.log(faq.text);
-			   	 		console.log(faq.comment);
 				   	 	db.insertOne(`FAQS`, faq, function(result){
 								res.render('partials\\post', {OPpath:result3.path, name:req.session.name, question_id:faq.question_id, title:req.query.questiontitle, text:req.query.questiontext, comment: faq.comment}, function(err, result)
 									{
@@ -87,6 +80,13 @@ const controller = {
 		var question_id = req.query.question_id;
 	  	db.findOne('FAQS', {question_id:question_id}, function(result)
 	  	{
+	  		console.log(result.OPpath);
+			console.log(result.author);
+			console.log(result.name);
+			console.log(result.title);
+			console.log(result.question_id);
+			console.log(result.text);
+			console.log(result.comment);
 	  	
 	  		res.render('indivFAQ', 
 	  			{

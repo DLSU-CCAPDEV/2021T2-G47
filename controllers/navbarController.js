@@ -13,67 +13,69 @@ const controller = {
 				name: 1,
 				bio: 1,
 				path: 1
-				}, function(result){
-
-
-					if(result != undefined){
+				}, function(usersresult){
+					if(usersresult != undefined){
 					
-						usersArray = result;
+						usersArray = usersresult;
 
 						db.findMany(`adoption_posts`, {poster_email: req.session.email, adoption_status: false}, {
 							name: 1,
 							path: 1,
-						}, function(result){num_user_posts = result.length;})
-
-						db.findMany(`adoption_posts`, {owner: req.session.email}, {
-							name: 1,
-							path: 1,
-						}, function(result){num_adopted = result.length;})
-
-						db.countDocuments('users', function(result3){
-							db.findOne(`users`, {email: req.session.email}, function(result2){
-								res.render(`UserResults`, {
-									u: {
-										currentUser: result2.name,
-										user_id: result2.user_id,
-										user_photo: result2.path,
-										num_user_posts: num_user_posts,
-										num_adopted: num_adopted,
-										users: result,
-										num_posts: result.length,
-										num_users: result3
-									}
-								})
+						}, function(result){
+							num_user_posts = result.length;
+							db.findMany(`adoption_posts`, {owner: req.session.email}, {
+								name: 1,
+								path: 1,
+							}, function(result){
+								num_adopted = result.length;
+								db.countDocuments('users', function(result3){
+									db.findOne(`users`, {email: req.session.email}, function(result2){
+										res.render(`UserResults`, {
+											u: {
+												currentUser: result2.name,
+												user_id: result2.user_id,
+												user_photo: result2.path,
+												num_user_posts: num_user_posts,
+												num_adopted: num_adopted,
+												users: usersresult,
+												num_posts: result.length,
+												num_users: result3
+											}
+										})
+									})
+								});	
 							})
-						});	
+						})
 					}
 					else{
 
 						db.findMany(`adoption_posts`, {poster_email: req.session.email, adoption_status: false}, {
 							name: 1,
 							path: 1,
-						}, function(result){num_user_posts = result.length;})
-
-						db.findMany(`adoption_posts`, {owner: req.session.email}, {
-							name: 1,
-							path: 1,
-						}, function(result){num_adopted = result.length;})
-
-						db.countDocuments('users', function(result3){
-							db.findOne(`users`, {email: req.session.email}, function(result2){
-								res.render(`UserResults`, {
-									u: {
-										currentUser: result2.name,
-										user_id: result2.user_id,
-										user_photo: result2.path,
-										num_user_posts: num_user_posts,
-										num_adopted: num_adopted,
-										num_posts: result.length,
-										num_users: result3
-									}
-								})
+						}, function(result){
+							num_user_posts = result.length;
+							db.findMany(`adoption_posts`, {owner: req.session.email}, {
+								name: 1,
+								path: 1,
+							}, function(result){
+								num_adopted = result.length;
+								db.countDocuments('users', function(result3){
+									db.findOne(`users`, {email: req.session.email}, function(result2){
+										res.render(`UserResults`, {
+											u: {
+												currentUser: result2.name,
+												user_id: result2.user_id,
+												user_photo: result2.path,
+												num_user_posts: num_user_posts,
+												num_adopted: num_adopted,
+												num_posts: result.length,
+												num_users: result3
+											}
+										})
+									})
+								});
 							})
-						});						
+						})						
 					}	
 			})
 		}
@@ -94,29 +96,31 @@ const controller = {
 					db.findMany(`adoption_posts`, {poster_email: req.session.email, adoption_status: false}, {
 						name: 1,
 						path: 1,
-					}, function(result){num_user_posts = result.length;})
-
-					db.findMany(`adoption_posts`, {owner: req.session.email}, {
-						name: 1,
-						path: 1,
-					}, function(result){num_adopted = result.length;})
-
-					db.countDocuments('users', function(result3){
-						db.findOne(`users`, {email: req.session.email}, function(result2){
-							res.render(`Browse`, {
-								u: {
-									currentUser: result2.name,
-									user_id: result2.user_id,
-									user_photo: result2.path,
-									num_user_posts: num_user_posts,
-									num_adopted: num_adopted,
-									posts: postsArray,
-									num_posts: result.length,
-									num_users: result3
-								}
-							})
+					}, function(result){
+						num_user_posts = result.length;
+						db.findMany(`adoption_posts`, {owner: req.session.email}, {
+							name: 1,
+							path: 1,
+						}, function(result){
+							num_adopted = result.length;
+							db.countDocuments('users', function(result3){
+								db.findOne(`users`, {email: req.session.email}, function(result2){
+									res.render(`Browse`, {
+										u: {
+											currentUser: result2.name,
+											user_id: result2.user_id,
+											user_photo: result2.path,
+											num_user_posts: num_user_posts,
+											num_adopted: num_adopted,
+											posts: postsArray,
+											num_posts: result.length,
+											num_users: result3
+										}
+									})
+								})
+							});
 						})
-					});		
+					})			
 			})
 		}
 		else if(radioRes == 'petBreed'){
@@ -136,40 +140,44 @@ const controller = {
 				db.findMany(`adoption_posts`, {poster_email: req.session.email, adoption_status: false}, {
 					name: 1,
 					path: 1,
-				}, function(result){num_user_posts = result.length;})
-
-				db.findMany(`adoption_posts`, {owner: req.session.email}, {
-					name: 1,
-					path: 1,
-				}, function(result){num_adopted = result.length;})
-
-				db.countDocuments('users', function(result3){
-					db.findOne(`users`, {email: req.session.email}, function(result2){
-						res.render(`Browse`, {
-							u: {
-								currentUser: result2.name,
-								user_id: result2.user_id,
-								user_photo: result2.path,
-								num_user_posts: num_user_posts,
-								num_adopted: num_adopted,
-								posts: postsArray,
-								num_posts: result.length,
-								num_users: result3
-							}
-						})
+				}, function(result){
+					num_user_posts = result.length;
+					db.findMany(`adoption_posts`, {owner: req.session.email}, {
+						name: 1,
+						path: 1,
+					}, function(result){
+						num_adopted = result.length;
+						db.countDocuments('users', function(result3){
+							db.findOne(`users`, {email: req.session.email}, function(result2){
+								res.render(`Browse`, {
+									u: {
+										currentUser: result2.name,
+										user_id: result2.user_id,
+										user_photo: result2.path,
+										num_user_posts: num_user_posts,
+										num_adopted: num_adopted,
+										posts: postsArray,
+										num_posts: result.length,
+										num_users: result3
+									}
+								})
+							})
+						});	
 					})
-				});		
+				})
 			})
 		}
 		else if(radioRes == 'faqTitle'){
-
+			
 			db.findMany('FAQS', {title: {$regex: ".*" + searchText + ".*", $options: 'i'}},
 		  	{
 		  		OPpath: 1,
 		  		author: 1,
 		  		name: 1,
-		  		title:1, 
-		  		text:1
+		  		title: 1, 
+		  		text: 1,
+		  		question_id:1,
+		  		comment: 1
 		  	}, function(result){
 		  		db.findOne(`users`, {email: req.session.email}, function(result2){
 			  		 res.render('FAQ', {

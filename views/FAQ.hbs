@@ -30,8 +30,11 @@
 			    	{
 			    		$('#postlist').prepend(result);
 
-			    		if(user != "user_0")
+			    		if(user != "user_0"){
 			    			$('#postlist').children('.posts').children('.container3').remove();
+			    		} else{
+			    			window.open('FAQ', '_self');
+			    		}
 			    	})
 
 			    	$('#questiontitle').val('');
@@ -70,7 +73,7 @@
 		});
 	</script>
 </head>
-<body style = "background-image: url(images/pattern.png);">
+<body style = "background-image: url(images/pattern.png); margin-bottom: 50px;">
 	{{> navbar}}
 
 	<div style = "padding-left: 20px; padding-right: 20px;">
@@ -93,10 +96,10 @@
 						<p id = addQHeader> Add a Question: </p>
 						<form id= addQTitle>
 							<label id = qTitleLabel for="Question title"> Title of question: </label> <br>
-							<input id = questiontitle type="text" id="addQTitle" name="questiontitle" required><br>
+							<input id = questiontitle type="text" id="addQTitle" name="questiontitle" size = "40" required><br><br>
 							<label id = qLabel for="Question"> Question: </label><br> 
-							<textarea id = questiontext rows = "1" cols = "20" name = "questiontext" required></textarea><br>
-							<input type="button" name="submit" id="submit" value="submit">
+							<textarea id = questiontext style = "resize: none;" rows = "5" cols = "42" name = "questiontext" required></textarea><br><br>
+							<input type="button" name="submit" id="submit" value="submit"><br><br>
 						</form>
 					</div>
 				</div>

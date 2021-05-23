@@ -18,55 +18,58 @@ const controller = {
 			title: 1,
 			text: 1,
 			question_id: 1
-		}, function(result){questionsArray = result;})
+		}, function(result){
+			questionsArray = result;
+			db.findMany(`adoption_posts`, {poster_email: req.session.email}, {
+				name: 1,
+				path: 1,
+				adoption_status: 1,
+				post_id: 1
+			}, function(result){
+				postsArray = result;
+				db.findMany(`adoption_posts`, {owner: req.session.email}, {
+					name: 1,
+					path: 1,
+					adoption_status: 1,
+					post_id: 1
+				}, function(result){
+					adoptArray = result;
+					if(adoptArray == undefined){
+						adoptCount = 0;
+					} else{
+						adoptCount = adoptArray.length;
+					}
 
-		db.findMany(`adoption_posts`, {poster_email: req.session.email}, {
-			name: 1,
-			path: 1,
-			adoption_status: 1,
-			post_id: 1
-		}, function(result){postsArray = result;})
+					if(postsArray == undefined){
+						postsCount = 0;
+					} else{
+						postsCount = postsArray.length;
+					}
 
-		db.findMany(`adoption_posts`, {owner: req.session.email}, {
-			name: 1,
-			path: 1,
-			adoption_status: 1,
-			post_id: 1
-		}, function(result){adoptArray = result;})
+					db.findOne(`users`, {email: req.session.email}, function(result2){
 
-		if(adoptArray == undefined){
-			adoptCount = 0;
-		} else{
-			adoptCount = adoptArray.length;
-		}
-
-		if(postsArray == undefined){
-			postsCount = 0;
-		} else{
-			postsCount = postsArray.length;
-		}
-
-		db.findOne(`users`, {email: req.session.email}, function(result2){
-
-			res.render(`userpage`, {
-				u: {
-					email: result2.email,
-					name: result2.name,
-					bio: result2.bio,
-					address: result2.address,
-					contact: result2.contact,
-					salary: result2.salary,
-					certvalid: result2.certvalid,
-					adoptcount: adoptCount,
-					rescuecount: postsCount,
-					path: result2.path,
-					questions: questionsArray,
-					posts: postsArray,
-					adopts: adoptArray,
-					certificate: result2.certificate,
-					bgpath: result2.bgpath
-				}
-			});
+						res.render(`userpage`, {
+							u: {
+								email: result2.email,
+								name: result2.name,
+								bio: result2.bio,
+								address: result2.address,
+								contact: result2.contact,
+								salary: result2.salary,
+								certvalid: result2.certvalid,
+								adoptcount: adoptCount,
+								rescuecount: postsCount,
+								path: result2.path,
+								questions: questionsArray,
+								posts: postsArray,
+								adopts: adoptArray,
+								certificate: result2.certificate,
+								bgpath: result2.bgpath
+							}
+						});
+					})
+				})
+			})
 		})
 	},
 

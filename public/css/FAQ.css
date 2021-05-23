@@ -377,6 +377,12 @@ small{
 	min-width: 200px;
 }
 
+.replyname{
+	text-align: justify;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
 .reply{
 	font-size: 30px;
 	margin-left: 15px;

@@ -37,29 +37,31 @@ const controller = {
 			db.findMany(`adoption_posts`, {poster_email: req.session.email, adoption_status: false}, {
 				name: 1,
 				path: 1,
-			}, function(result){num_user_posts = result.length;})
-
-			db.findMany(`adoption_posts`, {owner: req.session.email}, {
-				name: 1,
-				path: 1,
-			}, function(result){num_adopted = result.length;})
-
-			db.countDocuments('users', function(result3){
-				db.findOne(`users`, {email: req.session.email}, function(result2){
-					res.render(`Browse`, {
-						u: {
-							currentUser: result2.name,
-							user_id: result2.user_id,
-							user_photo: result2.path,
-							num_user_posts: num_user_posts,
-							num_adopted: num_adopted,
-							posts: postsArray,
-							num_posts: result.length,
-							num_users: result3
-						}
-					})
+			}, function(result){
+				num_user_posts = result.length;
+				db.findMany(`adoption_posts`, {owner: req.session.email}, {
+					name: 1,
+					path: 1,
+				}, function(result){
+					num_adopted = result.length;
+					db.countDocuments('users', function(result3){
+						db.findOne(`users`, {email: req.session.email}, function(result2){
+							res.render(`Browse`, {
+								u: {
+									currentUser: result2.name,
+									user_id: result2.user_id,
+									user_photo: result2.path,
+									num_user_posts: num_user_posts,
+									num_adopted: num_adopted,
+									posts: postsArray,
+									num_posts: result.length,
+									num_users: result3
+								}
+							})
+						})
+					});		
 				})
-			});		
+			})
 		})
 	},
 
@@ -114,53 +116,56 @@ const controller = {
 					title: 1,
 					text: 1,
 					question_id: 1
-				}, function(result2){questionsArray = result2;})
+				}, function(result2){
+					questionsArray = result2;
+					db.findMany(`adoption_posts`, {poster_id: user_id}, {
+						name: 1,
+						path: 1,
+						adoption_status: 1,
+						post_id: 1
+					}, function(result3){
+						postsArray = result3;
+						db.findMany(`adoption_posts`, {owner: user_id}, {
+							name: 1,
+							path: 1,
+						}, function(result4){
+							adoptArray = result4;
+							if(adoptArray == undefined){
+								adoptCount = 0;
+							} else{
+								adoptCount = adoptArray.length;
+							}
 
-				db.findMany(`adoption_posts`, {poster_id: user_id}, {
-					name: 1,
-					path: 1,
-					adoption_status: 1,
-					post_id: 1
-				}, function(result3){postsArray = result3;})
+							if(postsArray == undefined){
+								postsCount = 0;
+							} else{
+								postsCount = postsArray.length;
+							}
 
-				db.findMany(`adoption_posts`, {owner: user_id}, {
-					name: 1,
-					path: 1,
-				}, function(result4){adoptArray = result4;})
+							db.findOne(`users`, {user_id: user_id}, function(result5){
 
-				if(adoptArray == undefined){
-					adoptCount = 0;
-				} else{
-					adoptCount = adoptArray.length;
-				}
-
-				if(postsArray == undefined){
-					postsCount = 0;
-				} else{
-					postsCount = postsArray.length;
-				}
-
-				db.findOne(`users`, {user_id: user_id}, function(result5){
-
-					res.render(`otherusers`, {
-						u: {
-							email: result5.email,
-							name: result5.name,
-							bio: result5.bio,
-							address: result5.address,
-							contact: result5.contact,
-							salary: result5.salary,
-							certvalid: result5.certvalid,
-							adoptcount: adoptCount,
-							rescuecount: postsCount,
-							path: result5.path,
-							questions: questionsArray,
-							posts: postsArray,
-							adopts: adoptArray,
-							certificate: result5.certificate,
-							bgpath: result5.bgpath
-						}
-					});
+								res.render(`otherusers`, {
+									u: {
+										email: result5.email,
+										name: result5.name,
+										bio: result5.bio,
+										address: result5.address,
+										contact: result5.contact,
+										salary: result5.salary,
+										certvalid: result5.certvalid,
+										adoptcount: adoptCount,
+										rescuecount: postsCount,
+										path: result5.path,
+										questions: questionsArray,
+										posts: postsArray,
+										adopts: adoptArray,
+										certificate: result5.certificate,
+										bgpath: result5.bgpath
+									}
+								});
+							})
+						})
+					})
 				})
 			}
 		});

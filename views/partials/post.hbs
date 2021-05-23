@@ -16,7 +16,7 @@
 		{{/if}}
 		<div>
 			<form action = "/submitcomment">
-				<textarea name="{{this.question_id}}_comment_text" id = "{{this.question_id}}_comment_text" required></textarea> <br>
+				<textarea rows = "5" cols = "42" style = "resize: none;" name="{{this.question_id}}_comment_text" id = "{{this.question_id}}_comment_text" required></textarea> <br>
 				<input type="hidden" id="question_id" name="question_id" value="{{this.question_id}}">
 				<input type="button" class = "commentB" id="commentB" value= "{{this.comment.status}}" name="commentB">
 			</form>

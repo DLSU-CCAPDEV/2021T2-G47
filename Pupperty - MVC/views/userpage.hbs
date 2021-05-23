@@ -93,8 +93,9 @@
 						<img src = "images/peso.png" class = detaillogos>
 						<div style = "width: 200px; text-align: left">{{u.salary}}/month</div>
 					</div>
-					<!-- <div id = detailscontainer style = "padding-top: 50px; padding-bottom: 10px; margin: auto;">Status: {{u.status}}</div> --><br>
+					<div id = detailscontainer style = "padding-top: 50px; padding-bottom: 10px; margin: auto;">Certificate of Validity:</div>
 					<div id = detailscontainer style = "height: 190px; background-image: url(uploads/{{u.certificate}}); background-size: cover; background-position: center; margin: auto;"></div>
+					
 					<div id = detailscontainer>
 						<form action = "/submitcertificate" method = "post" enctype="multipart/form-data">
 							<input type="file" name="image" accept="image/*" required><br><br>

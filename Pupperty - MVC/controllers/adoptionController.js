@@ -7,9 +7,11 @@ const controller = {
 		db.updateOne(`adoption_posts`, {post_id: req.query.postID}, {$set: {
 			owner: req.session.email,
 			adoption_status: true
-		}})
+		}}, function(result){
+			res.redirect('/userpage');
+		})
 
-		res.redirect('/userpage')
+		
 	}
 }
 

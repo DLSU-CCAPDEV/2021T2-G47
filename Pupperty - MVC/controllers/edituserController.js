@@ -71,26 +71,17 @@ const controller = {
 			name: req.body.usernameform
 		}})
 
-		db.updateOne(`users`, {email: req.session.email}, {$set: {
-			name: req.body.usernameform,
-			bio: req.body.bioform,
-			address: req.body.addressform,
-			contact: req.body.numberform,
-			salary: req.body.moneyform,
-			test: req.body.savechanges
-		}})
-
 		if(background != undefined){
 			db.updateOne(`users`, {email: req.session.email}, {$set: {
 				bgpath: background
-			}})
+			}}, function(result){})
 		}
 
 		if(req.file != undefined){
 			db.updateOne(`users`, {email: req.session.email}, {$set: {
 				image: req.file,
 				path: req.file.filename
-			}})
+			}}, function(result){})
 
 			db.updateMany(`adoption_posts`, {poster_email: req.session.email}, {$set: {
 				poster_picture: req.file.filename
@@ -99,7 +90,17 @@ const controller = {
 
 		req.session.name = req.body.usernameform;
 
-		res.redirect('/userpage');
+		db.updateOne(`users`, {email: req.session.email}, {$set: {
+			name: req.body.usernameform,
+			bio: req.body.bioform,
+			address: req.body.addressform,
+			contact: req.body.numberform,
+			salary: req.body.moneyform,
+			test: req.body.savechanges
+		}}, function(result){
+			res.redirect('/userpage');
+		})
+
 	}
 }
 

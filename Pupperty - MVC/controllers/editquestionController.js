@@ -6,9 +6,9 @@ const controller = {
 		db.updateOne(`FAQS`, {question_id: req.body.question}, {$set: {
 			title: req.body.title,
 			text: req.body.text
-		}});
-		
-		res.redirect('/FAQ');
+		}}, function(result){
+			res.redirect('/FAQ');
+		});
 	}
 }
 

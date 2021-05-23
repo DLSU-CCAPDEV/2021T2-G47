@@ -11,7 +11,7 @@ const controller = {
 		db.findOne('adoption_posts', {post_id: post_id}, function(result){
 			db.updateOne(`adoption_posts`, {post_id: post_id}, {$set: {
 				upvotes: result.upvotes + 1
-			}});
+			}}, function(result){});
 		});
 	},
 

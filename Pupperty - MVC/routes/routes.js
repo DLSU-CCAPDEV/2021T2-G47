@@ -20,7 +20,7 @@ const storage = multer.diskStorage({
 		callback(null, './public/uploads');
 	},
 	filename: function(req, file, callback){
-		callback(null, new Date().getMonth() + "-" + new Date().getDate() + "-" + new Date().getFullYear() + "_" + new Date().getHours() + "-" + new Date().getMinutes() + "_" + file.originalname);
+		callback(null, new Date().getMonth() + "-" + new Date().getDate() + "-" + new Date().getFullYear() + "_" + new Date().getHours() + "-" + new Date().getMinutes() + "_" + file.originalname.split(" ").join("_"));
 	}
 })
 

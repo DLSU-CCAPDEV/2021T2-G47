@@ -62,9 +62,9 @@ const controller = {
 	submitcertificate: function(req, res){
 		db.updateOne(`users`, {email: req.session.email}, {$set: {
 			certificate: req.file.filename
-		}})
-
-		res.redirect('/userpage');
+		}}, function(result){
+			res.redirect('/userpage');
+		})
 	},
 
 	deleteuser: function(req, res){

@@ -101,7 +101,7 @@ const database = {
 		});
 	},
 
-	updateOne: function(collection, filter, update){
+	updateOne: function(collection, filter, update, callback){
 		client.connect(url, options, function (err, db){
 			if(err) throw err;
 			var database = db.db(`database`);
@@ -109,6 +109,7 @@ const database = {
 				if(err) throw err;
 				console.log(`1 document updated `);
 				db.close();
+				return callback(true);
 			});
 		});
 	},

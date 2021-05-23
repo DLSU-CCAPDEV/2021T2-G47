@@ -6,6 +6,13 @@ const controller = {
 
 		console.log("queryedit" + req.body.edit);
 		
+		if(req.file != undefined){
+			db.updateOne(`adoption_posts`, {post_id: req.body.edit}, {$set: {
+				image: req.file,
+				path: req.file.filename
+			}}, function(result){});
+		}
+
 		db.updateOne(`adoption_posts`, {post_id: req.body.edit}, {$set: {
 			name: req.body.name,
 			breed: req.body.breed,
@@ -14,14 +21,7 @@ const controller = {
 			age: req.body.age,
 			medical: req.body.medical,
 			remarks: req.body.remarks
-		}});
-
-		if(req.file != undefined){
-			db.updateOne(`adoption_posts`, {post_id: req.body.edit}, {$set: {
-				image: req.file,
-				path: req.file.filename
-			}});
-		}
+		}}, function(result){});
 
 		res.redirect('/userpage');
 

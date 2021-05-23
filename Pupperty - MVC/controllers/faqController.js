@@ -127,11 +127,11 @@ const controller = {
 			db.updateOne('FAQS', {question_id: question_id}, 
 			{
 				$set : {comment: commentObj}  
-			});
-
-			res.render('partials\\comment', {comment:commentObj}, function(err, result)
-			{
-				res.send(result);
+			}, function(result){
+				res.render('partials\\comment', {comment:commentObj}, function(err, result)
+				{
+					res.send(result);
+				});
 			});
 		});
 

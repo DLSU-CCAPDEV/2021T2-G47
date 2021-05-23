@@ -6,7 +6,6 @@ const express = require(`express`);
 const bodyParser = require(`body-parser`);
 const db = require('./models/db.js')
 const hbs = require(`hbs`);
-const multer = require('multer');
 const routes = require(`./routes/routes.js`);
 const session = require(`express-session`);
 
@@ -17,19 +16,6 @@ app.use(session({
     'resave': false,
     'saveUninitialized': false,
 }));
-
-// DB_URL=mongodb+srv://Admin:AdminPupperty@pupperty.ps47i.mongodb.net/database?retryWrites=true&w=majority
-
-const storage = multer.diskStorage({
-	destination: function(req, file, callback){
-		callback(null, './public/uploads');
-	},
-	filename: function(req, file, callback){
-		callback(null, new Date().getMonth() + "-" + new Date().getDate() + "-" + new Date().getFullYear() + "_" + new Date().getHours() + "-" + new Date().getMinutes() + "_" + file.originalname);
-	}
-})
-
-const upload = multer({storage: storage});
 
 hbs.registerPartials(__dirname + '/views/partials');
 

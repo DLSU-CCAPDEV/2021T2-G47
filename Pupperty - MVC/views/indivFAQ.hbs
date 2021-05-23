@@ -19,17 +19,22 @@
 		    	var question_id = $(this).siblings('#question_id').val();
 		    	var comment_text = $('#' + question_id + '_comment_text').val();
 
+		    	console.log("comment text: " + comment_text);
+		    	console.log("ques id: " + question_id);
 
 		    	var value = this.value;
+		    	console.log("value: " + value);
 		    	$.get('/submitcomment', {comment_text:comment_text, question_id:question_id}, function(result)
 		    	{
 		    		if(value == "Submit Comment")
 		    		{
+		    			console.log("if" + value);
 		    			$('#comment_container').prepend(result);
 		    		}
 		    		else
 		    		{
 		    			$('#' + question_id + '_comtext').text(comment_text);
+		    			console.log("else" + value);
 		    		}
 		    	})
 		    	$('#' + question_id + '_comment_text').val("");

@@ -62,6 +62,7 @@ const controller = {
 				        title: req.query.questiontitle,
 				        text: req.query.questiontext,
 				        question_id: "question_" + questionidvalue,
+				        asker_id: result3.user_id,
 				        comment: commentObj
 			   	 		}
 			   	 		console.log(faq.OPpath);

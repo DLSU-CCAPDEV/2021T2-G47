@@ -51,8 +51,6 @@ const controller = {
 									contact: "",
 									salary: "",
 									certvalid: "",
-									homeowner: [],
-									rescuer: [],
 									user_id: "user_" + useridvalue,
 									path: "user.png",
 									bgpath: "images/backgrounds/bg1.jpg"

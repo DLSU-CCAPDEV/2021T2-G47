@@ -9,6 +9,7 @@
   "author": "CUA, GABA, SINGSON",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "body-parser": "^1.19.0",
     "connect-mongo": "^4.4.1",
     "dotenv": "^8.2.0",

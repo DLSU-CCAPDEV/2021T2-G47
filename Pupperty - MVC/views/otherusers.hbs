@@ -7,7 +7,7 @@
 	<body>
 		{{> navbar}}
 
-		<div id = userdetails>
+		<div id = userdetails style = "background-image: url({{u.bgpath}}); background-size: auto">
 			<div id = usercontainer1>
 				<div id = useravatar style = "background-image: url(uploads/{{u.path}});"></div>
 				<div id = usertextcontainer>
@@ -34,7 +34,7 @@
 				</div>
 			</div>
 
-			<div>
+			<div style = "width: 70%; min-height: 1900px;">
 				<div id = userinfo  style = "background-color: #f1ce76; padding-top: 30px; padding-bottom: 15px;" >
 					<div style = "display: flex; justify-content: center; height: 120px;">
 						<img src = "images/doghouse.png" style = "height: 100px;">

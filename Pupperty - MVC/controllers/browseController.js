@@ -153,7 +153,8 @@ const controller = {
 							questions: questionsArray,
 							posts: postsArray,
 							adopts: adoptArray,
-							certificate: result5.certificate
+							certificate: result5.certificate,
+							bgpath: result5.bgpath
 						}
 					});
 				})

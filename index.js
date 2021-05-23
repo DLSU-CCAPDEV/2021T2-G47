@@ -26,7 +26,7 @@ app.use(express.static(__dirname + '/public'));
 app.use(`/`, routes);
 
 dotenv.config();
-port = process.env.PORT;
+port = process.env.PORT || 3000;
 hostname = process.env.HOSTNAME;
 
 // limit an array to a maximum of elements (from the start)

@@ -456,3 +456,43 @@ small{
 {
 	min-width: 700px;
 }
+
+.poster_name{
+	font-size: 20px;
+	font-weight: bold;
+	color: black;
+	background-color: rgba(0,0,0,0);
+	font-family: georgia;
+	text-decoration: none;
+	cursor: pointer; 
+	border: none;
+	margin: auto;
+}
+
+.poster_name:hover{
+	color: #b7dcf4;
+	text-decoration: underline;
+}
+
+.OPpicture{
+	 height: 200px; 
+	 width: 200px; 
+	 margin: auto; 
+	 background-size: cover;
+	 border-radius: 50%;
+}
+
+.user_icon{
+	cursor: pointer; 
+	border-radius: 100%; 
+	border: none;
+}
+
+.user_icon:hover{
+    -webkit-filter: brightness(70%);
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    -o-transition: all 1s ease;
+    -ms-transition: all 1s ease;
+    transition: all 1s ease;
+}

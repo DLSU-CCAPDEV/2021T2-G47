@@ -11,7 +11,7 @@
 			$.get('/checkuser', function(result){
 				user = result;
 				if(user != "user_0")
-					$('.container3').hide();
+					$('.subcomment').hide();
 			})
 
 		    $('#submit').click(function()
@@ -31,7 +31,7 @@
 			    		$('#postlist').prepend(result);
 
 			    		if(user != "user_0"){
-			    			$('#postlist').children('.posts').children('.container3').remove();
+			    			$('.subcomment').hide();
 			    		} else{
 			    			window.open('FAQ', '_self');
 			    		}
@@ -80,10 +80,19 @@
 		<div class = container2>
 			<p id= FAQHEADER> Frequently Asked Questions </p>
 			<div class = container1>
-				<div id = profile>
-						<a href = "/userpage"><div style = "background-image: url(uploads/{{path}}); height: 200px; width: 200px; margin: auto; background-size: cover; border-radius: 50%;"></div></a>
-						 <br>
-						<p id = profilename> <a href = "userpage.html">{{name}}</a> </p>
+				<div id = profile style="padding-top: 25px;">
+						<form method = "get" action = "/userpage">
+						<button class="user_icon">
+								<div class="OPpicture" style = "background-image: url(uploads/{{path}});">
+								</div>
+							</button>
+						</form>
+						<form method = "get" action = "/userpage" style="padding-top: 20px;">
+							<button class="poster_name" style="font-size: 30px; padding-bottom: 5px;">
+								{{name}}
+							</button>
+							<div id = profilename></div>
+						</form>
 				</div>
 
 				<div class = container2 id=postlist> 

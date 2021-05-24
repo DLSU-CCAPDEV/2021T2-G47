@@ -1,8 +1,17 @@
-
 <div class= posts>
 	<div class = userdeets>
-	<div style = "background-image: url(uploads/{{this.OPpath}});" class = "OPpicture"></div>
-	<p class = username>{{this.name}}</p>
+		<form method = "get" action = "/profile" style="padding-top: 10px;">
+		<button class="user_icon" name="username" value="{{this.asker_id}}">
+			<div class="OPpicture" style = "background-image: url(uploads/{{this.OPpath}});">
+			</div>
+		</button>
+		</form>
+		<form method = "get" action = "/profile" style="padding-top: 20px;">
+			<button class="poster_name" name="username" value="{{this.asker_id}}" style="font-size: 30px; padding-bottom: 5px;">
+				{{this.name}}
+			</button>
+			<div id = profilename style="padding-top: 15px;"></div>
+		</form>
 	</div>
 	<form method = "get" action = "/indivFAQ">
 	<button class = "indivFAQ" name="question_id" value="{{this.question_id}}">
@@ -14,7 +23,7 @@
 		{{#if this.comment.answered}}
 			{{> comment}}
 		{{/if}}
-		<div>
+		<div class="subcomment" id="subcomment">
 			<form action = "/submitcomment">
 				<textarea rows = "5" cols = "42" style = "resize: none;" name="{{this.question_id}}_comment_text" id = "{{this.question_id}}_comment_text" required></textarea> <br>
 				<input type="hidden" id="question_id" name="question_id" value="{{this.question_id}}">

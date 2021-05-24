@@ -10,10 +10,11 @@ const controller = {
 		  		OPpath: 1,
 		  		author: 1,
 		  		name: 1,
-		  		title:1, 
-		  		text:1,
-		  		question_id:1,
-		  		comment: 1
+		  		title: 1, 
+		  		text: 1,
+		  		question_id: 1,
+		  		comment: 1,
+		  		asker_id: 1
 		  	}, function(result){
 		  		db.findOne(`users`, {email: req.session.email}, function(result2){
 			  		 res.render('FAQ', {
@@ -89,7 +90,8 @@ const controller = {
 					title: result.title,
 					text: result.text,
 					comment: result.comment,
-					question_id: result.question_id,	
+					question_id: result.question_id,
+					asker_id: result.asker_id
 	  			}	
 	  		);
 	  	});

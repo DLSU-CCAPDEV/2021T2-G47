@@ -11,7 +11,7 @@
 			$.get('/checkuser', function(result){
 				user = result;
 				if(user != "user_0")
-					$('#submitcomment').hide();
+					$('#submitcomment').remove();
 			})
 
 		    $('.commentB').click(function()
@@ -40,10 +40,20 @@
 <body style = "background-image: url('images/pattern.png')">
 	{{> navbar}}
 
-	<div class = container1>
+	<div class = container1 style="align-items: center; padding-top: 10px;">
 			<div id = profile>
-				<a href = "/userpage"><div style = "background-image: url(uploads/{{path}});" class = "OPpicture"></div></a> <br>
-				<p id = profilename> {{name}} </p>
+				<form method = "get" action = "/profile" style="margin-top: 15px;">
+					<button class="user_icon" name="username" value="{{asker_id}}">
+						<div class="OPpicture" style = "background-image: url(uploads/{{path}});">
+						</div>
+					</button>
+				</form>
+				<form method = "get" action = "/profile" style="padding-top: 20px;">
+					<button class="poster_name" name="username" value="{{asker_id}}" style="font-size: 30px; padding-bottom: 5px;">
+						{{name}}
+					</button>
+					<div id = profilename></div>
+				</form>
 			</div>
 
 			<div id = addQuestion>
@@ -54,7 +64,7 @@
 					<div id="question">
 						<p id="questiontext"> {{text}} </p>
 					</div>
-					<div class = "container1" id="comment_container">
+					<div class = "containernew" id="comment_container" style="align-items: center;">
 						{{#if comment.answered}}
 							{{> comment}}
 						{{/if}}

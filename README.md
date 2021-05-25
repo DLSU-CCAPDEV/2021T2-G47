@@ -46,3 +46,24 @@ Pupperty has unfortunately encountered some difficulties with being launched as 
 * Delay in removal of comment box through AJAX when using a restricted account (not the administrator).
 
 Rest assured however, that these were tested to be working at an acceptable speed during development. It was only at application deployment that the delays became noticeable. Changing to a local database would also significantly reduce the delays mentioned. This is possible by editing the **.env** file located at the root folder, and changing the **DB_URL** variable to a local database *(e.g. mongodb://localhost:27017)*.
+
+## Important Info:
+#### Users:
+1. Pupperty Admin<br>
+   Username: puppertyadmin@gmail.com<br>
+   Password: pupadmin<br>
+2. Sansa Stark<br>
+   Username: sansastark@gmail.com<br>
+   Password: sansa<br>
+3. Snoop Dogg<br>
+   Username: snoopdogg@gmail.com<br>
+   Password: thedogg<br>
+4. Dwayne 'The Rock' Johnson<br>
+   Username: therock@gmail.com<br>
+   Password: rock<br>
+5. Samuel L. Jackson<br>
+   Username: samjackson@gmail.com<br>
+   Password: shield<br>
+
+#### Online Database Connection String:
+mongodb+srv://Administrator:PuppertyAdmin@cluster0.xijyy.mongodb.net/database?retryWrites=true&w=majority
